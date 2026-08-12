@@ -1,5 +1,5 @@
-from database import get_db_connection
-from services.menstrual_dataset_service import (
+from backend.database import get_db_connection
+from backend.services.menstrual_dataset_service import (
     get_personalized_menstrual_analysis
 )
 

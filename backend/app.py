@@ -2,22 +2,22 @@ from flask import Flask
 
 from flask_cors import CORS
 
-from routes.auth import auth_bp
-from routes.users import users_bp
-from routes.periods import periods_bp
-from routes.recommendations import recommendations_bp
-from routes.datasets import datasets_bp
-from routes.pcos import pcos_bp
-from routes.trends import trends_bp
-from routes.health_logs import health_logs_bp
-from routes.thyroid import thyroid_bp
-from routes.early_puberty import early_puberty_bp
-from routes.perimenopause import perimenopause_bp
-from routes.menopause import menopause_bp
-from routes.postmenopause import postmenopause_bp
-from routes.pregnancy import pregnancy_bp
-from routes.food import food_bp
-from routes.analysis_summary import analysis_summary_bp
+from backend.routes.auth import auth_bp
+from backend.routes.users import users_bp
+from backend.routes.periods import periods_bp
+from backend.routes.recommendations import recommendations_bp
+from backend.routes.datasets import datasets_bp
+from backend.routes.pcos import pcos_bp
+from backend.routes.trends import trends_bp
+from backend.routes.health_logs import health_logs_bp
+from backend.routes.thyroid import thyroid_bp
+from backend.routes.early_puberty import early_puberty_bp
+from backend.routes.perimenopause import perimenopause_bp
+from backend.routes.menopause import menopause_bp
+from backend.routes.postmenopause import postmenopause_bp
+from backend.routes.pregnancy import pregnancy_bp
+from backend.routes.food import food_bp
+from backend.routes.analysis_summary import analysis_summary_bp
 
 app = Flask(__name__)
 

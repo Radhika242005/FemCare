@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from database import get_db_connection
+from backend.database import get_db_connection
 
 trends_bp = Blueprint(
     "trends",

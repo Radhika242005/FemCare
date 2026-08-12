@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from database import get_db_connection
+from backend.database import get_db_connection
 
 early_puberty_bp = Blueprint(
     "early_puberty",

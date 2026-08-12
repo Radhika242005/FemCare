@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from services.menstrual_dataset_service import (
+from backend.services.menstrual_dataset_service import (
     get_menstrual_dataset_summary
 )
 
