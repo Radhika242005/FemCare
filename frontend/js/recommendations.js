@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:5000";
+const API = "https://femcare-production-2b2d.up.railway.app";
 
 console.log("🔥 FEMCARE RECOMMENDATIONS.JS LOADED 🔥");
 

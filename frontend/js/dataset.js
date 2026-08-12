@@ -19,7 +19,7 @@ async function loadDatasetAnalysis() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/datasets/menstrual/analysis"
+                "https://femcare-production-2b2d.up.railway.app/api/datasets/menstrual/analysis"
             );
 
 

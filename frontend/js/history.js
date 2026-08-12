@@ -54,7 +54,7 @@ async function loadHistory() {
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/api/periods/history/${user.id}`
+                `https://femcare-production-2b2d.up.railway.app/api/periods/history/${user.id}`
             );
 
         const data =
@@ -440,7 +440,7 @@ async function loadTrends() {
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/api/periods/trend/${user.id}`
+                `https://femcare-production-2b2d.up.railway.app/api/periods/trend/${user.id}`
             );
 
         const data =

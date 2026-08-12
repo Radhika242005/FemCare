@@ -46,7 +46,7 @@ async function loadPCOSAnalysis() {
         message.style.color = "#7542a2";
 
         const url =
-            `http://127.0.0.1:5000/api/pcos/analyze/${user.id}`;
+            `https://femcare-production-2b2d.up.railway.app/api/pcos/analyze/${user.id}`;
 
         console.log("Requesting:", url);
 

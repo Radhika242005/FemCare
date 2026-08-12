@@ -107,7 +107,7 @@ forgotPasswordForm.addEventListener(
 
             const response =
                 await fetch(
-                    "http://127.0.0.1:5000/api/auth/forgot-password",
+                    "https://femcare-production-2b2d.up.railway.app/api/auth/forgot-password",
                     {
                         method: "POST",
 

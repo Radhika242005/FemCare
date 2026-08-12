@@ -8,7 +8,7 @@ const registerButton =
     document.getElementById("registerButton");
 
 const API =
-    "http://127.0.0.1:5000";
+    "https://femcare-production-2b2d.up.railway.app";
 
 
 registerForm.addEventListener(
