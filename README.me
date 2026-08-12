@@ -1,0 +1,540 @@
+# 🌸 FemCare – Women's Health Monitoring System
+
+FemCare is a women's health monitoring and wellness support web application designed to help users record, understand, and track different aspects of their health.
+
+The system combines **health tracking, menstrual cycle monitoring, dataset-based insights, PCOS reference analysis, nutrition analysis, pregnancy reference screening, health trends, and personalized wellness recommendations** in a single platform.
+
+---
+
+## ✨ Features
+
+### 🔐 User Authentication
+
+- User registration
+- User login
+- User-specific health data
+- Session/user information maintained using browser local storage
+- Protected pages redirect unauthenticated users to the login page
+
+---
+
+### 🩸 Period Tracking
+
+Users can record:
+
+- Period start date
+- Cycle length
+- Flow level
+- Pain level
+- PMS symptoms
+- Mood score
+- Stress score
+- Sleep hours
+- Energy level
+- Concentration score
+- Work/study hours lost
+- Preparation before period
+
+The system stores the information and maintains the user's period history.
+
+---
+
+### 📊 Period History
+
+FemCare provides a history of previously recorded menstrual cycles.
+
+Users can view:
+
+- Cycle number
+- Period start date
+- Cycle length
+- Previous cycle length
+- Cycle phase
+- Flow
+- Pain
+- PMS symptoms
+- Mood
+- Stress
+- Sleep
+- Energy
+- Concentration
+- Work/study hours lost
+- Preparation status
+- Overall health score
+- Log consistency
+
+---
+
+### 📈 Health & Cycle Trends
+
+FemCare compares recent cycles and identifies changes in:
+
+- Sleep
+- Energy
+- Pain
+- Mood
+- Concentration
+- Stress
+- Cycle length
+
+The system displays whether a metric has:
+
+- Improved
+- Decreased
+- Increased
+- Remained unchanged
+
+This allows users to understand changes between their recent cycles.
+
+---
+
+### 🧘 Health Trends
+
+Users can view health information recorded through health logs.
+
+The system provides:
+
+- Average sleep
+- Average water intake
+- Average stress
+- Total exercise
+- Number of health logs
+
+It also displays historical trends for:
+
+- Sleep
+- Water intake
+- Stress
+- Exercise
+
+---
+
+### 🥗 Food & Nutrition Analysis
+
+Users can enter daily nutrition information including:
+
+- Meals per day
+- Fruit servings
+- Vegetable servings
+- Protein servings
+- Water intake
+- Fast food consumption
+- Sugary drinks
+- Breakfast
+- Dietary preference
+
+FemCare calculates a **nutrition score** based on the entered information.
+
+The result page provides:
+
+- Nutrition score
+- Nutrition level
+- Nutrition indicators
+- Areas for improvement
+- Personalized wellness recommendations
+
+---
+
+### 🤰 Pregnancy Reference Screening
+
+Users can enter pregnancy-related information such as:
+
+- Age
+- Pregnancy status
+- Gestational weeks
+- Prenatal visits
+- Blood pressure
+- Blood sugar
+- Nausea
+- Vomiting
+- Fatigue
+- Swelling
+- Headache
+- Abdominal pain
+- Bleeding
+
+The system provides a reference screening result based on the entered information.
+
+> **Important:** Pregnancy-related results are reference screening information and are not a medical diagnosis.
+
+---
+
+### 🧬 PCOS Reference Analysis
+
+FemCare uses reference dataset patterns to provide PCOS-related wellness insights.
+
+The system can consider information related to:
+
+- Lifestyle
+- Physical activity
+- Sleep
+- Stress
+- Skin health
+- Hair health
+- Menstrual health
+
+The application provides reference indicators and wellness recommendations based on available data.
+
+> **Important:** PCOS-related information is based on reference dataset patterns and is not a medical diagnosis.
+
+---
+
+### 🌿 Personalized Recommendations
+
+FemCare provides recommendations based on identified wellness areas.
+
+Examples include:
+
+- Gentle Evening Yoga
+- Breathing Relaxation
+- Regular Physical Activity
+- Gentle Period Yoga
+- Consistent Daily Routine
+- Gentle Skin Care Routine
+- Hair and Scalp Care
+
+Recommendations can include educational videos and practical wellness activities.
+
+Users can track completed recommendations.
+
+---
+
+### 📚 Dataset Insights
+
+FemCare provides statistical insights from the menstrual health reference dataset.
+
+The page displays:
+
+- Total dataset users
+- Total period records
+- Average age
+- Average BMI
+- Average cycle length
+- Average pain
+- Average mood
+- Average stress
+- Average sleep
+- Average energy
+- Average concentration
+- Average work/study hours lost
+- Average water intake
+- Baseline stress
+
+It also displays distributions for:
+
+- Flow
+- Diet quality
+- Exercise frequency
+
+---
+
+## 🏗️ System Architecture
+
+FemCare follows a frontend-backend-database architecture.
+
+```text
+                    ┌─────────────────────┐
+                    │      FemCare        │
+                    │     Web Frontend    │
+                    └──────────┬──────────┘
+                               │
+                               │ HTTP / JSON
+                               ▼
+                    ┌─────────────────────┐
+                    │    Flask Backend    │
+                    │       REST API      │
+                    └──────────┬──────────┘
+                               │
+                ┌──────────────┼──────────────┐
+                │              │              │
+                ▼              ▼              ▼
+          ┌──────────┐   ┌──────────┐   ┌──────────┐
+          │ Period   │   │ Health   │   │  Food    │
+          │  APIs    │   │  APIs    │   │  APIs    │
+          └──────────┘   └──────────┘   └──────────┘
+                │              │              │
+                └──────────────┼──────────────┘
+                               ▼
+                    ┌─────────────────────┐
+                    │      Database       │
+                    │    Health Records   │
+                    └─────────────────────┘
+
+
+🛠️ Technologies Used
+Frontend
+HTML5
+CSS3
+JavaScript
+Fetch API
+Local Storage
+Backend
+Python
+Flask
+Flask Blueprints
+REST APIs
+Database
+MySQL
+Development Tools
+Visual Studio Code
+Git
+GitHub
+Python Virtual Environment
+Data / Analytics
+Reference health datasets
+Dataset-based statistical analysis
+Rule-based wellness scoring
+📁 Project Structure
+
+A typical project structure is:
+
+FemCare/
+│
+├── backend/
+│   │
+│   ├── app.py
+│   ├── database.py
+│   │
+│   ├── routes/
+│   │   ├── auth.py
+│   │   ├── period.py
+│   │   ├── health.py
+│   │   ├── food.py
+│   │   ├── pregnancy.py
+│   │   ├── pcos.py
+│   │   ├── recommendation.py
+│   │   └── dataset.py
+│   │
+│   ├── models/
+│   │
+│   ├── datasets/
+│   │
+│   └── requirements.txt
+│
+├── frontend/
+│   │
+│   ├── pages/
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── dashboard.html
+│   │   ├── period.html
+│   │   ├── history.html
+│   │   ├── health.html
+│   │   ├── food.html
+│   │   ├── pregnancy.html
+│   │   ├── pcos.html
+│   │   ├── recommendations.html
+│   │   └── dataset.html
+│   │
+│   └── js/
+│       ├── login.js
+│       ├── register.js
+│       ├── dashboard.js
+│       ├── period.js
+│       ├── history.js
+│       ├── health.js
+│       ├── food.js
+│       ├── pregnancy.js
+│       ├── pcos.js
+│       ├── recommendations.js
+│       └── dataset.js
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
+
+The exact folder structure may vary depending on the final project organization.
+
+⚙️ Installation & Setup
+1. Clone the Repository
+git clone https://github.com/Radhika242005/FemCare.git
+
+Navigate into the project:
+
+cd FemCare
+2. Create a Python Virtual Environment
+
+Windows:
+
+python -m venv venv
+
+Activate it:
+
+venv\Scripts\activate
+
+You should see:
+
+(venv)
+
+in the terminal.
+
+3. Install Dependencies
+
+If requirements.txt is available:
+
+pip install -r requirements.txt
+
+If it does not exist yet, install the required Flask packages according to the backend configuration.
+
+4. Configure the Database
+
+Create the required MySQL database.
+
+Example:
+
+CREATE DATABASE femcare;
+
+Configure the database connection in the backend configuration.
+
+Do not commit passwords or secret credentials to GitHub.
+
+Use environment variables where appropriate.
+
+Example:
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=femcare
+5. Start the Flask Backend
+
+Navigate to the backend:
+
+cd backend
+
+Run the Flask application:
+
+python app.py
+
+The backend should normally be available at:
+
+http://127.0.0.1:5000
+6. Open the Frontend
+
+Open the frontend pages using a local web server.
+
+For example, with VS Code Live Server:
+
+Open frontend/pages/login.html
+
+Start the application from the login page.
+
+🔗 Main API Endpoints
+
+The application uses REST APIs between the frontend and Flask backend.
+
+Authentication
+POST /api/auth/register
+POST /api/auth/login
+Period Tracking
+POST /api/periods
+GET  /api/periods/history/<user_id>
+GET  /api/periods/trend/<user_id>
+Health Tracking
+POST /api/health
+GET  /api/health/<user_id>
+Food & Nutrition
+POST /api/food/analyze
+Pregnancy
+POST /api/pregnancy/analyze
+PCOS
+POST /api/pcos/analyze
+Dataset Insights
+GET /api/datasets/menstrual/analysis
+
+Endpoint names may vary slightly depending on the final backend route configuration.
+
+📊 Data Processing
+
+FemCare uses recorded user information and reference datasets to generate wellness-oriented insights.
+
+The system can analyze information such as:
+
+Menstrual Cycle
+       ↓
+Health Logs
+       ↓
+Lifestyle Information
+       ↓
+Nutrition Information
+       ↓
+Reference Dataset
+       ↓
+Analysis
+       ↓
+Trends & Recommendations
+
+The application does not present these results as medical diagnoses.
+
+🔐 Privacy & Security
+
+FemCare is designed to keep user health information within the application's database and backend system.
+
+Recommended security practices include:
+
+Never commit .env files
+Never commit database passwords
+Never commit API keys
+Use environment variables for secrets
+Validate user input on the backend
+Use parameterized SQL queries
+Restrict access to user-specific records
+Keep authentication credentials secure
+⚠️ Medical Disclaimer
+
+FemCare is a health monitoring and wellness support application.
+
+The information provided by the application is intended for:
+
+Wellness tracking
+Educational purposes
+Reference dataset analysis
+Lifestyle awareness
+Personal health record tracking
+
+FemCare does not replace professional medical advice, diagnosis, or treatment.
+
+Pregnancy, PCOS, menstrual, nutrition, and other health-related results should not be interpreted as a medical diagnosis.
+
+Users should consult a qualified healthcare professional for medical concerns.
+
+🎯 Project Objectives
+
+The main objectives of FemCare are:
+
+To provide a centralized women's health monitoring platform.
+To allow users to track menstrual cycles.
+To maintain personal health history.
+To identify changes in health-related parameters.
+To provide nutrition and lifestyle insights.
+To provide reference-based PCOS and pregnancy screening information.
+To analyze reference health datasets.
+To provide personalized wellness recommendations.
+To help users understand their health patterns over time.
+🚀 Future Enhancements
+
+Possible future improvements include:
+
+AI-based health prediction
+Machine learning models for personalized risk estimation
+Wearable/IoT integration
+Automatic menstrual cycle prediction
+Mobile application
+Push notifications
+Personalized diet planning
+Advanced visualization dashboards
+More comprehensive health datasets
+Secure cloud deployment
+Doctor/healthcare professional integration
+👩‍💻 Project
+FemCare
+
+Women's Health Monitoring System
+
+Developed as an academic/final-year project to explore the use of web technologies, databases, health datasets, analytics, and personalized wellness support in women's healthcare.
+
+📌 Repository
+
+GitHub:
+
+https://github.com/Radhika242005/FemCare
