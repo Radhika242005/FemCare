@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FemCare | Login</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body class="auth-page">
+
+
+    <!-- LEFT VISUAL PANEL -->
+
+    <section class="auth-visual">
+
+        <div class="auth-brand">
+            🌸 FemCare
+        </div>
+
+        <div class="auth-illustration">
+
+            <div class="auth-illustration-circle"></div>
+
+            <div class="auth-woman">
+
+                <div class="auth-woman-hair"></div>
+
+                <div class="auth-woman-face">
+
+                    <span class="auth-eye eye-left"></span>
+
+                    <span class="auth-eye eye-right"></span>
+
+                    <span class="auth-mouth"></span>
+
+                </div>
+
+                <div class="auth-woman-neck"></div>
+
+                <div class="auth-woman-body"></div>
+
+            </div>
+
+            <div class="auth-floating flower-one">
+                ✿
+            </div>
+
+            <div class="auth-floating flower-two">
+                🌸
+            </div>
+
+            <div class="auth-floating heart-one">
+                ♥
+            </div>
+
+        </div>
+
+
+        <div class="auth-visual-content">
+
+            <h2>
+                Welcome back to
+                <span>FemCare</span>
+            </h2>
+
+            <p>
+                Continue your personalized women's health
+                journey and keep your wellness information
+                organized in one secure place.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT LOGIN PANEL -->
+
+    <section class="auth-form-section">
+
+        <div class="auth-form-card">
+
+            <a
+                href="../index.html"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+
+            <div class="mobile-brand">
+                🌸 FemCare
+            </div>
+
+
+            <div class="form-heading">
+
+                <span class="form-icon">
+                    ♡
+                </span>
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+                <p>
+                    Login to continue to your FemCare
+                    health dashboard.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <div class="password-label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a
+                            href="#"
+                            class="forgot-password"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                        >
+                            ◉
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REMEMBER -->
+
+                <div class="remember-row">
+
+                    <label class="remember-label">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div id="message"></div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="professional-login-button"
+                >
+
+                    Login to FemCare
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+
+                <span></span>
+
+                <p>
+                    New to FemCare?
+                </p>
+
+                <span></span>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <a
+                href="register.html"
+                class="create-account-button"
+            >
+
+                Create a New Account
+
+            </a>
+
+
+            <!-- NOTICE -->
+
+            <div class="login-notice">
+
+                <span>
+                    🛡️
+                </span>
+
+                <p>
+                    Your health information is associated
+                    with your personal account.
+                </p>
+
+            </div>
+
+
+            <p class="medical-footer-note">
+
+                FemCare provides reference health information
+                and is not a substitute for professional
+                medical advice.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <script src="../js/login.js"></script>
+
+
+    <script>
+
+        const password =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        if (
+            password &&
+            togglePassword
+        ) {
+
+            togglePassword.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        password.type ===
+                        "password"
+                    ) {
+
+                        password.type =
+                            "text";
+
+                        togglePassword.textContent =
+                            "◉";
+
+                    } else {
+
+                        password.type =
+                            "password";
+
+                        togglePassword.textContent =
+                            "○";
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

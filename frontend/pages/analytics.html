@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FemCare - Health Analytics</title>
+
+    <style>
+
+        :root {
+            --purple: #7542a2;
+            --purple-dark: #452853;
+            --pink: #d94aa0;
+            --text: #302737;
+            --muted: #756d79;
+            --border: #e5dce8;
+            --soft: #faf7fb;
+            --page: #f8f6f9;
+            --white: #ffffff;
+            --green: #2f7d50;
+            --red: #b84b4b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background: var(--page);
+        }
+
+        body {
+            margin: 0;
+            background: var(--page);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            min-height: 100vh;
+            padding: 18px 0 40px;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            height: 62px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+
+            background: var(--white);
+
+            border: 1px solid var(--border);
+            border-radius: 7px;
+
+            margin-bottom: 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--purple);
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #faf2fb;
+
+            border-radius: 7px;
+
+            font-size: 18px;
+        }
+
+        .header-text {
+            color: #806f82;
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            background: var(--white);
+
+            border: 1px solid var(--border);
+            border-radius: 7px;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            margin: 0 0 8px;
+
+            color: var(--purple-dark);
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 32px;
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+            min-height: 20px;
+
+            margin: 10px 0;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           MAIN CARDS
+        ===================================================== */
+
+        .card {
+            background: var(--white);
+
+            border: 1px solid var(--border);
+            border-radius: 8px;
+
+            padding: 22px;
+
+            margin-bottom: 18px;
+        }
+
+        .card-title {
+            margin: 0 0 18px;
+
+            color: var(--text);
+
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           OVERVIEW
+        ===================================================== */
+
+        .overview-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .overview-item {
+            min-height: 130px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background: #fff;
+
+            border: 1px solid var(--border);
+            border-radius: 7px;
+
+            padding: 18px 12px;
+        }
+
+        .overview-icon {
+            font-size: 25px;
+
+            margin-bottom: 8px;
+        }
+
+        .overview-value {
+            color: var(--purple);
+
+            font-size: 25px;
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+        .overview-label {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           TRENDS
+        ===================================================== */
+
+        .trend-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .trend-item {
+            min-height: 125px;
+
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 7px;
+
+            background: #fff;
+        }
+
+        .trend-title {
+            margin-bottom: 14px;
+
+            color: var(--text);
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .trend-status {
+            margin-bottom: 7px;
+
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .trend-message {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        .improving {
+            color: var(--green);
+        }
+
+        .decreasing {
+            color: var(--red);
+        }
+
+        .increasing {
+            color: var(--red);
+        }
+
+        .stable {
+            color: var(--purple);
+        }
+
+        .not-enough {
+            color: var(--muted);
+        }
+
+        /* =====================================================
+           HISTORY
+        ===================================================== */
+
+        .history-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+
+            border: 1px solid var(--border);
+            border-radius: 7px;
+        }
+
+        .history-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: var(--white);
+        }
+
+        .history-table th {
+            padding: 13px 12px;
+
+            background: var(--soft);
+
+            color: var(--purple-dark);
+
+            border-bottom: 1px solid var(--border);
+
+            text-align: center;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .history-table td {
+            padding: 13px 12px;
+
+            color: var(--text);
+
+            border-bottom: 1px solid #eee8f0;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+        .history-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .history-table tbody tr:hover {
+            background: #fcf9fd;
+        }
+
+        .empty {
+            padding: 35px;
+
+            text-align: center;
+
+            color: var(--muted);
+        }
+
+        /* =====================================================
+           NOTICE
+        ===================================================== */
+
+        .notice {
+            padding: 13px 15px;
+
+            margin-bottom: 18px;
+
+            background: #fffaf0;
+
+            border: 1px solid #eadfbc;
+            border-radius: 6px;
+
+            color: #665c48;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .navigation {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 4px;
+        }
+
+        .button {
+            min-width: 205px;
+
+            height: 42px;
+
+            padding: 0 20px;
+
+            border: 0;
+            border-radius: 7px;
+
+            background: linear-gradient(
+                90deg,
+                var(--purple),
+                var(--pink)
+            );
+
+            color: white;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            opacity: 0.94;
+        }
+
+        .button.secondary {
+            background: white;
+
+            color: var(--purple);
+
+            border: 1px solid var(--border);
+        }
+
+        .button.secondary:hover {
+            background: var(--soft);
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            margin-top: 22px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid var(--border);
+
+            text-align: center;
+
+            color: #99919d;
+
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .overview-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .trend-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: calc(100% - 22px);
+            }
+
+            .page {
+                padding-top: 10px;
+            }
+
+            .header {
+                padding: 0 13px;
+            }
+
+            .header-text {
+                display: none;
+            }
+
+            .brand {
+                font-size: 25px;
+            }
+
+            .hero {
+                padding: 25px 15px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <div class="container">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🌸
+                </div>
+
+                <span>
+                    FemCare
+                </span>
+
+            </div>
+
+            <div class="header-text">
+                Women's Health Monitoring System
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <h1>
+                Your <span>Health Analytics</span>
+            </h1>
+
+            <p>
+                Health information recorded for your account
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             MESSAGE
+        ================================================== -->
+
+        <div
+            id="message"
+            class="message"
+        >
+            Loading health analytics...
+        </div>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div
+            id="analyticsContent"
+            style="display:none;"
+        >
+
+
+            <!-- =================================================
+                 HEALTH OVERVIEW
+            ================================================== -->
+
+            <section class="card">
+
+                <h2 class="card-title">
+                    📊 Health Overview
+                </h2>
+
+
+                <div class="overview-grid">
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-icon">
+                            😴
+                        </div>
+
+                        <div
+                            id="averageSleep"
+                            class="overview-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="overview-label">
+                            Average Sleep (hrs)
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-icon">
+                            💧
+                        </div>
+
+                        <div
+                            id="averageWater"
+                            class="overview-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="overview-label">
+                            Average Water (L)
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-icon">
+                            🧘
+                        </div>
+
+                        <div
+                            id="averageStress"
+                            class="overview-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="overview-label">
+                            Average Stress
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-icon">
+                            🏃
+                        </div>
+
+                        <div
+                            id="totalExercise"
+                            class="overview-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="overview-label">
+                            Total Exercise (min)
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 HEALTH TRENDS
+            ================================================== -->
+
+            <section class="card">
+
+                <h2 class="card-title">
+                    📈 Health Trends
+                </h2>
+
+                <div
+                    id="trendGrid"
+                    class="trend-grid"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 HEALTH HISTORY
+            ================================================== -->
+
+            <section class="card">
+
+                <h2 class="card-title">
+                    📅 Health Log History
+                </h2>
+
+                <div
+                    id="historyContainer"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NOTICE
+            ================================================== -->
+
+            <div class="notice">
+
+                These analytics are calculated from the health
+                information recorded in your FemCare health logs.
+                They are intended for wellness tracking and are
+                not a medical diagnosis.
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <div class="navigation">
+
+            <button
+                class="button"
+                onclick="goRecommendations()"
+            >
+                🌿 My Recommendations
+            </button>
+
+            <button
+                class="button secondary"
+                onclick="goTrends()"
+            >
+                📈 Back to Health Trends
+            </button>
+
+            <button
+                class="button secondary"
+                onclick="goDashboard()"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="footer">
+            FemCare • Health Analytics
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ============================================================
+       API
+    ============================================================ */
+
+    const API =
+        "http://127.0.0.1:5000";
+
+
+    /* ============================================================
+       LOGIN
+    ============================================================ */
+
+    const storedUser =
+        localStorage.getItem("user");
+
+
+    if (!storedUser) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    let user;
+
+
+    try {
+
+        user =
+            JSON.parse(storedUser);
+
+    }
+
+    catch (error) {
+
+        localStorage.removeItem(
+            "user"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* ============================================================
+       USER ID
+    ============================================================ */
+
+    const userId =
+        user.id ||
+        user.user_id ||
+        user.userId;
+
+
+    if (!userId) {
+
+        localStorage.removeItem(
+            "user"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* ============================================================
+       LOAD ANALYTICS
+    ============================================================ */
+
+    async function loadAnalytics() {
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+        const content =
+            document.getElementById(
+                "analyticsContent"
+            );
+
+
+        try {
+
+            console.log(
+                "Loading analytics for user:",
+                userId
+            );
+
+
+            const response =
+                await fetch(
+                    `${API}/api/health-logs/user/${userId}`
+                );
+
+
+            console.log(
+                "Health log HTTP status:",
+                response.status
+            );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Health analytics API response:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load health logs."
+                );
+
+            }
+
+
+            const logs =
+                Array.isArray(data.logs)
+                    ? data.logs
+                    : [];
+
+
+            if (!logs.length) {
+
+                message.textContent =
+                    "No health log data available.";
+
+                return;
+
+            }
+
+
+            calculateOverview(
+                logs
+            );
+
+
+            renderTrends(
+                logs
+            );
+
+
+            renderHistory(
+                logs
+            );
+
+
+            message.style.display =
+                "none";
+
+            content.style.display =
+                "block";
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Health analytics error:",
+                error
+            );
+
+
+            message.textContent =
+                "Unable to load health analytics.";
+
+        }
+
+    }
+
+
+    /* ============================================================
+       OVERVIEW
+    ============================================================ */
+
+    function calculateOverview(logs) {
+
+
+        const sleepValues =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.sleep_hours
+                        )
+                )
+                .filter(
+                    value =>
+                        Number.isFinite(value)
+                );
+
+
+        const waterValues =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.water_intake_liters
+                        )
+                )
+                .filter(
+                    value =>
+                        Number.isFinite(value)
+                );
+
+
+        const stressValues =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.stress_score
+                        )
+                )
+                .filter(
+                    value =>
+                        Number.isFinite(value)
+                );
+
+
+        const exerciseValues =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.exercise_minutes
+                        )
+                )
+                .filter(
+                    value =>
+                        Number.isFinite(value)
+                );
+
+
+        const averageSleep =
+            average(
+                sleepValues
+            );
+
+
+        const averageWater =
+            average(
+                waterValues
+            );
+
+
+        const averageStress =
+            average(
+                stressValues
+            );
+
+
+        const totalExercise =
+            exerciseValues.reduce(
+                function(
+                    total,
+                    value
+                ) {
+
+                    return total + value;
+
+                },
+                0
+            );
+
+
+        document.getElementById(
+            "averageSleep"
+        ).textContent =
+            averageSleep !== null
+                ? averageSleep.toFixed(2)
+                : "N/A";
+
+
+        document.getElementById(
+            "averageWater"
+        ).textContent =
+            averageWater !== null
+                ? averageWater.toFixed(2)
+                : "N/A";
+
+
+        document.getElementById(
+            "averageStress"
+        ).textContent =
+            averageStress !== null
+                ? averageStress.toFixed(2)
+                : "N/A";
+
+
+        document.getElementById(
+            "totalExercise"
+        ).textContent =
+            totalExercise;
+
+    }
+
+
+    /* ============================================================
+       AVERAGE
+    ============================================================ */
+
+    function average(values) {
+
+        if (!values.length) {
+
+            return null;
+
+        }
+
+
+        const total =
+            values.reduce(
+                function(
+                    sum,
+                    value
+                ) {
+
+                    return sum + value;
+
+                },
+                0
+            );
+
+
+        return total /
+            values.length;
+
+    }
+
+
+    /* ============================================================
+       TREND
+    ============================================================ */
+
+    function getTrend(
+        values,
+        lowerIsBetter = false
+    ) {
+
+        if (
+            values.length < 2
+        ) {
+
+            return {
+
+                status:
+                    "Not enough data",
+
+                message:
+                    "At least two health logs are required."
+
+            };
+
+        }
+
+
+        const first =
+            values[0];
+
+
+        const last =
+            values[
+                values.length - 1
+            ];
+
+
+        const difference =
+            last - first;
+
+
+        if (
+            Math.abs(
+                difference
+            ) < 0.001
+        ) {
+
+            return {
+
+                status:
+                    "Stable",
+
+                message:
+                    "Your recorded values are relatively stable."
+
+            };
+
+        }
+
+
+        if (lowerIsBetter) {
+
+            if (
+                difference < 0
+            ) {
+
+                return {
+
+                    status:
+                        "Improving",
+
+                    message:
+                        "Your recorded score has decreased."
+
+                };
+
+            }
+
+
+            return {
+
+                status:
+                    "Increasing",
+
+                message:
+                    "Your recorded score has increased."
+
+            };
+
+        }
+
+
+        if (
+            difference > 0
+        ) {
+
+            return {
+
+                status:
+                    "Improving",
+
+                message:
+                    "Your recorded values have increased."
+
+            };
+
+        }
+
+
+        return {
+
+            status:
+                "Decreasing",
+
+            message:
+                "Your recorded values have decreased."
+
+        };
+
+    }
+
+
+    /* ============================================================
+       RENDER TRENDS
+    ============================================================ */
+
+    function renderTrends(logs) {
+
+
+        const sleep =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.sleep_hours
+                        )
+                )
+                .filter(
+                    Number.isFinite
+                );
+
+
+        const water =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.water_intake_liters
+                        )
+                )
+                .filter(
+                    Number.isFinite
+                );
+
+
+        const stress =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.stress_score
+                        )
+                )
+                .filter(
+                    Number.isFinite
+                );
+
+
+        const exercise =
+            logs
+                .map(
+                    log =>
+                        Number(
+                            log.exercise_minutes
+                        )
+                )
+                .filter(
+                    Number.isFinite
+                );
+
+
+        const trends = {
+
+            sleep:
+                getTrend(
+                    sleep
+                ),
+
+            water:
+                getTrend(
+                    water
+                ),
+
+            stress:
+                getTrend(
+                    stress,
+                    true
+                ),
+
+            exercise:
+                getTrend(
+                    exercise
+                )
+
+        };
+
+
+        const config = {
+
+            sleep: {
+                icon: "😴",
+                title: "Sleep Trend"
+            },
+
+            water: {
+                icon: "💧",
+                title: "Water Trend"
+            },
+
+            stress: {
+                icon: "🧘",
+                title: "Stress Trend"
+            },
+
+            exercise: {
+                icon: "🏃",
+                title: "Exercise Trend"
+            }
+
+        };
+
+
+        const grid =
+            document.getElementById(
+                "trendGrid"
+            );
+
+
+        grid.innerHTML =
+            "";
+
+
+        Object.keys(
+            config
+        ).forEach(
+            function(key) {
+
+
+                const trend =
+                    trends[key];
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "trend-item";
+
+
+                const statusClass =
+                    getStatusClass(
+                        trend.status
+                    );
+
+
+                item.innerHTML = `
+
+                    <div class="trend-title">
+                        ${config[key].icon}
+                        ${config[key].title}
+                    </div>
+
+                    <div class="trend-status ${statusClass}">
+                        ${escapeHtml(trend.status)}
+                    </div>
+
+                    <div class="trend-message">
+                        ${escapeHtml(trend.message)}
+                    </div>
+
+                `;
+
+
+                grid.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ============================================================
+       STATUS CLASS
+    ============================================================ */
+
+    function getStatusClass(status) {
+
+        const value =
+            status
+                .toLowerCase()
+                .replace(
+                    /\s+/g,
+                    "-"
+                );
+
+
+        if (
+            value === "improving"
+        ) {
+
+            return "improving";
+
+        }
+
+
+        if (
+            value === "decreasing"
+        ) {
+
+            return "decreasing";
+
+        }
+
+
+        if (
+            value === "increasing"
+        ) {
+
+            return "increasing";
+
+        }
+
+
+        if (
+            value === "stable"
+        ) {
+
+            return "stable";
+
+        }
+
+
+        return "not-enough";
+
+    }
+
+
+    /* ============================================================
+       HISTORY
+    ============================================================ */
+
+    function renderHistory(logs) {
+
+
+        const container =
+            document.getElementById(
+                "historyContainer"
+            );
+
+
+        if (!logs.length) {
+
+            container.innerHTML = `
+
+                <div class="empty">
+                    No health log data available.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const sortedLogs =
+            [...logs].sort(
+                function(
+                    a,
+                    b
+                ) {
+
+                    return new Date(
+                        b.log_date
+                    ) -
+                    new Date(
+                        a.log_date
+                    );
+
+                }
+            );
+
+
+        let html = `
+
+            <div class="history-wrapper">
+
+                <table class="history-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Sleep</th>
+                            <th>Water</th>
+                            <th>Stress</th>
+                            <th>Exercise</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+        `;
+
+
+        sortedLogs.forEach(
+            function(log) {
+
+                html += `
+
+                    <tr>
+
+                        <td>
+                            ${formatDate(
+                                log.log_date
+                            )}
+                        </td>
+
+                        <td>
+                            ${
+                                log.sleep_hours !== null &&
+                                log.sleep_hours !== undefined
+                                    ? `${log.sleep_hours} hrs`
+                                    : "N/A"
+                            }
+                        </td>
+
+                        <td>
+                            ${
+                                log.water_intake_liters !== null &&
+                                log.water_intake_liters !== undefined
+                                    ? `${log.water_intake_liters} L`
+                                    : "N/A"
+                            }
+                        </td>
+
+                        <td>
+                            ${
+                                log.stress_score !== null &&
+                                log.stress_score !== undefined
+                                    ? log.stress_score
+                                    : "N/A"
+                            }
+                        </td>
+
+                        <td>
+                            ${
+                                log.exercise_minutes !== null &&
+                                log.exercise_minutes !== undefined
+                                    ? `${log.exercise_minutes} min`
+                                    : "N/A"
+                            }
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+
+        html += `
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        `;
+
+
+        container.innerHTML =
+            html;
+
+    }
+
+
+    /* ============================================================
+       DATE
+    ============================================================ */
+
+    function formatDate(value) {
+
+        if (!value) {
+
+            return "N/A";
+
+        }
+
+
+        const date =
+            new Date(
+                value
+            );
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return value;
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short"
+            }
+        );
+
+    }
+
+
+    /* ============================================================
+       ESCAPE HTML
+    ============================================================ */
+
+    function escapeHtml(value) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.textContent =
+            value;
+
+
+        return div.innerHTML;
+
+    }
+
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+
+    function goRecommendations() {
+
+        window.location.href =
+            "recommendations.html";
+
+    }
+
+
+    function goTrends() {
+
+        window.location.href =
+            "trends.html";
+
+    }
+
+
+    function goDashboard() {
+
+        window.location.href =
+            "dashboard.html";
+
+    }
+
+
+    /* ============================================================
+       INITIAL LOAD
+    ============================================================ */
+
+    loadAnalytics();
+
+</script>
+
+</body>
+
+</html>

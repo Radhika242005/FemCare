@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - Dataset Insights
+    </title>
+
+
+    <style>
+
+        :root {
+
+            --purple: #7542a2;
+            --purple-dark: #4b2b58;
+            --pink: #d94aa0;
+
+            --text: #302737;
+            --muted: #756d79;
+
+            --border: #e8ddea;
+            --soft: #faf6fc;
+
+            --white: #ffffff;
+
+            --green: #287a45;
+            --green-bg: #eaf7ee;
+
+            --orange: #a96820;
+            --orange-bg: #fff4e5;
+
+            --page: #fbfafc;
+
+        }
+
+
+        * {
+
+            box-sizing:
+                border-box;
+
+        }
+
+
+        body {
+
+            margin:
+                0;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+        }
+
+
+        .page {
+
+            min-height:
+                100vh;
+
+            padding:
+                24px 15px 45px;
+
+        }
+
+
+        .container {
+
+            width:
+                min(
+                    1100px,
+                    calc(100% - 20px)
+                );
+
+            margin:
+                auto;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            min-height:
+                65px;
+
+            padding:
+                0 20px;
+
+            margin-bottom:
+                20px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.06
+                );
+
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            color:
+                var(--purple);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                25px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .brand-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                8px;
+
+            background:
+                var(--soft);
+
+            font-size:
+                19px;
+
+        }
+
+
+        .header-label {
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+
+            padding:
+                28px 20px;
+
+            margin-bottom:
+                20px;
+
+            text-align:
+                center;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.06
+                );
+
+        }
+
+
+        .hero h1 {
+
+            margin:
+                0 0 7px;
+
+            color:
+                var(--purple-dark);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                31px;
+
+        }
+
+
+        .hero h1 span {
+
+            color:
+                var(--pink);
+
+        }
+
+
+        .hero p {
+
+            max-width:
+                680px;
+
+            margin:
+                auto;
+
+            color:
+                var(--muted);
+
+            font-size:
+                12px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+
+            min-height:
+                20px;
+
+            margin:
+                12px 0;
+
+            text-align:
+                center;
+
+            color:
+                var(--muted);
+
+            font-size:
+                12px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .section {
+
+            padding:
+                21px;
+
+            margin-bottom:
+                18px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                11px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(
+                    53,
+                    35,
+                    64,
+                    0.05
+                );
+
+        }
+
+
+        .section-title {
+
+            margin:
+                0 0 16px;
+
+            color:
+                var(--purple-dark);
+
+            font-size:
+                18px;
+
+        }
+
+
+        .section-description {
+
+            margin:
+                -8px 0 17px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        /* =====================================================
+           STAT GRID
+        ===================================================== */
+
+        .stats-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                11px;
+
+        }
+
+
+        .stat-card {
+
+            min-height:
+                105px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                15px;
+
+            text-align:
+                center;
+
+            background:
+                var(--soft);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                9px;
+
+        }
+
+
+        .stat-icon {
+
+            margin-bottom:
+                5px;
+
+            font-size:
+                21px;
+
+        }
+
+
+        .stat-value {
+
+            margin-bottom:
+                6px;
+
+            color:
+                var(--purple);
+
+            font-size:
+                22px;
+
+            font-weight:
+                700;
+
+            overflow-wrap:
+                anywhere;
+
+        }
+
+
+        .stat-label {
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.4;
+
+        }
+
+
+        /* =====================================================
+           DISTRIBUTION
+        ===================================================== */
+
+        .distribution {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                10px;
+
+        }
+
+
+        .distribution-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                13px 14px;
+
+            background:
+                var(--soft);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                8px;
+
+        }
+
+
+        .distribution-name {
+
+            color:
+                var(--text);
+
+            font-size:
+                12px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        .distribution-count {
+
+            min-width:
+                35px;
+
+            padding:
+                4px 8px;
+
+            text-align:
+                center;
+
+            border-radius:
+                15px;
+
+            background:
+                #eadcf2;
+
+            color:
+                var(--purple-dark);
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
+
+        .summary-box {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                12px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .summary-item {
+
+            padding:
+                17px;
+
+            text-align:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                white;
+
+        }
+
+
+        .summary-icon {
+
+            margin-bottom:
+                7px;
+
+            font-size:
+                23px;
+
+        }
+
+
+        .summary-title {
+
+            margin-bottom:
+                5px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+        }
+
+
+        .summary-value {
+
+            color:
+                var(--purple);
+
+            font-size:
+                18px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* =====================================================
+           NOTICE
+        ===================================================== */
+
+        .notice {
+
+            padding:
+                13px 15px;
+
+            margin-top:
+                5px;
+
+            border:
+                1px solid
+                #eadfbc;
+
+            border-radius:
+                8px;
+
+            background:
+                #fffaf0;
+
+            color:
+                #655a42;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .button {
+
+            width:
+                100%;
+
+            min-height:
+                43px;
+
+            padding:
+                0 20px;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color:
+                white;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .button:hover {
+
+            opacity:
+                0.94;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+
+            padding-top:
+                17px;
+
+            margin-top:
+                18px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            text-align:
+                center;
+
+            color:
+                #99919d;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (
+            max-width: 900px
+        ) {
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 650px
+        ) {
+
+            .container {
+
+                width:
+                    calc(100% - 4px);
+
+            }
+
+
+            .header {
+
+                padding:
+                    0 13px;
+
+            }
+
+
+            .header-label {
+
+                display:
+                    none;
+
+            }
+
+
+            .hero h1 {
+
+                font-size:
+                    27px;
+
+            }
+
+
+            .section {
+
+                padding:
+                    16px;
+
+            }
+
+
+            .stats-grid,
+            .distribution,
+            .summary-box {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 430px
+        ) {
+
+            .stats-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+
+        <div class="header-label">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+        <h1>
+            Dataset
+            <span>Insights</span>
+        </h1>
+
+        <p>
+            Explore reference statistics from the
+            menstrual health dataset used by FemCare.
+            These insights help explain the patterns
+            represented in the reference data.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         MESSAGE
+    ====================================================== -->
+
+    <div
+        id="message"
+        class="message"
+    >
+        Loading dataset analysis...
+    </div>
+
+
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <div id="content"></div>
+
+
+    <!-- =====================================================
+         DASHBOARD
+    ====================================================== -->
+
+    <button
+        class="button"
+        onclick="goDashboard()"
+    >
+        ← Back to Dashboard
+    </button>
+
+
+    <footer class="footer">
+
+        FemCare • Dataset Insights
+
+    </footer>
+
+
+</div>
+
+</div>
+
+
+<script src="../js/dataset.js"></script>
+
+
+</body>
+
+</html>

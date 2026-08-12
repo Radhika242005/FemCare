@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - Health Trends
+    </title>
+
+    <style>
+
+        :root {
+            --purple: #7542a2;
+            --purple-dark: #452853;
+            --pink: #d94aa0;
+            --text: #302737;
+            --muted: #756d79;
+            --border: #e7e0e9;
+            --soft: #f8f3fa;
+            --page: #fbfafc;
+            --white: #ffffff;
+            --green: #2f7d50;
+            --red: #c44c4c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            background: var(--page);
+
+            color: var(--text);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+        }
+
+        .page {
+            min-height: 100vh;
+
+            padding:
+                22px 0 45px;
+        }
+
+        .container {
+            width:
+                min(
+                    1150px,
+                    calc(100% - 44px)
+                );
+
+            margin: auto;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .page-header {
+            min-height: 64px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 20px;
+
+            margin-bottom: 20px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(
+                    53,
+                    35,
+                    64,
+                    0.05
+                );
+        }
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color:
+                var(--purple);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 26px;
+
+            font-weight: 700;
+        }
+
+        .brand-mark {
+            width: 38px;
+
+            height: 38px;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                var(--soft);
+
+            border-radius: 7px;
+
+            font-size: 18px;
+        }
+
+        .header-label {
+            color:
+                var(--muted);
+
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            padding:
+                30px 20px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+        }
+
+        .hero h1 {
+            margin:
+                0 0 8px;
+
+            color:
+                var(--purple-dark);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 32px;
+        }
+
+        .hero h1 span {
+            color:
+                var(--pink);
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            margin:
+                0 auto;
+
+            color:
+                var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        #message {
+            min-height: 22px;
+
+            margin:
+                10px 0 16px;
+
+            text-align: center;
+
+            color:
+                var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+            padding:
+                22px;
+
+            margin-bottom:
+                18px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                8px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(
+                    53,
+                    35,
+                    64,
+                    0.05
+                );
+        }
+
+        .card h2 {
+            margin:
+                0 0 18px;
+
+            color:
+                var(--text);
+
+            font-size: 17px;
+        }
+
+        /* =====================================================
+           HEALTH OVERVIEW
+        ===================================================== */
+
+        .trend-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    5,
+                    minmax(0, 1fr)
+                );
+
+            gap: 10px;
+        }
+
+        .trend-item {
+            min-height: 120px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 14px;
+
+            text-align: center;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 7px;
+        }
+
+        .trend-icon {
+            margin-bottom: 8px;
+
+            font-size: 25px;
+        }
+
+        .trend-label {
+            margin-bottom: 7px;
+
+            color:
+                var(--muted);
+
+            font-size: 11px;
+        }
+
+        .trend-value {
+            color:
+                var(--purple);
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           TREND ANALYSIS
+        ===================================================== */
+
+        .trend-analysis-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 14px;
+        }
+
+        .analysis-item {
+            padding:
+                18px;
+
+            background:
+                var(--soft);
+
+            border-radius:
+                7px;
+
+            border:
+                1px solid
+                var(--border);
+        }
+
+        .analysis-item h3 {
+            margin:
+                0 0 10px;
+
+            color:
+                var(--purple-dark);
+
+            font-size: 14px;
+        }
+
+        .analysis-value {
+            margin-bottom:
+                7px;
+
+            color:
+                var(--purple);
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+        .analysis-item p {
+            margin: 0;
+
+            color:
+                var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           HISTORICAL CHARTS
+        ===================================================== */
+
+        .chart-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+        .chart-card {
+            padding:
+                18px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                8px;
+
+            background:
+                #ffffff;
+        }
+
+        .chart-title {
+            margin:
+                0 0 15px;
+
+            color:
+                var(--purple-dark);
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           BAR CHART
+        ===================================================== */
+
+        .chart {
+            min-height: 270px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 10px;
+
+            padding:
+                20px 10px 5px;
+
+            overflow-x: auto;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            background:
+                linear-gradient(
+                    to top,
+                    #ffffff,
+                    #fcf9fd
+                );
+        }
+
+        .chart-bar {
+            min-width: 42px;
+
+            height: 230px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 6px;
+        }
+
+        .bar-value {
+            color:
+                var(--purple-dark);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            white-space:
+                nowrap;
+        }
+
+        .bar {
+            width: 28px;
+
+            min-height: 5px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            border-radius:
+                5px 5px 0 0;
+
+            transition:
+                opacity .15s ease;
+        }
+
+        .bar:hover {
+            opacity:
+                .75;
+        }
+
+        .bar-date {
+            color:
+                var(--muted);
+
+            font-size: 9px;
+
+            white-space:
+                nowrap;
+        }
+
+        .no-chart-data {
+            width: 100%;
+
+            display: grid;
+
+            place-items: center;
+
+            color:
+                var(--muted);
+
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           NOTICE
+        ===================================================== */
+
+        .notice {
+            padding:
+                13px 15px;
+
+            background:
+                #fffaf0;
+
+            border:
+                1px solid
+                #eadfbc;
+
+            border-radius:
+                6px;
+
+            color:
+                #655a42;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .navigation {
+            display: flex;
+
+            justify-content:
+                center;
+
+            gap: 12px;
+
+            margin-top:
+                20px;
+        }
+
+        .button {
+            min-width:
+                190px;
+
+            height:
+                43px;
+
+            padding:
+                0 20px;
+
+            border-radius:
+                7px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+        }
+
+        .primary {
+            border:
+                none;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color:
+                white;
+        }
+
+        .secondary {
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                white;
+
+            color:
+                var(--purple);
+        }
+
+        .button:hover {
+            opacity:
+                .92;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            padding-top:
+                17px;
+
+            margin-top:
+                22px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            text-align:
+                center;
+
+            color:
+                #99919d;
+
+            font-size:
+                10px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .trend-grid {
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0, 1fr)
+                    );
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width:
+                    calc(100% - 22px);
+            }
+
+            .header-label {
+                display:
+                    none;
+            }
+
+            .trend-grid,
+            .trend-analysis-grid,
+            .chart-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .navigation {
+                flex-direction:
+                    column;
+            }
+
+            .button {
+                width:
+                    100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="page-header">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+        <div class="header-label">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+        <h1>
+            Health <span>Trends</span>
+        </h1>
+
+        <p>
+            Review your recorded health information,
+            understand recent changes, and view your
+            health history through simple visual charts.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         MESSAGE
+    ====================================================== -->
+
+    <div id="message">
+        Loading your health information...
+    </div>
+
+
+    <!-- =====================================================
+         HEALTH OVERVIEW
+    ====================================================== -->
+
+    <section
+        id="trendCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            📊 Health Overview
+        </h2>
+
+        <div
+            id="trendContainer"
+            class="trend-grid"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TREND ANALYSIS
+    ====================================================== -->
+
+    <section
+        class="card"
+    >
+
+        <h2>
+            📈 Health Trends
+        </h2>
+
+        <div
+            id="trendAnalysis"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LIFESTYLE
+    ====================================================== -->
+
+    <section
+        id="lifestyleCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            🌿 Lifestyle Analysis
+        </h2>
+
+        <div
+            id="lifestyleContainer"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SYMPTOMS
+    ====================================================== -->
+
+    <section
+        id="symptomCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            🩺 Health Indicators
+        </h2>
+
+        <div
+            id="symptomContainer"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HISTORICAL CHARTS
+    ====================================================== -->
+
+    <section
+        id="historicalCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            📊 Health History
+        </h2>
+
+        <p
+            style="
+                color:#756d79;
+                font-size:11px;
+                line-height:1.6;
+                margin-top:-8px;
+                margin-bottom:18px;
+            "
+        >
+            These charts show the values recorded in your
+            FemCare health logs over time.
+        </p>
+
+
+        <div class="chart-grid">
+
+
+            <!-- SLEEP -->
+
+            <div class="chart-card">
+
+                <h3 class="chart-title">
+                    😴 Sleep History
+                </h3>
+
+                <div
+                    id="sleepChart"
+                    class="chart"
+                ></div>
+
+            </div>
+
+
+            <!-- WATER -->
+
+            <div class="chart-card">
+
+                <h3 class="chart-title">
+                    💧 Water Intake History
+                </h3>
+
+                <div
+                    id="waterChart"
+                    class="chart"
+                ></div>
+
+            </div>
+
+
+            <!-- STRESS -->
+
+            <div class="chart-card">
+
+                <h3 class="chart-title">
+                    🧘 Stress History
+                </h3>
+
+                <div
+                    id="stressChart"
+                    class="chart"
+                ></div>
+
+            </div>
+
+
+            <!-- EXERCISE -->
+
+            <div class="chart-card">
+
+                <h3 class="chart-title">
+                    🏃 Exercise History
+                </h3>
+
+                <div
+                    id="exerciseChart"
+                    class="chart"
+                ></div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NOTICE
+    ====================================================== -->
+
+    <section class="card">
+
+        <div class="notice">
+
+            These analytics are calculated from the health
+            information recorded in your FemCare health logs.
+            They are intended for wellness tracking and are
+            not a medical diagnosis.
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <div class="navigation">
+
+        <button
+            class="button primary"
+            onclick="goRecommendations()"
+        >
+            🌿 My Recommendations
+        </button>
+
+
+        <button
+            class="button secondary"
+            onclick="goDashboard()"
+        >
+            ← Back to Dashboard
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        FemCare • Health Trends
+
+    </footer>
+
+
+</div>
+
+</div>
+
+
+<!-- IMPORTANT:
+     Use your ORIGINAL trends.js,
+     not the simplified one I gave earlier.
+-->
+
+<script src="../js/trends.js"></script>
+
+</body>
+
+</html>

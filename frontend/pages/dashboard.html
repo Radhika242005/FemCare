@@ -1,0 +1,3212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FemCare Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <style>
+
+        .dashboard-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-section {
+            margin-top: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .auth-button {
+            margin-bottom: 10px;
+        }
+
+        .logout-button {
+            margin-top: 20px;
+        }
+
+        .wellness-card,
+        .health-summary-card,
+        .period-summary-card,
+        .analysis-summary-card {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            background: #f8f5f7;
+            border: 1px solid #eee;
+        }
+
+        .wellness-title,
+        .health-summary-title,
+        .period-summary-title,
+        .analysis-summary-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .wellness-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .wellness-stat {
+            background: white;
+            padding: 15px 8px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .wellness-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .wellness-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: #e5e5e5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #333;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .streak-display {
+            text-align: center;
+            margin-top: 18px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .streak-icon {
+            font-size: 25px;
+        }
+
+        .streak-number {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .streak-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .health-summary-grid,
+        .period-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .summary-item {
+            background: white;
+            padding: 16px 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .summary-icon {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .summary-status {
+            margin-top: 5px;
+            font-size: 11px;
+            color: #777;
+        }
+
+        .loading-text {
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .error-text {
+            text-align: center;
+            color: #b00020;
+            font-size: 13px;
+        }
+
+        .view-button {
+            margin-top: 15px;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .analysis-item {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .analysis-icon {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .analysis-name {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .analysis-status {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 10px;
+            min-height: 18px;
+        }
+
+        .status-available {
+            color: green;
+        }
+
+        .status-pending {
+            color: #777;
+        }
+
+        .analysis-button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 7px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .analysis-button:hover {
+            background: #222;
+        }
+
+        @media (max-width: 500px) {
+
+            .wellness-stats,
+            .health-summary-grid,
+            .period-summary-grid,
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+
+
+<style id="femcare-clean-dashboard">
+/* ============================================================
+   FEMCARE — CLEAN PROFESSIONAL HEALTHCARE DASHBOARD
+   No decorative illustrations. Existing HTML/JS/API preserved.
+   ============================================================ */
+
+:root {
+    --fc-purple: #7b43a8;
+    --fc-purple-dark: #4d2868;
+    --fc-pink: #df4da5;
+    --fc-text: #30243a;
+    --fc-muted: #7c7381;
+    --fc-border: #e9e1ed;
+    --fc-bg: #faf9fb;
+    --fc-card: #ffffff;
+    --fc-soft: #f7f1fa;
+    --fc-shadow: 0 8px 24px rgba(63, 40, 75, 0.055);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--fc-bg);
+    color: var(--fc-text);
+    font-family: Inter, Arial, sans-serif;
+}
+
+/* Main container */
+.dashboard-shell {
+    width: min(1160px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 24px 0 36px;
+}
+
+/* Header */
+.dashboard-topbar {
+    min-height: 64px;
+    padding: 12px 18px;
+    margin-bottom: 22px;
+    background: #fff;
+    border: 1px solid var(--fc-border);
+    border-radius: 14px;
+    box-shadow: var(--fc-shadow);
+}
+
+.brand {
+    color: var(--fc-purple);
+    font-size: 23px;
+}
+
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: var(--fc-soft);
+    box-shadow: none;
+}
+
+.avatar {
+    background: var(--fc-soft);
+    color: var(--fc-purple);
+}
+
+.logout-top {
+    border-color: #eadfeb;
+    background: #fff;
+    color: #68497a;
+}
+
+/* Simple welcome banner */
+.hero {
+    display: block;
+    min-height: auto;
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f8f0fc, #fff4f9);
+    color: var(--fc-text);
+    border: 1px solid var(--fc-border);
+    box-shadow: none;
+}
+
+.hero::after,
+.hero-figure {
+    display: none;
+}
+
+.hero-kicker {
+    margin-bottom: 7px;
+    color: var(--fc-purple);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+}
+
+.hero h1 {
+    margin-bottom: 7px;
+    color: var(--fc-purple-dark);
+    font-size: 32px;
+}
+
+.hero h1 span {
+    color: var(--fc-pink);
+}
+
+.hero p {
+    color: var(--fc-muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Section headings */
+.section-heading {
+    margin: 25px 2px 11px;
+}
+
+.section-heading h2 {
+    color: var(--fc-text);
+    font-size: 20px;
+}
+
+.section-heading p {
+    color: var(--fc-muted);
+}
+
+/* Cards */
+.dashboard-card {
+    padding: 20px;
+    background: var(--fc-card);
+    border: 1px solid var(--fc-border);
+    border-radius: 15px;
+    box-shadow: var(--fc-shadow);
+}
+
+.dashboard-card:hover {
+    box-shadow: var(--fc-shadow);
+}
+
+/* Wellness */
+.wellness-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.wellness-stat {
+    padding: 16px;
+    border: 1px solid var(--fc-border);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.wellness-number,
+.summary-value {
+    color: var(--fc-purple);
+}
+
+.progress-container {
+    margin-top: 18px;
+}
+
+.progress-track {
+    height: 9px;
+    background: #eee9f1;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, var(--fc-purple), var(--fc-pink));
+}
+
+.progress-text {
+    color: var(--fc-purple);
+}
+
+.streak-display {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border: 1px solid var(--fc-border);
+    border-radius: 12px;
+    background: #fbf7fc;
+}
+
+/* Buttons */
+.dashboard-button {
+    min-height: 42px;
+    border-radius: 9px;
+    background: linear-gradient(90deg, var(--fc-purple), var(--fc-pink));
+    box-shadow: none;
+    transition: transform .15s ease, opacity .15s ease;
+}
+
+.dashboard-button:hover {
+    transform: translateY(-1px);
+    box-shadow: none;
+    opacity: .94;
+}
+
+/* Summary cards */
+.health-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.summary-item {
+    min-height: 125px;
+    padding: 16px 12px;
+    border: 1px solid var(--fc-border);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.summary-icon {
+    font-size: 23px;
+}
+
+/* Menstrual section */
+.period-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.period-actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.period-actions .dashboard-button {
+    margin-top: 13px;
+}
+
+/* Health analysis */
+.analysis-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.analysis-item {
+    min-width: 0;
+    min-height: 160px;
+    padding: 16px;
+    border: 1px solid var(--fc-border);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: none;
+}
+
+.analysis-item:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.analysis-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background: var(--fc-soft);
+}
+
+.analysis-name {
+    color: var(--fc-text);
+    font-size: 12px;
+}
+
+.analysis-status {
+    margin: 6px 0 9px;
+    font-size: 9px;
+}
+
+.analysis-button {
+    width: 100%;
+    min-height: 35px;
+    padding: 7px 8px;
+    border: 1px solid #dfd4e5;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--fc-purple-dark);
+    font-size: 9px;
+}
+
+.analysis-button:hover {
+    background: var(--fc-soft);
+    transform: none;
+}
+
+/* Personalized health */
+.personalized-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.personalized-card {
+    min-height: 145px;
+    padding: 18px;
+    border: 1px solid var(--fc-border);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: var(--fc-shadow);
+}
+
+.personalized-card h3 {
+    color: var(--fc-text);
+}
+
+.personalized-card p {
+    color: var(--fc-muted);
+}
+
+/* Remove decorative card symbols */
+.dashboard-card::before {
+    display: none;
+}
+
+/* Footer */
+.dashboard-footer {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid var(--fc-border);
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .analysis-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .period-grid,
+    .health-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .period-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .dashboard-shell {
+        width: min(100% - 24px, 600px);
+        padding-top: 14px;
+    }
+
+    .hero {
+        padding: 23px 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .analysis-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .personalized-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .dashboard-shell {
+        width: calc(100% - 16px);
+    }
+
+    .dashboard-topbar {
+        padding: 10px 12px;
+    }
+
+    .topbar-user-text {
+        display: none;
+    }
+
+    .wellness-stats,
+    .health-grid,
+    .period-grid,
+    .analysis-grid,
+    .personalized-grid,
+    .period-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card {
+        padding: 15px;
+    }
+
+    .section-heading h2 {
+        font-size: 18px;
+    }
+}
+</style>
+
+
+<style id="femcare-dashboard-layout">
+/* ============================================================
+   FEMCARE DASHBOARD
+   Clean, balanced, professional healthcare layout
+   ============================================================ */
+
+:root {
+    --purple: #7a43a7;
+    --purple-dark: #4d2868;
+    --pink: #dc4ba0;
+    --text: #30263a;
+    --muted: #77707d;
+    --border: #e9e2ed;
+    --soft: #f8f3fa;
+    --page: #faf9fb;
+    --white: #ffffff;
+    --shadow: 0 8px 25px rgba(62, 40, 76, 0.055);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--page);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ---------- PAGE ---------- */
+
+.dashboard-page {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 22px 0 35px;
+}
+
+/* ---------- HEADER ---------- */
+
+.dashboard-header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    margin-bottom: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--purple);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.dashboard-brand-mark {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: var(--soft);
+    font-size: 19px;
+}
+
+.dashboard-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashboard-user-info {
+    text-align: right;
+}
+
+.dashboard-user-info small {
+    display: block;
+    color: #9a929e;
+    font-size: 9px;
+}
+
+.dashboard-user-info strong {
+    color: var(--text);
+    font-size: 12px;
+}
+
+.dashboard-avatar {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--soft);
+    color: var(--purple);
+    font-weight: 700;
+}
+
+/* ---------- WELCOME ---------- */
+
+.welcome-card {
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f8f1fc, #fff6fa);
+}
+
+.welcome-label {
+    margin-bottom: 7px;
+    color: var(--purple);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.welcome-card h1 {
+    margin: 0 0 7px;
+    color: var(--purple-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 31px;
+}
+
+.welcome-card h1 span {
+    color: var(--pink);
+}
+
+.welcome-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* ---------- SECTION ---------- */
+
+.dashboard-section {
+    margin-bottom: 20px;
+}
+
+.section-card {
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    margin: 0;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.section-description {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* ---------- WELLNESS ---------- */
+
+.wellness-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.wellness-stat {
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.wellness-number {
+    color: var(--purple);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.wellness-label {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.progress-container {
+    margin-top: 17px;
+}
+
+.progress-track {
+    height: 9px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #eee8f1;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+}
+
+.progress-text {
+    margin-top: 7px;
+    text-align: center;
+    color: var(--purple);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.streak-display {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #fbf8fc;
+}
+
+.streak-icon {
+    font-size: 20px;
+}
+
+.streak-number {
+    color: var(--pink);
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.streak-label {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.view-button,
+.auth-button {
+    min-height: 40px;
+    border: 0;
+    border-radius: 9px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    color: white;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 700;
+    box-shadow: none;
+    transition: transform .15s ease, opacity .15s ease;
+}
+
+.view-button {
+    margin-top: 15px;
+    padding: 0 17px;
+}
+
+.view-button:hover,
+.auth-button:hover {
+    transform: translateY(-1px);
+    opacity: .94;
+}
+
+/* ---------- TWO COLUMN SUMMARY ---------- */
+
+.summary-columns {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.summary-columns .section-card {
+    height: 100%;
+}
+
+/* ---------- HEALTH SUMMARY ---------- */
+
+.health-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.summary-item {
+    min-height: 116px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #fff;
+}
+
+.summary-icon {
+    margin-bottom: 5px;
+    font-size: 21px;
+}
+
+.summary-value {
+    color: var(--purple);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.summary-label {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.summary-status {
+    margin-top: 5px;
+    color: #8e8792;
+    font-size: 8px;
+}
+
+/* ---------- MENSTRUAL ---------- */
+
+.period-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.period-summary-grid .summary-item {
+    min-height: 100px;
+}
+
+.period-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.period-actions .auth-button {
+    width: 100%;
+    padding: 0 6px;
+}
+
+/* ---------- HEALTH ANALYSIS ---------- */
+
+.analysis-summary-card {
+    width: 100%;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.analysis-item {
+    min-width: 0;
+    min-height: 165px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.analysis-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 9px;
+    border-radius: 50%;
+    background: var(--soft);
+    font-size: 21px;
+}
+
+.analysis-name {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.analysis-status {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 6px 0 9px;
+    color: #8c858f;
+    font-size: 9px;
+}
+
+.analysis-button {
+    width: 100%;
+    min-height: 34px;
+    padding: 5px 7px;
+    border: 1px solid #ded3e4;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--purple-dark);
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.analysis-button:hover {
+    background: var(--soft);
+}
+
+/* ---------- PERSONALIZED ---------- */
+
+.personalized-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.personalized-actions .auth-button {
+    width: 100%;
+}
+
+/* ---------- LOGOUT ---------- */
+
+.logout-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.logout-button {
+    min-width: 105px;
+    padding: 0 18px;
+    background: #fff;
+    border: 1px solid #e6b6c7;
+    color: #c54f70;
+    box-shadow: none;
+}
+
+.logout-button:hover {
+    background: #fff7f9;
+}
+
+/* ---------- LOADING / ERROR ---------- */
+
+.loading-text {
+    padding: 18px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.error-text {
+    margin-top: 10px;
+    padding: 9px;
+    border-radius: 8px;
+    background: #fff4f6;
+    color: #b74761;
+    font-size: 9px;
+}
+
+/* ---------- FOOTER ---------- */
+
+.dashboard-footer {
+    padding-top: 17px;
+    margin-top: 22px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: #9a929e;
+    font-size: 9px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1050px) {
+    .summary-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .period-summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .analysis-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .analysis-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .period-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .period-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .dashboard-container {
+        width: calc(100% - 18px);
+        padding-top: 10px;
+    }
+
+    .dashboard-header {
+        height: 58px;
+        padding: 0 12px;
+    }
+
+    .dashboard-brand {
+        font-size: 20px;
+    }
+
+    .dashboard-user-info {
+        display: none;
+    }
+
+    .welcome-card {
+        padding: 22px 19px;
+    }
+
+    .welcome-card h1 {
+        font-size: 27px;
+    }
+
+    .wellness-stats,
+    .health-summary-grid,
+    .period-summary-grid,
+    .analysis-grid,
+    .personalized-actions,
+    .period-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .section-card {
+        padding: 16px;
+    }
+
+    .analysis-item {
+        min-height: 150px;
+    }
+
+    .logout-row {
+        justify-content: stretch;
+    }
+
+    .logout-button {
+        width: 100%;
+    }
+}
+</style>
+
+
+<style id="femcare-final-alignment">
+/* Final alignment fixes */
+.wellness-recommendation-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.wellness-recommendation-row .view-button,
+.wellness-recommendation-row .auth-button {
+    width: min(420px, 100%);
+    margin: 0;
+    min-height: 44px;
+    text-align: center;
+}
+
+/* Keep wellness metrics evenly distributed */
+.wellness-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.wellness-stat {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Keep the streak centered */
+.streak-display {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Keep summary cards symmetrical */
+.summary-columns {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: 18px;
+}
+
+.health-summary-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.period-summary-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+}
+
+/* Analysis cards always fill the section evenly */
+.analysis-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.analysis-item {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Personalized actions stay aligned */
+.personalized-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.personalized-actions .auth-button {
+    width: 100%;
+}
+
+/* No horizontal overflow */
+.dashboard-container,
+.section-card,
+.dashboard-section {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 1050px) {
+    .summary-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .period-summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .analysis-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .analysis-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .period-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .wellness-stats,
+    .health-summary-grid,
+    .period-summary-grid,
+    .analysis-grid,
+    .personalized-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .wellness-recommendation-row .view-button,
+    .wellness-recommendation-row .auth-button {
+        width: 100%;
+    }
+}
+</style>
+
+</head>
+
+
+
+<body>
+
+<div class="dashboard-page">
+
+    <main class="dashboard-container">
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <div class="dashboard-brand">
+                <div class="dashboard-brand-mark">🌸</div>
+                <span>FemCare</span>
+            </div>
+
+            <div class="dashboard-user">
+
+                <div class="dashboard-user-info">
+                    <small>Welcome back</small>
+                    <strong id="topbarUserName">User</strong>
+                </div>
+
+                <div class="dashboard-avatar" id="userAvatar">
+                    U
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME -->
+        <section class="welcome-card">
+
+            <div class="welcome-label">
+                Personal Health Dashboard
+            </div>
+
+            <h1>
+                Welcome,
+                <span id="userName"></span>
+            </h1>
+
+            <p>
+                Your personalized FemCare dashboard for tracking
+                wellness, menstrual health and reference health analyses.
+            </p>
+
+        </section>
+
+
+        <!-- WELLNESS -->
+        <section class="dashboard-section">
+
+            <div class="section-card">
+
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">🌿 Wellness Progress</h2>
+                        <p class="section-description">
+                            Keep track of your progress and wellness activities.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="progressLoading" class="loading-text">
+                    Loading your wellness progress...
+                </div>
+
+                <div id="wellnessContent" style="display:none;">
+
+                    <div class="wellness-stats">
+
+                        <div class="wellness-stat">
+                            <div id="completedCount" class="wellness-number">0</div>
+                            <div class="wellness-label">Completed</div>
+                        </div>
+
+                        <div class="wellness-stat">
+                            <div id="remainingCount" class="wellness-number">0</div>
+                            <div class="wellness-label">Remaining</div>
+                        </div>
+
+                        <div class="wellness-stat">
+                            <div id="streakNumber" class="wellness-number">0</div>
+                            <div class="wellness-label">🔥 Day Streak</div>
+                        </div>
+
+                    </div>
+
+                    <div class="progress-container">
+
+                        <div class="progress-track">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+
+                        <div id="progressText" class="progress-text">
+                            0% Complete
+                        </div>
+
+                    </div>
+
+                    <div class="streak-display">
+                        <div class="streak-icon">🔥</div>
+
+                        <div
+                            id="streakDisplayNumber"
+                            class="streak-number"
+                        >
+                            0
+                        </div>
+
+                        <div class="streak-label">
+                            Day Wellness Streak
+                        </div>
+                    </div>
+
+                    <div class="wellness-recommendation-row">
+                        <button
+                            class="auth-button view-button"
+                            onclick="openRecommendations()"
+                        >
+                            🌿 View My Recommendations
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HEALTH + MENSTRUAL -->
+        <section class="dashboard-section">
+
+            <div class="summary-columns">
+
+                <!-- HEALTH SUMMARY -->
+                <div class="section-card">
+
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">📊 Health Summary</h2>
+                            <p class="section-description">
+                                Your latest wellness measurements.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="healthSummaryLoading" class="loading-text">
+                        Loading health summary...
+                    </div>
+
+                    <div
+                        id="healthSummaryContent"
+                        class="health-summary-grid"
+                        style="display:none;"
+                    >
+
+                        <div class="summary-item">
+                            <div class="summary-icon">😴</div>
+                            <div id="averageSleep" class="summary-value">N/A</div>
+                            <div class="summary-label">Average Sleep</div>
+                            <div id="sleepStatus" class="summary-status"></div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">💧</div>
+                            <div id="averageWater" class="summary-value">N/A</div>
+                            <div class="summary-label">Average Water</div>
+                            <div id="waterStatus" class="summary-status"></div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">🧘</div>
+                            <div id="averageStress" class="summary-value">N/A</div>
+                            <div class="summary-label">Average Stress</div>
+                            <div id="stressStatus" class="summary-status"></div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">🏃</div>
+                            <div id="totalExercise" class="summary-value">N/A</div>
+                            <div class="summary-label">Total Exercise</div>
+                            <div id="exerciseStatus" class="summary-status"></div>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="auth-button view-button"
+                        onclick="openAnalytics()"
+                    >
+                        📊 View Full Health Analytics
+                    </button>
+
+                </div>
+
+
+                <!-- MENSTRUAL HEALTH -->
+                <div class="section-card">
+
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">🩸 Menstrual Health</h2>
+                            <p class="section-description">
+                                Your latest cycle information.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="periodLoading" class="loading-text">
+                        Loading menstrual health...
+                    </div>
+
+                    <div
+                        id="periodContent"
+                        class="period-summary-grid"
+                        style="display:none;"
+                    >
+
+                        <div class="summary-item">
+                            <div class="summary-icon">🩸</div>
+                            <div id="periodStart" class="summary-value">N/A</div>
+                            <div class="summary-label">Last Period</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">📅</div>
+                            <div id="cycleLength" class="summary-value">N/A</div>
+                            <div class="summary-label">Cycle Length</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">🌸</div>
+                            <div id="cycleDay" class="summary-value">N/A</div>
+                            <div class="summary-label">Current Cycle Day</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">🔮</div>
+                            <div id="nextPeriod" class="summary-value">N/A</div>
+                            <div class="summary-label">Estimated Next Period</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">💧</div>
+                            <div id="flowLevel" class="summary-value">N/A</div>
+                            <div class="summary-label">Flow Level</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">💗</div>
+                            <div id="painLevel" class="summary-value">N/A</div>
+                            <div class="summary-label">Pain Level</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">😊</div>
+                            <div id="moodScore" class="summary-value">N/A</div>
+                            <div class="summary-label">Mood Score</div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="summary-icon">🧘</div>
+                            <div id="cycleStress" class="summary-value">N/A</div>
+                            <div class="summary-label">Cycle Stress</div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="periodError"
+                        class="error-text"
+                        style="display:none;"
+                    ></div>
+
+                    <div class="period-actions">
+
+                        <button
+                            class="auth-button"
+                            onclick="openPeriodTracking()"
+                        >
+                            🩸 Update Data
+                        </button>
+
+                        <button
+                            class="auth-button"
+                            onclick="openHistory()"
+                        >
+                            📊 History
+                        </button>
+
+                        <button
+                            class="auth-button"
+                            onclick="openTrends()"
+                        >
+                            📈 Trends
+                        </button>
+
+                        <button
+                            class="auth-button"
+                            onclick="openAnalytics()"
+                        >
+                            📊 Analytics
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HEALTH ANALYSIS -->
+        <section class="dashboard-section">
+
+            <div class="section-card analysis-summary-card">
+
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">🩺 Health Analysis</h2>
+                        <p class="section-description">
+                            Select a module for a reference screening or wellness analysis.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="analysisLoading" class="loading-text">
+                    Loading your health analyses...
+                </div>
+
+                <div
+                    id="analysisGrid"
+                    class="analysis-grid"
+                    style="display:none;"
+                >
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🩺</div>
+                        <div class="analysis-name">PCOS</div>
+                        <div id="pcosStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="openPCOS()">
+                            Open PCOS
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🦋</div>
+                        <div class="analysis-name">Thyroid</div>
+                        <div id="thyroidStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goThyroid()">
+                            Open Thyroid
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🌸</div>
+                        <div class="analysis-name">Early Puberty</div>
+                        <div id="earlyPubertyStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goEarlyPuberty()">
+                            Open Early Puberty
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🌸</div>
+                        <div class="analysis-name">Perimenopause</div>
+                        <div id="perimenopauseStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goPerimenopause()">
+                            Open Perimenopause
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🌺</div>
+                        <div class="analysis-name">Menopause</div>
+                        <div id="menopauseStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goMenopause()">
+                            Open Menopause
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🌺</div>
+                        <div class="analysis-name">Postmenopause</div>
+                        <div id="postmenopauseStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goPostmenopause()">
+                            Open Postmenopause
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🤰</div>
+                        <div class="analysis-name">Pregnancy</div>
+                        <div id="pregnancyStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goPregnancy()">
+                            Open Pregnancy
+                        </button>
+                    </div>
+
+                    <div class="analysis-item">
+                        <div class="analysis-icon">🍎</div>
+                        <div class="analysis-name">Food &amp; Nutrition</div>
+                        <div id="foodStatus" class="analysis-status status-pending">
+                            No analysis yet
+                        </div>
+                        <button class="analysis-button" onclick="goFood()">
+                            Open Food
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERSONALIZED HEALTH -->
+        <section class="dashboard-section">
+
+            <div class="section-card">
+
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">🌿 Personalized Health</h2>
+                        <p class="section-description">
+                            Quick access to your personal FemCare tools.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="personalized-actions">
+
+                    <button
+                        class="auth-button"
+                        onclick="openRecommendations()"
+                    >
+                        🌿 My Recommendations
+                    </button>
+
+                    <button
+                        class="auth-button"
+                        onclick="openProfile()"
+                    >
+                        👤 Health Profile
+                    </button>
+
+                </div>
+
+                <div class="logout-row">
+
+                    <button
+                        class="auth-button logout-button"
+                        onclick="logout()"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            FemCare • Women's Health Monitoring System
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+const API =
+    "http://127.0.0.1:5000";
+
+
+// ============================================================
+// CHECK LOGIN
+// ============================================================
+
+const storedUser =
+    localStorage.getItem("user");
+
+
+if (!storedUser) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+let user;
+
+
+try {
+
+    user =
+        JSON.parse(
+            storedUser
+        );
+
+} catch (error) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+const userId =
+    user.id ||
+    user.user_id ||
+    user.userId;
+
+
+if (!userId) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// ============================================================
+// USER NAME
+// ============================================================
+
+const displayName =
+    user.name || "User";
+
+document.getElementById(
+    "userName"
+).textContent =
+    displayName;
+
+const topbarName =
+    document.getElementById(
+        "topbarUserName"
+    );
+
+if (topbarName) {
+    topbarName.textContent =
+        displayName;
+}
+
+const avatar =
+    document.getElementById(
+        "userAvatar"
+    );
+
+if (avatar) {
+    avatar.textContent =
+        displayName.charAt(0).toUpperCase();
+}
+
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+
+function openPeriodTracking() {
+
+    window.location.href =
+        "period.html";
+
+}
+
+
+function openHistory() {
+
+    window.location.href =
+        "history.html";
+
+}
+
+
+function openTrends() {
+
+    window.location.href =
+        "trends.html";
+
+}
+
+
+function openAnalytics() {
+
+    window.location.href =
+        "analytics.html";
+
+}
+
+
+function openRecommendations() {
+
+    window.location.href =
+        "recommendations.html";
+
+}
+
+
+function openProfile() {
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+function openPCOS() {
+
+    window.location.href =
+        "pcos.html";
+
+}
+
+
+function goThyroid() {
+
+    window.location.href =
+        "thyroid.html";
+
+}
+
+
+function goEarlyPuberty() {
+
+    window.location.href =
+        "early_puberty.html";
+
+}
+
+
+function goPerimenopause() {
+
+    window.location.href =
+        "perimenopause.html";
+
+}
+
+
+function goMenopause() {
+
+    window.location.href =
+        "menopause.html";
+
+}
+
+
+function goPostmenopause() {
+
+    window.location.href =
+        "postmenopause.html";
+
+}
+
+
+function goPregnancy() {
+
+    window.location.href =
+        "pregnancy.html";
+
+}
+
+
+function goFood() {
+
+    window.location.href =
+        "food.html";
+
+}
+
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+function logout() {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "../index.html";
+
+}
+
+
+// ============================================================
+// NUMBER
+// ============================================================
+
+function toNumber(value) {
+
+    const number =
+        Number(value);
+
+    return Number.isFinite(number)
+        ? number
+        : null;
+
+}
+
+
+// ============================================================
+// AVERAGE
+// ============================================================
+
+function calculateAverage(
+    values
+) {
+
+    if (!values.length) {
+
+        return null;
+
+    }
+
+
+    const total =
+        values.reduce(
+            function(
+                sum,
+                value
+            ) {
+
+                return sum + value;
+
+            },
+            0
+        );
+
+
+    return total /
+        values.length;
+
+}
+
+
+// ============================================================
+// DATE
+// ============================================================
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+
+        return "N/A";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+// ============================================================
+// CYCLE DAY
+// ============================================================
+
+function calculateCycleDay(
+    startDate
+) {
+
+    if (!startDate) {
+
+        return null;
+
+    }
+
+
+    const start =
+        new Date(
+            startDate
+        );
+
+    const today =
+        new Date();
+
+
+    start.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const difference =
+        Math.floor(
+            (
+                today.getTime() -
+                start.getTime()
+            ) /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
+        );
+
+
+    if (
+        difference < 0
+    ) {
+
+        return null;
+
+    }
+
+
+    return difference + 1;
+
+}
+
+
+// ============================================================
+// NEXT PERIOD
+// ============================================================
+
+function calculateNextPeriod(
+    startDate,
+    cycleLength
+) {
+
+    if (
+        !startDate ||
+        !cycleLength
+    ) {
+
+        return null;
+
+    }
+
+
+    const date =
+        new Date(
+            startDate
+        );
+
+
+    date.setDate(
+        date.getDate() +
+        Number(
+            cycleLength
+        )
+    );
+
+
+    return date;
+
+}
+
+
+// ============================================================
+// LATEST VALUE
+// ============================================================
+
+function getLatestAvailableValue(
+    history,
+    field
+) {
+
+    for (
+        let i = 0;
+        i < history.length;
+        i++
+    ) {
+
+        const value =
+            history[i][field];
+
+
+        if (
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        ) {
+
+            return value;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+// ============================================================
+// WELLNESS PROGRESS
+// ============================================================
+
+async function loadWellnessProgress() {
+
+    const loading =
+        document.getElementById(
+            "progressLoading"
+        );
+
+    const content =
+        document.getElementById(
+            "wellnessContent"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/recommendations/user/${userId}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Recommendations API error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const recommendations =
+            Array.isArray(
+                data.recommendations
+            )
+                ? data.recommendations
+                : [];
+
+
+        let completedIds = [];
+
+
+        try {
+
+            const completedResponse =
+                await fetch(
+                    `${API}/api/recommendations/completed/${userId}`
+                );
+
+
+            if (
+                completedResponse.ok
+            ) {
+
+                const completedData =
+                    await completedResponse.json();
+
+
+                completedIds =
+                    Array.isArray(
+                        completedData
+                            .completed_recommendation_ids
+                    )
+                        ? completedData
+                            .completed_recommendation_ids
+                            .map(Number)
+                        : [];
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Completed recommendations error:",
+                error
+            );
+
+        }
+
+
+        const total =
+            recommendations.length;
+
+
+        const completed =
+            recommendations.filter(
+                function(
+                    recommendation
+                ) {
+
+                    return completedIds.includes(
+                        Number(
+                            recommendation.id
+                        )
+                    );
+
+                }
+            ).length;
+
+
+        const remaining =
+            Math.max(
+                total -
+                completed,
+                0
+            );
+
+
+        const percentage =
+            total > 0
+                ? Math.round(
+                    (
+                        completed /
+                        total
+                    ) * 100
+                )
+                : 0;
+
+
+        let streak = 0;
+
+
+        try {
+
+            const streakResponse =
+                await fetch(
+                    `${API}/api/recommendations/streak/${userId}`
+                );
+
+
+            if (
+                streakResponse.ok
+            ) {
+
+                const streakData =
+                    await streakResponse.json();
+
+
+                streak =
+                    Number(
+                        streakData.streak ||
+                        0
+                    );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Streak error:",
+                error
+            );
+
+        }
+
+
+        document.getElementById(
+            "completedCount"
+        ).textContent =
+            completed;
+
+
+        document.getElementById(
+            "remainingCount"
+        ).textContent =
+            remaining;
+
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            `${percentage}%`;
+
+
+        document.getElementById(
+            "progressText"
+        ).textContent =
+            `${percentage}% Complete`;
+
+
+        document.getElementById(
+            "streakNumber"
+        ).textContent =
+            streak;
+
+
+        document.getElementById(
+            "streakDisplayNumber"
+        ).textContent =
+            streak;
+
+
+        loading.style.display =
+            "none";
+
+
+        content.style.display =
+            "block";
+
+
+    } catch (error) {
+
+        console.error(
+            "Wellness error:",
+            error
+        );
+
+
+        loading.textContent =
+            "Unable to load wellness progress.";
+
+    }
+
+}
+
+
+// ============================================================
+// HEALTH SUMMARY
+// ============================================================
+
+async function loadHealthSummary() {
+
+    const loading =
+        document.getElementById(
+            "healthSummaryLoading"
+        );
+
+    const content =
+        document.getElementById(
+            "healthSummaryContent"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/health-logs/user/${userId}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Health log API error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const logs =
+            Array.isArray(
+                data.logs
+            )
+                ? data.logs
+                : [];
+
+
+        if (!logs.length) {
+
+            loading.textContent =
+                "No health logs available yet.";
+
+            return;
+
+        }
+
+
+        const sleepValues =
+            logs
+                .map(
+                    log =>
+                        toNumber(
+                            log.sleep_hours
+                        )
+                )
+                .filter(
+                    value =>
+                        value !== null
+                );
+
+
+        const waterValues =
+            logs
+                .map(
+                    log =>
+                        toNumber(
+                            log.water_intake_liters
+                        )
+                )
+                .filter(
+                    value =>
+                        value !== null
+                );
+
+
+        const stressValues =
+            logs
+                .map(
+                    log =>
+                        toNumber(
+                            log.stress_score
+                        )
+                )
+                .filter(
+                    value =>
+                        value !== null
+                );
+
+
+        const exerciseValues =
+            logs
+                .map(
+                    log =>
+                        toNumber(
+                            log.exercise_minutes
+                        )
+                )
+                .filter(
+                    value =>
+                        value !== null
+                );
+
+
+        const averageSleep =
+            calculateAverage(
+                sleepValues
+            );
+
+
+        const averageWater =
+            calculateAverage(
+                waterValues
+            );
+
+
+        const averageStress =
+            calculateAverage(
+                stressValues
+            );
+
+
+        const totalExercise =
+            exerciseValues.reduce(
+                function(
+                    sum,
+                    value
+                ) {
+
+                    return sum + value;
+
+                },
+                0
+            );
+
+
+        document.getElementById(
+            "averageSleep"
+        ).textContent =
+            averageSleep !== null
+                ? `${averageSleep.toFixed(2)} hrs`
+                : "N/A";
+
+
+        document.getElementById(
+            "sleepStatus"
+        ).textContent =
+            averageSleep !== null
+                ? (
+                    averageSleep >= 7
+                        ? "Good average"
+                        : "Below 7 hours"
+                )
+                : "";
+
+
+        document.getElementById(
+            "averageWater"
+        ).textContent =
+            averageWater !== null
+                ? `${averageWater.toFixed(2)} L`
+                : "N/A";
+
+
+        document.getElementById(
+            "waterStatus"
+        ).textContent =
+            averageWater !== null
+                ? (
+                    averageWater >= 2
+                        ? "Good intake"
+                        : "Low intake"
+                )
+                : "";
+
+
+        document.getElementById(
+            "averageStress"
+        ).textContent =
+            averageStress !== null
+                ? `${averageStress.toFixed(2)} / 10`
+                : "N/A";
+
+
+        document.getElementById(
+            "stressStatus"
+        ).textContent =
+            averageStress !== null
+                ? (
+                    averageStress <= 3
+                        ? "Low stress"
+                        : averageStress <= 6
+                            ? "Moderate stress"
+                            : "Higher stress"
+                )
+                : "";
+
+
+        document.getElementById(
+            "totalExercise"
+        ).textContent =
+            `${totalExercise} min`;
+
+
+        document.getElementById(
+            "exerciseStatus"
+        ).textContent =
+            totalExercise >= 150
+                ? "Good activity"
+                : "Room for improvement";
+
+
+        loading.style.display =
+            "none";
+
+
+        content.style.display =
+            "grid";
+
+
+    } catch (error) {
+
+        console.error(
+            "Health summary error:",
+            error
+        );
+
+
+        loading.textContent =
+            "Unable to load health summary.";
+
+    }
+
+}
+
+
+// ============================================================
+// PERIOD SUMMARY
+// ============================================================
+
+async function loadPeriodSummary() {
+
+    const loading =
+        document.getElementById(
+            "periodLoading"
+        );
+
+    const content =
+        document.getElementById(
+            "periodContent"
+        );
+
+    const errorElement =
+        document.getElementById(
+            "periodError"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/periods/history/${userId}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Period history API error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const history =
+            Array.isArray(
+                data.history
+            )
+                ? data.history
+                : [];
+
+
+        if (!history.length) {
+
+            loading.textContent =
+                "No period data recorded yet.";
+
+            return;
+
+        }
+
+
+        const latest =
+            history[0];
+
+
+        const startDate =
+            latest.start_date;
+
+
+        const cycleLength =
+            toNumber(
+                latest.cycle_length_days
+            );
+
+
+        const currentCycleDay =
+            calculateCycleDay(
+                startDate
+            );
+
+
+        const nextPeriod =
+            calculateNextPeriod(
+                startDate,
+                cycleLength
+            );
+
+
+        document.getElementById(
+            "periodStart"
+        ).textContent =
+            formatDate(
+                startDate
+            );
+
+
+        document.getElementById(
+            "cycleLength"
+        ).textContent =
+            cycleLength !== null
+                ? `${cycleLength} days`
+                : "N/A";
+
+
+        document.getElementById(
+            "cycleDay"
+        ).textContent =
+            currentCycleDay !== null
+                ? `Day ${currentCycleDay}`
+                : "N/A";
+
+
+        document.getElementById(
+            "nextPeriod"
+        ).textContent =
+            nextPeriod
+                ? formatDate(
+                    nextPeriod
+                )
+                : "N/A";
+
+
+        const latestFlow =
+            getLatestAvailableValue(
+                history,
+                "flow_level"
+            );
+
+
+        const latestPain =
+            getLatestAvailableValue(
+                history,
+                "pain_level"
+            );
+
+
+        const latestMood =
+            getLatestAvailableValue(
+                history,
+                "mood_score"
+            );
+
+
+        const latestStress =
+            getLatestAvailableValue(
+                history,
+                "stress_score_cycle"
+            );
+
+
+        document.getElementById(
+            "flowLevel"
+        ).textContent =
+            latestFlow || "N/A";
+
+
+        document.getElementById(
+            "painLevel"
+        ).textContent =
+            latestPain !== null
+                ? `${latestPain}/10`
+                : "N/A";
+
+
+        document.getElementById(
+            "moodScore"
+        ).textContent =
+            latestMood !== null
+                ? `${latestMood}/10`
+                : "N/A";
+
+
+        document.getElementById(
+            "cycleStress"
+        ).textContent =
+            latestStress !== null
+                ? `${latestStress}/10`
+                : "N/A";
+
+
+        loading.style.display =
+            "none";
+
+
+        content.style.display =
+            "grid";
+
+
+        errorElement.style.display =
+            "none";
+
+
+    } catch (error) {
+
+        console.error(
+            "Period summary error:",
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        errorElement.style.display =
+            "block";
+
+
+        errorElement.textContent =
+            "Unable to load menstrual health data.";
+
+    }
+
+}
+
+
+// ============================================================
+// ANALYSIS SUMMARY
+// ============================================================
+
+async function loadAnalysisSummary() {
+
+    const loading =
+        document.getElementById(
+            "analysisLoading"
+        );
+
+    const grid =
+        document.getElementById(
+            "analysisGrid"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/analysis/${userId}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Analysis summary API error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Analysis summary:",
+            data
+        );
+
+
+        const analyses =
+            data.analyses || {};
+
+
+        updateAnalysisStatus(
+            "pcosStatus",
+            analyses.pcos
+        );
+
+
+        updateAnalysisStatus(
+            "thyroidStatus",
+            analyses.thyroid
+        );
+
+
+        updateAnalysisStatus(
+            "earlyPubertyStatus",
+            analyses.early_puberty
+        );
+
+
+        updateAnalysisStatus(
+            "perimenopauseStatus",
+            analyses.perimenopause
+        );
+
+
+        updateAnalysisStatus(
+            "menopauseStatus",
+            analyses.menopause
+        );
+
+
+        updateAnalysisStatus(
+            "postmenopauseStatus",
+            analyses.postmenopause
+        );
+
+
+        updateAnalysisStatus(
+            "pregnancyStatus",
+            analyses.pregnancy
+        );
+
+
+        updateAnalysisStatus(
+            "foodStatus",
+            analyses.food
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        grid.style.display =
+            "grid";
+
+
+    } catch (error) {
+
+        console.error(
+            "Analysis summary error:",
+            error
+        );
+
+
+        loading.textContent =
+            "Unable to load health analyses.";
+
+
+        grid.style.display =
+            "grid";
+
+    }
+
+}
+
+
+// ============================================================
+// ANALYSIS STATUS
+// ============================================================
+
+function updateAnalysisStatus(
+    elementId,
+    record
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (!element) {
+
+        return;
+
+    }
+
+
+    if (
+        record &&
+        typeof record === "object"
+    ) {
+
+        element.textContent =
+            "✓ Analysis Available";
+
+        element.className =
+            "analysis-status status-available";
+
+    } else {
+
+        element.textContent =
+            "No analysis yet";
+
+        element.className =
+            "analysis-status status-pending";
+
+    }
+
+}
+
+
+// ============================================================
+// INITIAL LOAD
+// ============================================================
+
+loadWellnessProgress();
+
+loadHealthSummary();
+
+loadPeriodSummary();
+
+loadAnalysisSummary();
+</script>
+
+</body>
+
+
+</html>

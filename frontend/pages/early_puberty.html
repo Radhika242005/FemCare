@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FemCare - Early Puberty Analysis</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #fbfafc;
+            color: #302737;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 20px 0 40px;
+        }
+
+        .container {
+            width: min(1000px, calc(100% - 40px));
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            height: 64px;
+            background: white;
+            border: 1px solid #e5dfe8;
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+            margin-bottom: 18px;
+
+            box-shadow: 0 3px 12px rgba(53, 35, 64, 0.04);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #7542a2;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f8f1fa;
+            border-radius: 7px;
+
+            font-size: 18px;
+        }
+
+        .header-text {
+            color: #756d79;
+            font-size: 11px;
+        }
+
+        /* TITLE */
+
+        .title-card {
+            background: white;
+            border: 1px solid #e5dfe8;
+            border-radius: 8px;
+
+            padding: 28px 20px;
+
+            text-align: center;
+
+            margin-bottom: 18px;
+
+            box-shadow: 0 3px 12px rgba(53, 35, 64, 0.04);
+        }
+
+        .title-card h1 {
+            margin: 0 0 8px;
+
+            color: #43264f;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 30px;
+        }
+
+        .title-card h1 span {
+            color: #d94aa0;
+        }
+
+        .title-card p {
+            margin: 0;
+
+            color: #756d79;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* MAIN FORM */
+
+        .main-card {
+            background: white;
+
+            border: 1px solid #e5dfe8;
+            border-radius: 8px;
+
+            padding: 24px;
+
+            box-shadow: 0 3px 12px rgba(53, 35, 64, 0.04);
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            margin: 0 0 16px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid #e5dfe8;
+
+            font-size: 17px;
+
+            color: #302737;
+        }
+
+        /* BASIC INFO */
+
+        .basic-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 16px;
+        }
+
+        /* SIGNS */
+
+        .sign-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 16px;
+        }
+
+        .field {
+            width: 100%;
+        }
+
+        .field label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #302737;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .field input,
+        .field select {
+
+            width: 100%;
+
+            height: 42px;
+
+            padding: 0 12px;
+
+            border: 1px solid #d9d1dd;
+
+            border-radius: 6px;
+
+            background: white;
+
+            color: #302737;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 12px;
+
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus {
+
+            border-color: #7542a2;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(117, 66, 162, 0.08);
+        }
+
+        .hint {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #8a828e;
+
+            font-size: 10px;
+        }
+
+        /* MESSAGE */
+
+        #message {
+
+            min-height: 22px;
+
+            margin: 8px 0;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        /* ANALYZE */
+
+        .analyze-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .analyze-button {
+
+            width: 360px;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7542a2,
+                    #d94aa0
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .analyze-button:hover {
+            opacity: 0.94;
+        }
+
+        .analyze-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* RESULT */
+
+        .result-card {
+
+            display: none;
+
+            margin-top: 24px;
+
+            padding: 20px;
+
+            background: white;
+
+            border: 1px solid #e5dfe8;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(53, 35, 64, 0.04);
+        }
+
+        .result-card h2 {
+
+            margin: 0 0 15px;
+
+            font-size: 17px;
+
+            color: #302737;
+        }
+
+        .result-box {
+
+            padding: 16px;
+
+            background: #f8f4fa;
+
+            border-left: 3px solid #7542a2;
+
+            border-radius: 6px;
+
+            color: #302737;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .notice {
+
+            margin-top: 12px;
+
+            padding: 12px 14px;
+
+            background: #fffaf0;
+
+            border: 1px solid #eadfbc;
+
+            border-radius: 6px;
+
+            color: #655a42;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+        /* BACK */
+
+        .back-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .back-button {
+
+            width: 360px;
+
+            height: 42px;
+
+            background: white;
+
+            border: 1px solid #d8cedc;
+
+            border-radius: 7px;
+
+            color: #7542a2;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #f8f4fa;
+        }
+
+        /* FOOTER */
+
+        .footer {
+
+            margin-top: 20px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #e5dfe8;
+
+            text-align: center;
+
+            color: #99919d;
+
+            font-size: 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: calc(100% - 24px);
+            }
+
+            .header {
+                padding: 0 13px;
+            }
+
+            .header-text {
+                display: none;
+            }
+
+            .main-card {
+                padding: 17px;
+            }
+
+            .basic-grid,
+            .sign-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analyze-button,
+            .back-button {
+                width: 100%;
+            }
+
+            .title-card h1 {
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+        <div class="header-text">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- TITLE -->
+
+    <section class="title-card">
+
+        <h1>
+            Early Puberty
+            <span>Reference Analysis</span>
+        </h1>
+
+        <p>
+            Enter the information below for a personalized
+            reference screening analysis.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN -->
+
+    <main class="main-card">
+
+
+        <form id="earlyPubertyForm">
+
+
+            <!-- BASIC INFORMATION -->
+
+            <section class="section">
+
+                <h2 class="section-title">
+                    👧 Basic Information
+                </h2>
+
+
+                <div class="basic-grid">
+
+                    <div class="field">
+
+                        <label for="age">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            min="1"
+                            max="18"
+                            placeholder="Enter age"
+                            required
+                        >
+
+                        <span class="hint">
+                            Enter the child's current age.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PUBERTY SIGNS -->
+
+            <section class="section">
+
+                <h2 class="section-title">
+                    🌸 Puberty-Related Signs
+                </h2>
+
+
+                <div class="sign-grid">
+
+
+                    <div class="field">
+
+                        <label for="pubertySigns">
+                            Puberty Signs
+                        </label>
+
+                        <select id="pubertySigns">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="earlyBreastDevelopment">
+                            Early Breast Development
+                        </label>
+
+                        <select id="earlyBreastDevelopment">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="earlyPubicHair">
+                            Early Pubic Hair
+                        </label>
+
+                        <select id="earlyPubicHair">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="earlyUnderarmHair">
+                            Early Underarm Hair
+                        </label>
+
+                        <select id="earlyUnderarmHair">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="bodyOdor">
+                            Body Odor
+                        </label>
+
+                        <select id="bodyOdor">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="acne">
+                            Acne
+                        </label>
+
+                        <select id="acne">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="rapidGrowth">
+                            Rapid Growth
+                        </label>
+
+                        <select id="rapidGrowth">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="vaginalBleeding">
+                            Vaginal Bleeding
+                        </label>
+
+                        <select id="vaginalBleeding">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <div id="message"></div>
+
+
+            <!-- ANALYZE -->
+
+            <div class="analyze-container">
+
+                <button
+                    type="submit"
+                    id="analyzeButton"
+                    class="analyze-button"
+                >
+                    Analyze Early Puberty
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <!-- RESULT -->
+
+        <section
+            id="resultCard"
+            class="result-card"
+        >
+
+            <h2>
+                🩺 Reference Result
+            </h2>
+
+            <div
+                id="resultText"
+                class="result-box"
+            ></div>
+
+            <div
+                id="medicalNotice"
+                class="notice"
+            >
+                This is a reference screening result based
+                on the information provided. It is not a
+                medical diagnosis.
+            </div>
+
+        </section>
+
+
+        <!-- BACK -->
+
+        <div class="back-container">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="goDashboard()"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </div>
+
+
+    </main>
+
+
+    <footer class="footer">
+        FemCare • Early Puberty Reference Analysis
+    </footer>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+const form =
+    document.getElementById(
+        "earlyPubertyForm"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const resultCard =
+    document.getElementById(
+        "resultCard"
+    );
+
+const resultText =
+    document.getElementById(
+        "resultText"
+    );
+
+const medicalNotice =
+    document.getElementById(
+        "medicalNotice"
+    );
+
+const analyzeButton =
+    document.getElementById(
+        "analyzeButton"
+    );
+
+
+/* LOGIN */
+
+const storedUser =
+    localStorage.getItem("user");
+
+
+if (!storedUser) {
+
+    window.location.href =
+        "login.html";
+}
+
+
+let user;
+
+
+try {
+
+    user =
+        JSON.parse(
+            storedUser
+        );
+
+} catch (error) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+}
+
+
+const userId =
+    user.id ||
+    user.user_id ||
+    user.userId;
+
+
+if (!userId) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+}
+
+
+/* ANALYSIS */
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const data = {
+
+            user_id: userId,
+
+            age:
+                document.getElementById(
+                    "age"
+                ).value,
+
+            puberty_signs:
+                document.getElementById(
+                    "pubertySigns"
+                ).value,
+
+            early_breast_development:
+                document.getElementById(
+                    "earlyBreastDevelopment"
+                ).value,
+
+            early_pubic_hair:
+                document.getElementById(
+                    "earlyPubicHair"
+                ).value,
+
+            early_underarm_hair:
+                document.getElementById(
+                    "earlyUnderarmHair"
+                ).value,
+
+            body_odor:
+                document.getElementById(
+                    "bodyOdor"
+                ).value,
+
+            acne:
+                document.getElementById(
+                    "acne"
+                ).value,
+
+            rapid_growth:
+                document.getElementById(
+                    "rapidGrowth"
+                ).value,
+
+            vaginal_bleeding:
+                document.getElementById(
+                    "vaginalBleeding"
+                ).value
+        };
+
+
+        console.log(
+            "EARLY PUBERTY DATA:",
+            data
+        );
+
+
+        message.textContent =
+            "Analyzing information...";
+
+        message.style.color =
+            "#7542a2";
+
+
+        resultCard.style.display =
+            "none";
+
+
+        analyzeButton.disabled =
+            true;
+
+        analyzeButton.textContent =
+            "Analyzing...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/api/early-puberty/analyze",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                data
+                            )
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "EARLY PUBERTY RESPONSE:",
+                result
+            );
+
+
+            if (!response.ok) {
+
+                message.textContent =
+                    result.error ||
+                    result.message ||
+                    "Unable to analyze early puberty data.";
+
+                message.style.color =
+                    "#c44c4c";
+
+                return;
+            }
+
+
+            if (result.success === false) {
+
+                message.textContent =
+                    result.error ||
+                    result.message ||
+                    "Analysis failed.";
+
+                message.style.color =
+                    "#c44c4c";
+
+                return;
+            }
+
+
+            resultText.textContent =
+                result.result ||
+                "No reference result available.";
+
+
+            medicalNotice.textContent =
+                result.medical_notice ||
+                "This is a reference screening result based on the information provided. It is not a medical diagnosis.";
+
+
+            resultCard.style.display =
+                "block";
+
+
+            message.textContent =
+                "Analysis completed successfully.";
+
+            message.style.color =
+                "#2f7d50";
+
+
+        } catch (error) {
+
+            console.error(
+                "EARLY PUBERTY ERROR:",
+                error
+            );
+
+
+            message.textContent =
+                error.message ||
+                "Unable to connect to the FemCare server.";
+
+            message.style.color =
+                "#c44c4c";
+
+
+        } finally {
+
+            analyzeButton.disabled =
+                false;
+
+            analyzeButton.textContent =
+                "Analyze Early Puberty";
+        }
+
+    }
+);
+
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+}
+
+</script>
+
+</body>
+
+</html>

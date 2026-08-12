@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FemCare - Postmenopause Analysis</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #fbfafc;
+            color: #302737;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 20px 0 40px;
+        }
+
+        .container {
+            width: min(1000px, calc(100% - 40px));
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            min-height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+            margin-bottom: 18px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5dfe8;
+            border-radius: 8px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(53, 35, 64, 0.04);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #7542a2;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f8f1fa;
+
+            border-radius: 7px;
+
+            font-size: 18px;
+        }
+
+        .header-text {
+            color: #756d79;
+            font-size: 11px;
+        }
+
+        /* TITLE */
+
+        .title-card {
+            background: #ffffff;
+
+            border: 1px solid #e5dfe8;
+            border-radius: 8px;
+
+            padding: 28px 20px;
+            margin-bottom: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 3px 12px
+                rgba(53, 35, 64, 0.04);
+        }
+
+        .title-card h1 {
+            margin: 0 0 8px;
+
+            color: #43264f;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 30px;
+        }
+
+        .title-card h1 span {
+            color: #d94aa0;
+        }
+
+        .title-card p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #756d79;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* MAIN CARD */
+
+        .main-card {
+            background: #ffffff;
+
+            border: 1px solid #e5dfe8;
+            border-radius: 8px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(53, 35, 64, 0.04);
+        }
+
+        /* SECTION */
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            margin: 0 0 16px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid #e5dfe8;
+
+            color: #302737;
+
+            font-size: 17px;
+        }
+
+        /* GRIDS */
+
+        .basic-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 16px;
+        }
+
+        .symptom-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 16px;
+        }
+
+        /* FIELDS */
+
+        .field {
+            width: 100%;
+        }
+
+        .field label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #302737;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .field input,
+        .field select {
+
+            width: 100%;
+
+            height: 42px;
+
+            padding: 0 12px;
+
+            background: #ffffff;
+
+            border: 1px solid #d9d1dd;
+
+            border-radius: 6px;
+
+            color: #302737;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 12px;
+
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus {
+
+            border-color: #7542a2;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(117, 66, 162, 0.08);
+        }
+
+        .hint {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #8a828e;
+
+            font-size: 10px;
+        }
+
+        /* MESSAGE */
+
+        #message {
+
+            min-height: 22px;
+
+            margin-top: 8px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+        /* ANALYZE */
+
+        .analyze-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .analyze-button {
+
+            width: 360px;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7542a2,
+                    #d94aa0
+                );
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .analyze-button:hover {
+            opacity: 0.94;
+        }
+
+        .analyze-button:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+        }
+
+        /* RESULT */
+
+        .result-card {
+
+            display: none;
+
+            margin-top: 24px;
+
+            padding: 20px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5dfe8;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(53, 35, 64, 0.04);
+        }
+
+        .result-card h2 {
+
+            margin: 0 0 15px;
+
+            color: #302737;
+
+            font-size: 17px;
+        }
+
+        .result-box {
+
+            padding: 16px;
+
+            background: #f8f4fa;
+
+            border-left: 3px solid #7542a2;
+
+            border-radius: 6px;
+
+            color: #302737;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .notice {
+
+            margin-top: 12px;
+
+            padding: 12px 14px;
+
+            background: #fffaf0;
+
+            border: 1px solid #eadfbc;
+
+            border-radius: 6px;
+
+            color: #655a42;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+        /* BACK BUTTON */
+
+        .back-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .back-button {
+
+            width: 360px;
+
+            height: 42px;
+
+            background: #ffffff;
+
+            border: 1px solid #d8cedc;
+
+            border-radius: 7px;
+
+            color: #7542a2;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #f8f4fa;
+        }
+
+        /* FOOTER */
+
+        .footer {
+
+            margin-top: 20px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #e5dfe8;
+
+            text-align: center;
+
+            color: #99919d;
+
+            font-size: 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: calc(100% - 24px);
+            }
+
+            .header {
+                padding: 0 13px;
+            }
+
+            .header-text {
+                display: none;
+            }
+
+            .main-card {
+                padding: 17px;
+            }
+
+            .basic-grid,
+            .symptom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analyze-button,
+            .back-button {
+                width: 100%;
+            }
+
+            .title-card h1 {
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+        <div class="header-text">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- TITLE -->
+
+    <section class="title-card">
+
+        <h1>
+
+            Postmenopause
+            <span>
+                Reference Analysis
+            </span>
+
+        </h1>
+
+        <p>
+
+            Enter the information below for a personalized
+            reference screening analysis.
+
+        </p>
+
+    </section>
+
+
+    <!-- MAIN -->
+
+    <main class="main-card">
+
+
+        <form id="postmenopauseForm">
+
+
+            <!-- BASIC INFORMATION -->
+
+            <section class="section">
+
+                <h2 class="section-title">
+                    👤 Basic Information
+                </h2>
+
+
+                <div class="basic-grid">
+
+
+                    <div class="field">
+
+                        <label for="age">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            min="40"
+                            max="100"
+                            placeholder="Enter age"
+                            required
+                        >
+
+                        <span class="hint">
+                            Enter your current age.
+                        </span>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="yearsSinceMenopause">
+
+                            Years Since Menopause
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="yearsSinceMenopause"
+                            min="0"
+                            max="50"
+                            step="0.5"
+                            placeholder="Example: 5"
+                            required
+                        >
+
+                        <span class="hint">
+                            Approximate number of years since menopause.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- SYMPTOMS -->
+
+            <section class="section">
+
+                <h2 class="section-title">
+
+                    🌸 Postmenopause-Related Symptoms
+
+                </h2>
+
+
+                <div class="symptom-grid">
+
+
+                    <!-- HOT FLASHES -->
+
+                    <div class="field">
+
+                        <label for="hotFlashes">
+                            Hot Flashes
+                        </label>
+
+                        <select id="hotFlashes">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- NIGHT SWEATS -->
+
+                    <div class="field">
+
+                        <label for="nightSweats">
+                            Night Sweats
+                        </label>
+
+                        <select id="nightSweats">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- VAGINAL DRYNESS -->
+
+                    <div class="field">
+
+                        <label for="vaginalDryness">
+                            Vaginal Dryness
+                        </label>
+
+                        <select id="vaginalDryness">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SLEEP -->
+
+                    <div class="field">
+
+                        <label for="sleepProblems">
+                            Sleep Problems
+                        </label>
+
+                        <select id="sleepProblems">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MOOD -->
+
+                    <div class="field">
+
+                        <label for="moodChanges">
+                            Mood Changes
+                        </label>
+
+                        <select id="moodChanges">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- FATIGUE -->
+
+                    <div class="field">
+
+                        <label for="fatigue">
+                            Fatigue
+                        </label>
+
+                        <select id="fatigue">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- JOINT PAIN -->
+
+                    <div class="field">
+
+                        <label for="jointPain">
+                            Joint Pain
+                        </label>
+
+                        <select id="jointPain">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- URINARY -->
+
+                    <div class="field">
+
+                        <label for="urinarySymptoms">
+                            Urinary Symptoms
+                        </label>
+
+                        <select id="urinarySymptoms">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BONE HEALTH -->
+
+                    <div class="field">
+
+                        <label for="boneHealthConcern">
+                            Bone Health Concern
+                        </label>
+
+                        <select id="boneHealthConcern">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CONCENTRATION -->
+
+                    <div class="field">
+
+                        <label for="concentrationProblems">
+                            Concentration Problems
+                        </label>
+
+                        <select id="concentrationProblems">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"></div>
+
+
+            <!-- ANALYZE -->
+
+            <div class="analyze-container">
+
+                <button
+                    type="submit"
+                    id="analyzeButton"
+                    class="analyze-button"
+                >
+
+                    Analyze Postmenopause
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <!-- RESULT -->
+
+        <section
+            id="resultCard"
+            class="result-card"
+        >
+
+            <h2>
+                🩺 Reference Result
+            </h2>
+
+            <div
+                id="resultText"
+                class="result-box"
+            ></div>
+
+            <div
+                id="medicalNotice"
+                class="notice"
+            >
+
+                This is a reference screening result
+                based on the information provided.
+                It is not a medical diagnosis.
+
+            </div>
+
+        </section>
+
+
+        <!-- BACK -->
+
+        <div class="back-container">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="goDashboard()"
+            >
+
+                ← Back to Dashboard
+
+            </button>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        FemCare • Postmenopause Reference Analysis
+
+    </footer>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ============================================================
+// ELEMENTS
+// ============================================================
+
+const form =
+    document.getElementById(
+        "postmenopauseForm"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const resultCard =
+    document.getElementById(
+        "resultCard"
+    );
+
+const resultText =
+    document.getElementById(
+        "resultText"
+    );
+
+const medicalNotice =
+    document.getElementById(
+        "medicalNotice"
+    );
+
+const analyzeButton =
+    document.getElementById(
+        "analyzeButton"
+    );
+
+
+// ============================================================
+// LOGIN CHECK
+// ============================================================
+
+const storedUser =
+    localStorage.getItem("user");
+
+
+if (!storedUser) {
+
+    window.location.href =
+        "login.html";
+}
+
+
+let user;
+
+
+try {
+
+    user =
+        JSON.parse(storedUser);
+
+} catch (error) {
+
+    console.error(
+        "Invalid stored user:",
+        error
+    );
+
+    localStorage.removeItem("user");
+
+    window.location.href =
+        "login.html";
+}
+
+
+const userId =
+    user.id ||
+    user.user_id ||
+    user.userId;
+
+
+if (!userId) {
+
+    localStorage.removeItem("user");
+
+    window.location.href =
+        "login.html";
+}
+
+
+// ============================================================
+// FORM SUBMIT
+// ============================================================
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        // ------------------------------------------------------
+        // COLLECT DATA
+        // ------------------------------------------------------
+
+        const data = {
+
+            user_id:
+                userId,
+
+            age:
+                document.getElementById(
+                    "age"
+                ).value,
+
+            years_since_menopause:
+                document.getElementById(
+                    "yearsSinceMenopause"
+                ).value,
+
+            hot_flashes:
+                document.getElementById(
+                    "hotFlashes"
+                ).value,
+
+            night_sweats:
+                document.getElementById(
+                    "nightSweats"
+                ).value,
+
+            vaginal_dryness:
+                document.getElementById(
+                    "vaginalDryness"
+                ).value,
+
+            sleep_problems:
+                document.getElementById(
+                    "sleepProblems"
+                ).value,
+
+            mood_changes:
+                document.getElementById(
+                    "moodChanges"
+                ).value,
+
+            fatigue:
+                document.getElementById(
+                    "fatigue"
+                ).value,
+
+            joint_pain:
+                document.getElementById(
+                    "jointPain"
+                ).value,
+
+            urinary_symptoms:
+                document.getElementById(
+                    "urinarySymptoms"
+                ).value,
+
+            bone_health_concern:
+                document.getElementById(
+                    "boneHealthConcern"
+                ).value,
+
+            concentration_problems:
+                document.getElementById(
+                    "concentrationProblems"
+                ).value
+
+        };
+
+
+        console.log(
+            "POSTMENOPAUSE DATA SENT:",
+            data
+        );
+
+
+        // ------------------------------------------------------
+        // UI
+        // ------------------------------------------------------
+
+        message.textContent =
+            "Analyzing your information...";
+
+        message.style.color =
+            "#7542a2";
+
+
+        resultCard.style.display =
+            "none";
+
+
+        analyzeButton.disabled =
+            true;
+
+        analyzeButton.textContent =
+            "Analyzing...";
+
+
+        // ------------------------------------------------------
+        // API REQUEST
+        // ------------------------------------------------------
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/api/postmenopause/analyze",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(data)
+
+                    }
+                );
+
+
+            let result;
+
+
+            try {
+
+                result =
+                    await response.json();
+
+            } catch (jsonError) {
+
+                throw new Error(
+                    `Invalid server response. HTTP ${response.status}`
+                );
+
+            }
+
+
+            console.log(
+                "POSTMENOPAUSE API RESPONSE:",
+                result
+            );
+
+
+            // --------------------------------------------------
+            // HTTP ERROR
+            // --------------------------------------------------
+
+            if (!response.ok) {
+
+                message.textContent =
+                    result.error ||
+                    result.message ||
+                    `Unable to analyze information. HTTP ${response.status}`;
+
+                message.style.color =
+                    "#c44c4c";
+
+                return;
+            }
+
+
+            // --------------------------------------------------
+            // API ERROR
+            // --------------------------------------------------
+
+            if (result.success === false) {
+
+                message.textContent =
+                    result.error ||
+                    result.message ||
+                    "Postmenopause analysis failed.";
+
+                message.style.color =
+                    "#c44c4c";
+
+                return;
+            }
+
+
+            // --------------------------------------------------
+            // SHOW RESULT
+            // --------------------------------------------------
+
+            resultText.textContent =
+                result.result ||
+                "No reference result available.";
+
+
+            medicalNotice.textContent =
+                result.medical_notice ||
+                "This is a reference screening result based on the information provided. It is not a medical diagnosis.";
+
+
+            resultCard.style.display =
+                "block";
+
+
+            message.textContent =
+                "Postmenopause analysis completed successfully.";
+
+            message.style.color =
+                "#2f7d50";
+
+
+        } catch (error) {
+
+            console.error(
+                "POSTMENOPAUSE ERROR:",
+                error
+            );
+
+
+            message.textContent =
+                error.message ||
+                "Unable to connect to the FemCare server.";
+
+            message.style.color =
+                "#c44c4c";
+
+
+        } finally {
+
+            analyzeButton.disabled =
+                false;
+
+            analyzeButton.textContent =
+                "Analyze Postmenopause";
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - Thyroid Analysis
+    </title>
+
+
+    <style>
+
+        :root {
+
+            --purple: #7542a2;
+            --purple-dark: #43264f;
+            --pink: #d94aa0;
+
+            --text: #302737;
+            --muted: #756d79;
+
+            --border: #e5dfe8;
+
+            --soft: #f8f4fa;
+
+            --page: #fbfafc;
+
+            --white: #ffffff;
+
+            --success: #2f7d50;
+            --danger: #c44c4c;
+
+            --shadow:
+                0 4px 16px
+                rgba(53, 35, 64, 0.05);
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size:
+                14px;
+        }
+
+
+        .page {
+
+            min-height:
+                100vh;
+
+            padding:
+                20px 0 40px;
+        }
+
+
+        .container {
+
+            width:
+                min(
+                    980px,
+                    calc(100% - 40px)
+                );
+
+            margin:
+                0 auto;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .site-header {
+
+            min-height:
+                62px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                0 20px;
+
+            margin-bottom:
+                18px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            box-shadow:
+                var(--shadow);
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            color:
+                var(--purple);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                24px;
+
+            font-weight:
+                700;
+        }
+
+
+        .brand-icon {
+
+            width:
+                36px;
+
+            height:
+                36px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                7px;
+
+            background:
+                var(--soft);
+
+            font-size:
+                18px;
+        }
+
+
+        .header-text {
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+        }
+
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .intro {
+
+            padding:
+                25px 20px;
+
+            margin-bottom:
+                18px;
+
+            text-align:
+                center;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            box-shadow:
+                var(--shadow);
+        }
+
+
+        .intro h1 {
+
+            margin:
+                0 0 7px;
+
+            color:
+                var(--purple-dark);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                29px;
+        }
+
+
+        .intro h1 span {
+
+            color:
+                var(--pink);
+        }
+
+
+        .subtitle {
+
+            max-width:
+                620px;
+
+            margin:
+                0 auto;
+
+            color:
+                var(--muted);
+
+            font-size:
+                12px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .form-card {
+
+            padding:
+                22px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            box-shadow:
+                var(--shadow);
+        }
+
+
+        .section-title {
+
+            margin:
+                0 0 16px;
+
+            padding-bottom:
+                9px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            color:
+                var(--text);
+
+            font-size:
+                17px;
+        }
+
+
+        .form-section + .form-section {
+
+            margin-top:
+                25px;
+        }
+
+
+        /* =====================================================
+           INPUT GRID
+        ===================================================== */
+
+        .form-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                14px;
+        }
+
+
+        .symptom-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                14px;
+        }
+
+
+        .form-group {
+
+            margin:
+                0;
+        }
+
+
+        label {
+
+            display:
+                block;
+
+            margin-bottom:
+                6px;
+
+            color:
+                var(--text);
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+        }
+
+
+        input,
+        select {
+
+            width:
+                100%;
+
+            height:
+                40px;
+
+            padding:
+                0 11px;
+
+            border:
+                1px solid #d9d1dd;
+
+            border-radius:
+                6px;
+
+            outline:
+                none;
+
+            background:
+                #fff;
+
+            color:
+                var(--text);
+
+            font-family:
+                inherit;
+
+            font-size:
+                12px;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color:
+                var(--purple);
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    117,
+                    66,
+                    162,
+                    0.08
+                );
+        }
+
+
+        .hint {
+
+            display:
+                block;
+
+            margin-top:
+                5px;
+
+            color:
+                #8a828e;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        #message {
+
+            min-height:
+                20px;
+
+            margin-top:
+                15px;
+
+            text-align:
+                center;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+            line-height:
+                1.5;
+        }
+
+
+        /* =====================================================
+           ANALYZE BUTTON
+        ===================================================== */
+
+        .analyze-area {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            margin-top:
+                18px;
+        }
+
+
+        .analyze-button {
+
+            width:
+                340px;
+
+            min-height:
+                44px;
+
+            border:
+                0;
+
+            border-radius:
+                7px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color:
+                white;
+
+            font-family:
+                inherit;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+        }
+
+
+        .analyze-button:hover {
+
+            opacity:
+                0.94;
+        }
+
+
+        .analyze-button:disabled {
+
+            opacity:
+                0.65;
+
+            cursor:
+                not-allowed;
+        }
+
+
+        /* =====================================================
+           RESULT
+        ===================================================== */
+
+        .result-card {
+
+            display:
+                none;
+
+            margin-top:
+                20px;
+
+            padding:
+                20px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            background:
+                var(--white);
+
+            box-shadow:
+                var(--shadow);
+        }
+
+
+        .result-card h3 {
+
+            margin:
+                0 0 14px;
+
+            color:
+                var(--text);
+
+            font-size:
+                16px;
+        }
+
+
+        .result-text {
+
+            padding:
+                15px;
+
+            border-left:
+                3px solid var(--purple);
+
+            border-radius:
+                6px;
+
+            background:
+                var(--soft);
+
+            color:
+                var(--text);
+
+            font-size:
+                12px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .notice {
+
+            margin-top:
+                12px;
+
+            padding:
+                11px 13px;
+
+            border:
+                1px solid #eadfbc;
+
+            border-radius:
+                6px;
+
+            background:
+                #fffaf0;
+
+            color:
+                #655a42;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-area {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            margin-top:
+                18px;
+        }
+
+
+        .back-button {
+
+            width:
+                340px;
+
+            min-height:
+                42px;
+
+            border:
+                1px solid #d8cedc;
+
+            border-radius:
+                7px;
+
+            background:
+                #fff;
+
+            color:
+                var(--purple);
+
+            font-family:
+                inherit;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+        }
+
+
+        .back-button:hover {
+
+            background:
+                var(--soft);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+
+            padding-top:
+                16px;
+
+            margin-top:
+                18px;
+
+            border-top:
+                1px solid var(--border);
+
+            text-align:
+                center;
+
+            color:
+                #99919d;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 760px) {
+
+            .container {
+
+                width:
+                    calc(100% - 24px);
+            }
+
+
+            .form-grid,
+            .symptom-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .site-header {
+
+                padding:
+                    0 13px;
+            }
+
+
+            .header-text {
+
+                display:
+                    none;
+            }
+
+
+            .form-card {
+
+                padding:
+                    16px;
+            }
+
+
+            .analyze-button,
+            .back-button {
+
+                width:
+                    100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+
+        <div class="header-text">
+
+            Women's Health Monitoring System
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         TITLE
+    ====================================================== -->
+
+    <section class="intro">
+
+        <h1>
+            Thyroid
+            <span>
+                Reference Analysis
+            </span>
+        </h1>
+
+
+        <p class="subtitle">
+
+            Enter your thyroid-related
+            information for a personalized
+            reference screening analysis.
+
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         FORM
+    ====================================================== -->
+
+    <main class="form-card">
+
+
+        <form id="thyroidForm">
+
+
+            <!-- =================================================
+                 LAB VALUES
+            ================================================== -->
+
+            <section class="form-section">
+
+                <h3 class="section-title">
+
+                    🧪 Thyroid Test Values
+
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="tsh">
+
+                            TSH
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="tsh"
+                            step="0.01"
+                            min="0"
+                            placeholder="Example: 2.5"
+                        >
+
+
+                        <span class="hint">
+
+                            Enter TSH if available.
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="t3">
+
+                            T3
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="t3"
+                            step="0.01"
+                            min="0"
+                            placeholder="Example: 1.2"
+                        >
+
+
+                        <span class="hint">
+
+                            Enter T3 if available.
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="t4">
+
+                            T4
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="t4"
+                            step="0.01"
+                            min="0"
+                            placeholder="Example: 8.0"
+                        >
+
+
+                        <span class="hint">
+
+                            Enter T4 if available.
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SYMPTOMS
+            ================================================== -->
+
+            <section class="form-section">
+
+                <h3 class="section-title">
+
+                    🌿 Thyroid-Related Symptoms
+
+                </h3>
+
+
+                <div class="symptom-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="fatigue">
+
+                            Fatigue
+
+                        </label>
+
+
+                        <select id="fatigue">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="weightChange">
+
+                            Weight Change
+
+                        </label>
+
+
+                        <select id="weightChange">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="coldSensitivity">
+
+                            Cold Sensitivity
+
+                        </label>
+
+
+                        <select id="coldSensitivity">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="heatSensitivity">
+
+                            Heat Sensitivity
+
+                        </label>
+
+
+                        <select id="heatSensitivity">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="hairChanges">
+
+                            Hair Changes
+
+                        </label>
+
+
+                        <select id="hairChanges">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="moodChanges">
+
+                            Mood Changes
+
+                        </label>
+
+
+                        <select id="moodChanges">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="sleepProblems">
+
+                            Sleep Problems
+
+                        </label>
+
+
+                        <select id="sleepProblems">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MESSAGE
+            ================================================== -->
+
+            <div id="message"></div>
+
+
+            <!-- =================================================
+                 ANALYZE BUTTON
+            ================================================== -->
+
+            <div class="analyze-area">
+
+                <button
+                    type="submit"
+                    id="analyzeButton"
+                    class="analyze-button"
+                >
+
+                    Analyze Thyroid
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <!-- =====================================================
+             RESULT
+        ====================================================== -->
+
+        <section
+            id="resultCard"
+            class="result-card"
+        >
+
+            <h3>
+
+                🩺 Reference Result
+
+            </h3>
+
+
+            <div
+                id="resultText"
+                class="result-text"
+            ></div>
+
+
+            <div
+                id="medicalNotice"
+                class="notice"
+            >
+
+                This is a reference screening
+                result based on the information
+                provided. It is not a medical
+                diagnosis.
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BACK TO DASHBOARD
+        ====================================================== -->
+
+        <div class="back-area">
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="goDashboard()"
+            >
+
+                ← Back to Dashboard
+
+            </button>
+
+        </div>
+
+
+    </main>
+
+
+    <footer class="footer">
+
+        FemCare • Thyroid Reference Analysis
+
+    </footer>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ============================================================
+// ELEMENTS
+// ============================================================
+
+const thyroidForm =
+    document.getElementById(
+        "thyroidForm"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const resultCard =
+    document.getElementById(
+        "resultCard"
+    );
+
+
+const resultText =
+    document.getElementById(
+        "resultText"
+    );
+
+
+const medicalNotice =
+    document.getElementById(
+        "medicalNotice"
+    );
+
+
+const analyzeButton =
+    document.getElementById(
+        "analyzeButton"
+    );
+
+
+// ============================================================
+// CHECK LOGIN
+// ============================================================
+
+const storedUser =
+    localStorage.getItem(
+        "user"
+    );
+
+
+if (!storedUser) {
+
+    window.location.href =
+        "login.html";
+}
+
+
+let user;
+
+
+try {
+
+    user =
+        JSON.parse(
+            storedUser
+        );
+
+} catch (error) {
+
+    console.error(
+        "Invalid stored user:",
+        error
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+}
+
+
+const userId =
+    user.id ||
+    user.user_id ||
+    user.userId;
+
+
+if (!userId) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+}
+
+
+// ============================================================
+// THYROID FORM
+// ============================================================
+
+thyroidForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        // ------------------------------------------------------
+        // GET PATIENT VALUES
+        // ------------------------------------------------------
+
+        const thyroidData = {
+
+            user_id:
+                userId,
+
+            tsh:
+                document.getElementById(
+                    "tsh"
+                ).value || null,
+
+            t3:
+                document.getElementById(
+                    "t3"
+                ).value || null,
+
+            t4:
+                document.getElementById(
+                    "t4"
+                ).value || null,
+
+            fatigue:
+                document.getElementById(
+                    "fatigue"
+                ).value || null,
+
+            weight_change:
+                document.getElementById(
+                    "weightChange"
+                ).value || null,
+
+            cold_sensitivity:
+                document.getElementById(
+                    "coldSensitivity"
+                ).value || null,
+
+            heat_sensitivity:
+                document.getElementById(
+                    "heatSensitivity"
+                ).value || null,
+
+            hair_changes:
+                document.getElementById(
+                    "hairChanges"
+                ).value || null,
+
+            mood_changes:
+                document.getElementById(
+                    "moodChanges"
+                ).value || null,
+
+            sleep_problems:
+                document.getElementById(
+                    "sleepProblems"
+                ).value || null
+
+        };
+
+
+        console.log(
+            "THYROID DATA SENT:",
+            thyroidData
+        );
+
+
+        // ------------------------------------------------------
+        // UI
+        // ------------------------------------------------------
+
+        message.textContent =
+            "Analyzing your thyroid information...";
+
+        message.style.color =
+            "#7542a2";
+
+
+        resultCard.style.display =
+            "none";
+
+
+        analyzeButton.disabled =
+            true;
+
+
+        analyzeButton.textContent =
+            "Analyzing...";
+
+
+        // ------------------------------------------------------
+        // API
+        // ------------------------------------------------------
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/api/thyroid/analyze",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                thyroidData
+                            )
+                    }
+                );
+
+
+            let data;
+
+
+            try {
+
+                data =
+                    await response.json();
+
+            } catch (jsonError) {
+
+                throw new Error(
+                    `Invalid server response. HTTP ${response.status}`
+                );
+            }
+
+
+            console.log(
+                "THYROID API RESPONSE:",
+                data
+            );
+
+
+            // --------------------------------------------------
+            // BACKEND ERROR
+            // --------------------------------------------------
+
+            if (!response.ok) {
+
+                console.error(
+                    "Backend error:",
+                    data
+                );
+
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    `Unable to analyze thyroid data. HTTP ${response.status}`;
+
+
+                message.style.color =
+                    "#c44c4c";
+
+
+                return;
+            }
+
+
+            if (
+                data.success === false
+            ) {
+
+                message.textContent =
+                    data.error ||
+                    data.message ||
+                    "Thyroid analysis failed.";
+
+
+                message.style.color =
+                    "#c44c4c";
+
+
+                return;
+            }
+
+
+            // --------------------------------------------------
+            // DISPLAY RESULT
+            // --------------------------------------------------
+
+            resultText.textContent =
+                data.result ||
+                "No reference result available.";
+
+
+            medicalNotice.textContent =
+                data.medical_notice ||
+                "This is a reference screening result and is not a medical diagnosis.";
+
+
+            resultCard.style.display =
+                "block";
+
+
+            message.textContent =
+                "Thyroid analysis completed successfully.";
+
+
+            message.style.color =
+                "#2f7d50";
+
+
+        } catch (error) {
+
+            console.error(
+                "THYROID FRONTEND ERROR:",
+                error
+            );
+
+
+            message.textContent =
+                error.message ||
+                "Unable to connect to the FemCare server.";
+
+
+            message.style.color =
+                "#c44c4c";
+
+
+        } finally {
+
+            analyzeButton.disabled =
+                false;
+
+
+            analyzeButton.textContent =
+                "Analyze Thyroid";
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+}
+
+</script>
+
+
+</body>
+
+</html>

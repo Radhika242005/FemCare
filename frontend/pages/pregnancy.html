@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FemCare - Pregnancy Analysis</title>
+
+    <style>
+
+        :root {
+            --purple: #7542a2;
+            --purple-dark: #452853;
+            --pink: #d94aa0;
+            --text: #302737;
+            --muted: #756d79;
+            --border: #e7e0e9;
+            --soft: #f8f3fa;
+            --page: #fbfafc;
+            --white: #ffffff;
+            --green: #2f7d50;
+            --red: #c44c4c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background: var(--page);
+        }
+
+        body {
+            margin: 0;
+            background: var(--page);
+            color: var(--text);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 22px 0 40px;
+        }
+
+        .container {
+            width: min(
+                1100px,
+                calc(100% - 40px)
+            );
+
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .page-header {
+            min-height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+            margin-bottom: 20px;
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(53, 35, 64, 0.05);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--purple);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--soft);
+
+            border-radius: 7px;
+
+            font-size: 18px;
+        }
+
+        .header-label {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            padding: 28px 20px;
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(53, 35, 64, 0.05);
+        }
+
+        .hero h1 {
+            margin: 0 0 7px;
+
+            color: var(--purple-dark);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 31px;
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            margin: 0 auto;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           MAIN FORM CARD
+        ========================================= */
+
+        .form-card {
+            padding: 24px;
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(53, 35, 64, 0.05);
+        }
+
+        /* =========================================
+           SECTIONS
+        ========================================= */
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            margin: 0 0 16px;
+
+            padding-bottom: 9px;
+
+            color: var(--text);
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        /* =========================================
+           FORM GRID
+        ========================================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 16px 18px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--text);
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            height: 43px;
+
+            padding: 0 12px;
+
+            background: white;
+
+            color: var(--text);
+
+            border:
+                1px solid
+                #d9cfe0;
+
+            border-radius: 7px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 13px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+
+            border-color:
+                var(--purple);
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    117,
+                    66,
+                    162,
+                    0.08
+                );
+        }
+
+        .hint {
+            display: block;
+
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        #message {
+            min-height: 20px;
+
+            margin: 10px 0;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           ANALYZE BUTTON
+        ========================================= */
+
+        .button-row {
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 22px;
+        }
+
+        .button {
+            min-width: 230px;
+
+            height: 44px;
+
+            padding: 0 22px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .15s ease,
+                opacity .15s ease;
+        }
+
+        .button:hover {
+            transform:
+                translateY(-1px);
+
+            opacity: .94;
+        }
+
+        /* =========================================
+           RESULT CARD
+        ========================================= */
+
+        .result-card {
+            display: none;
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 4px 16px
+                rgba(53, 35, 64, 0.05);
+        }
+
+        .result-card h3 {
+            margin: 0 0 15px;
+
+            color: var(--text);
+
+            font-size: 17px;
+        }
+
+        .result-text {
+            padding: 15px 16px;
+
+            background: var(--soft);
+
+            border-left:
+                3px solid
+                var(--purple);
+
+            border-radius: 6px;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .notice {
+            margin-top: 12px;
+
+            padding: 12px 14px;
+
+            background: #fffaf0;
+
+            border:
+                1px solid
+                #eadfbc;
+
+            border-radius: 6px;
+
+            color: #655a42;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           BACK TO DASHBOARD
+        ========================================= */
+
+        .navigation {
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .back-button {
+            min-width: 230px;
+
+            height: 44px;
+
+            padding: 0 22px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 7px;
+
+            background: white;
+
+            color: var(--purple);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: var(--soft);
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .page-footer {
+            padding-top: 17px;
+
+            margin-top: 20px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            text-align: center;
+
+            color: #99919d;
+
+            font-size: 10px;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+                width:
+                    calc(100% - 22px);
+            }
+
+            .page-header {
+                padding: 0 14px;
+            }
+
+            .header-label {
+                display: none;
+            }
+
+            .hero {
+                padding:
+                    25px 15px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .form-card {
+                padding: 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button,
+            .back-button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <div class="container">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="page-header">
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    🌸
+                </div>
+
+                <span>
+                    FemCare
+                </span>
+
+            </div>
+
+            <div class="header-label">
+                Women's Health Monitoring System
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             PAGE INTRODUCTION
+        ====================================== -->
+
+        <section class="hero">
+
+            <h1>
+                Pregnancy
+                <span>Reference Analysis</span>
+            </h1>
+
+            <p>
+                Enter your pregnancy-related information
+                to view a personalized reference screening
+                based on the selected information.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             FORM
+        ====================================== -->
+
+        <div class="form-card">
+
+            <form id="pregnancyForm">
+
+
+                <!-- =================================
+                     BASIC INFORMATION
+                ================================== -->
+
+                <section class="section">
+
+                    <h3 class="section-title">
+                        👤 Basic Information
+                    </h3>
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="age">
+                                Age
+                            </label>
+
+                            <input
+                                type="number"
+                                id="age"
+                                min="13"
+                                max="60"
+                                placeholder="Enter age"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="pregnancyStatus">
+                                Currently Pregnant
+                            </label>
+
+                            <select
+                                id="pregnancyStatus"
+                                required
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================
+                     PREGNANCY INFORMATION
+                ================================== -->
+
+                <section class="section">
+
+                    <h3 class="section-title">
+                        🍼 Pregnancy Information
+                    </h3>
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="gestationalWeeks">
+                                Gestational Weeks
+                            </label>
+
+                            <input
+                                type="number"
+                                id="gestationalWeeks"
+                                min="0"
+                                max="45"
+                                step="0.1"
+                                placeholder="Example: 20"
+                            >
+
+                            <span class="hint">
+                                Enter 0 if not currently pregnant.
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="prenatalVisits">
+                                Prenatal Visits
+                            </label>
+
+                            <input
+                                type="number"
+                                id="prenatalVisits"
+                                min="0"
+                                placeholder="Number of visits"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================
+                     HEALTH INFORMATION
+                ================================== -->
+
+                <section class="section">
+
+                    <h3 class="section-title">
+                        🩺 Health Information
+                    </h3>
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="bloodPressure">
+                                Blood Pressure
+                            </label>
+
+                            <select id="bloodPressure">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Normal">
+                                    Normal
+                                </option>
+
+                                <option value="High">
+                                    High
+                                </option>
+
+                                <option value="Low">
+                                    Low
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="bloodSugar">
+                                Blood Sugar
+                            </label>
+
+                            <select id="bloodSugar">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Normal">
+                                    Normal
+                                </option>
+
+                                <option value="High">
+                                    High
+                                </option>
+
+                                <option value="Low">
+                                    Low
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================
+                     SYMPTOMS
+                ================================== -->
+
+                <section class="section">
+
+                    <h3 class="section-title">
+                        🌸 Pregnancy-Related Symptoms
+                    </h3>
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="nausea">
+                                Nausea
+                            </label>
+
+                            <select id="nausea">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="vomiting">
+                                Vomiting
+                            </label>
+
+                            <select id="vomiting">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="fatigue">
+                                Fatigue
+                            </label>
+
+                            <select id="fatigue">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="swelling">
+                                Swelling
+                            </label>
+
+                            <select id="swelling">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="headache">
+                                Headache
+                            </label>
+
+                            <select id="headache">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="abdominalPain">
+                                Abdominal Pain
+                            </label>
+
+                            <select id="abdominalPain">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="bleeding">
+                                Bleeding
+                            </label>
+
+                            <select id="bleeding">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Yes">
+                                    Yes
+                                </option>
+
+                                <option value="No">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================
+                     ANALYZE BUTTON
+                ================================== -->
+
+                <div class="button-row">
+
+                    <button
+                        type="submit"
+                        class="button"
+                    >
+                        Analyze Pregnancy
+                    </button>
+
+                </div>
+
+
+                <!-- =================================
+                     MESSAGE
+                ================================== -->
+
+                <div id="message"></div>
+
+
+                <!-- =================================
+                     REFERENCE RESULT
+                ================================== -->
+
+                <div
+                    id="resultCard"
+                    class="result-card"
+                >
+
+                    <h3>
+                        🩺 Reference Result
+                    </h3>
+
+                    <div
+                        id="resultText"
+                        class="result-text"
+                    ></div>
+
+                    <div
+                        id="medicalNotice"
+                        class="notice"
+                    >
+                        This is a reference screening
+                        result based on the information
+                        provided. It is not a medical
+                        diagnosis.
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     BACK TO DASHBOARD
+                ================================== -->
+
+                <div class="navigation">
+
+                    <button
+                        type="button"
+                        class="back-button"
+                        onclick="goDashboard()"
+                    >
+                        ← Back to Dashboard
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer class="page-footer">
+
+            FemCare • Pregnancy Reference Analysis
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const form =
+    document.getElementById(
+        "pregnancyForm"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const resultCard =
+    document.getElementById(
+        "resultCard"
+    );
+
+const resultText =
+    document.getElementById(
+        "resultText"
+    );
+
+const medicalNotice =
+    document.getElementById(
+        "medicalNotice"
+    );
+
+
+/* ============================================================
+   CHECK LOGIN
+============================================================ */
+
+const storedUser =
+    localStorage.getItem("user");
+
+
+if (!storedUser) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+let user;
+
+
+try {
+
+    user =
+        JSON.parse(storedUser);
+
+} catch (error) {
+
+    console.error(
+        "User data error:",
+        error
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+const userId =
+    user.id ||
+    user.user_id ||
+    user.userId;
+
+
+if (!userId) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* ============================================================
+   ANALYZE PREGNANCY
+============================================================ */
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        /* -----------------------------------------------
+           COLLECT USER INPUT
+        ----------------------------------------------- */
+
+        const data = {
+
+            user_id:
+                userId,
+
+            age:
+                document.getElementById(
+                    "age"
+                ).value,
+
+            pregnancy_status:
+                document.getElementById(
+                    "pregnancyStatus"
+                ).value,
+
+            gestational_weeks:
+                document.getElementById(
+                    "gestationalWeeks"
+                ).value || 0,
+
+            prenatal_visits:
+                document.getElementById(
+                    "prenatalVisits"
+                ).value || 0,
+
+            blood_pressure:
+                document.getElementById(
+                    "bloodPressure"
+                ).value,
+
+            blood_sugar:
+                document.getElementById(
+                    "bloodSugar"
+                ).value,
+
+            nausea:
+                document.getElementById(
+                    "nausea"
+                ).value,
+
+            vomiting:
+                document.getElementById(
+                    "vomiting"
+                ).value,
+
+            fatigue:
+                document.getElementById(
+                    "fatigue"
+                ).value,
+
+            swelling:
+                document.getElementById(
+                    "swelling"
+                ).value,
+
+            headache:
+                document.getElementById(
+                    "headache"
+                ).value,
+
+            abdominal_pain:
+                document.getElementById(
+                    "abdominalPain"
+                ).value,
+
+            bleeding:
+                document.getElementById(
+                    "bleeding"
+                ).value
+
+        };
+
+
+        console.log(
+            "Pregnancy data:",
+            data
+        );
+
+
+        /* -----------------------------------------------
+           RESET RESULT
+        ----------------------------------------------- */
+
+        message.textContent =
+            "Analyzing information...";
+
+        message.style.color =
+            "#756d79";
+
+        resultCard.style.display =
+            "none";
+
+
+        /* -----------------------------------------------
+           SEND TO BACKEND
+        ----------------------------------------------- */
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/api/pregnancy/analyze",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(data)
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "Pregnancy response:",
+                result
+            );
+
+
+            /* -------------------------------------------
+               ERROR
+            ------------------------------------------- */
+
+            if (!response.ok) {
+
+                message.textContent =
+                    result.message ||
+                    "Unable to analyze information.";
+
+                message.style.color =
+                    "#c44c4c";
+
+                return;
+
+            }
+
+
+            if (!result.success) {
+
+                message.textContent =
+                    result.message ||
+                    "Analysis failed.";
+
+                message.style.color =
+                    "#c44c4c";
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------
+               SUCCESS
+            ------------------------------------------- */
+
+            message.textContent =
+                "Pregnancy analysis completed successfully.";
+
+            message.style.color =
+                "#2f7d50";
+
+
+            resultText.textContent =
+                result.result ||
+                "No reference result available.";
+
+
+            if (
+                result.medical_notice
+            ) {
+
+                medicalNotice.textContent =
+                    result.medical_notice;
+
+            }
+
+
+            /*
+             * IMPORTANT:
+             * Result appears AFTER Analyze button
+             * and BEFORE Back to Dashboard.
+             */
+
+            resultCard.style.display =
+                "block";
+
+
+            /* -------------------------------------------
+               SCROLL TO RESULT
+            ------------------------------------------- */
+
+            setTimeout(
+                function() {
+
+                    resultCard.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                },
+                100
+            );
+
+        }
+
+
+        catch (error) {
+
+            console.error(
+                "Pregnancy analysis error:",
+                error
+            );
+
+            message.textContent =
+                "Unable to connect to the FemCare server.";
+
+            message.style.color =
+                "#c44c4c";
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   BACK TO DASHBOARD
+============================================================ */
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

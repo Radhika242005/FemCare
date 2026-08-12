@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - PCOS Analysis
+    </title>
+
+
+    <style>
+:root {
+    --purple: #7542a2;
+    --purple-dark: #452853;
+    --pink: #d94aa0;
+    --text: #302737;
+    --muted: #756d79;
+    --border: #e7e0e9;
+    --soft: #f8f3fa;
+    --page: #fbfafc;
+    --white: #ffffff;
+    --green: #2f7d50;
+    --red: #c44c4c;
+    --shadow: 0 4px 16px rgba(53, 35, 64, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--page);
+}
+
+body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 22px 0 45px;
+}
+
+.container {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+/* Header */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--purple);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    background: var(--soft);
+    font-size: 18px;
+}
+
+.header-label {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* Hero */
+
+.hero {
+    padding: 28px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.hero h1 {
+    margin: 0 0 7px;
+    color: var(--purple-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 31px;
+}
+
+.hero h1 span {
+    color: var(--pink);
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.message {
+    min-height: 20px;
+    margin: 12px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Cards */
+
+.card {
+    width: 100%;
+    padding: 21px;
+    margin-bottom: 18px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: 17px;
+}
+
+.card h2::first-letter {
+    color: var(--purple);
+}
+
+/* Profile */
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.profile-item {
+    min-height: 74px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: #fff;
+}
+
+.label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.value {
+    display: block;
+    color: var(--purple);
+    font-size: 14px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* Reference metrics */
+
+.reference-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.reference-item {
+    min-height: 95px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: #fff;
+}
+
+.reference-number {
+    margin-bottom: 6px;
+    color: var(--purple);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.reference-label {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* Result */
+
+.result {
+    padding: 17px 18px;
+    border-left: 3px solid var(--purple);
+    border-radius: 6px;
+    background: var(--soft);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.result p {
+    margin: 0 0 8px;
+}
+
+.result p:last-child {
+    margin-bottom: 0;
+}
+
+.notice {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border: 1px solid #eadfbc;
+    border-radius: 6px;
+    background: #fffaf0;
+    color: #655a42;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Similar records */
+
+.table-description {
+    margin: -3px 0 16px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+th {
+    padding: 11px 10px;
+    background: var(--soft);
+    color: var(--purple-dark);
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 10px;
+    color: var(--text);
+    text-align: center;
+    font-size: 10px;
+    white-space: nowrap;
+    border-bottom: 1px solid #eee8f0;
+}
+
+tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+tbody tr:hover {
+    background: #fcf9fd;
+}
+
+.positive,
+.negative {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.positive {
+    background: #fceaea;
+    color: var(--red);
+}
+
+.negative {
+    background: #eaf6ee;
+    color: var(--green);
+}
+
+/* Navigation */
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+}
+
+.button {
+    width: auto;
+    min-width: 190px;
+    min-height: 42px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s ease, opacity .15s ease;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+    opacity: .94;
+}
+
+/* Footer */
+
+.page-footer {
+    padding-top: 17px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: #99919d;
+    font-size: 10px;
+}
+
+/* Responsive */
+
+@media (max-width: 1050px) {
+    .profile-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .reference-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        width: calc(100% - 22px);
+    }
+
+    .page {
+        padding-top: 10px;
+    }
+
+    .page-header {
+        padding: 0 13px;
+    }
+
+    .header-label {
+        display: none;
+    }
+
+    .hero {
+        padding: 24px 14px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .profile-grid,
+    .reference-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 460px) {
+    .profile-grid,
+    .reference-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <div class="container">
+
+        <!-- Website header -->
+        <header class="page-header">
+            <div class="brand">
+                <div class="brand-mark">🌸</div>
+                <span>FemCare</span>
+            </div>
+
+            <div class="header-label">
+                Women's Health Monitoring System
+            </div>
+        </header>
+
+
+        <!-- Page introduction -->
+        <section class="hero">
+            <h1>PCOS <span>Reference Analysis</span></h1>
+            <p>
+                Review your profile, dataset-based reference indicators,
+                and similar records from the PCOS reference dataset.
+            </p>
+        </section>
+
+
+        <!-- Loading / error message -->
+        <div id="message" class="message">
+            Loading analysis...
+        </div>
+
+
+        <!-- User profile -->
+        <section
+            id="profileCard"
+            class="card"
+            style="display:none;"
+        >
+            <h2>👤 Your Profile</h2>
+
+            <div
+                id="profileContainer"
+                class="profile-grid"
+            ></div>
+        </section>
+
+
+        <!-- Dataset reference -->
+        <section
+            id="referenceCard"
+            class="card"
+            style="display:none;"
+        >
+            <h2>📊 Dataset Reference</h2>
+
+            <div
+                id="referenceContainer"
+                class="reference-grid"
+            ></div>
+        </section>
+
+
+        <!-- Reference result -->
+        <section
+            id="resultCard"
+            class="card"
+            style="display:none;"
+        >
+            <h2>🩺 Reference Result</h2>
+
+            <div
+                id="resultContainer"
+                class="result"
+            ></div>
+
+            <div
+                id="medicalNotice"
+                class="notice"
+            ></div>
+        </section>
+
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button
+                class="button"
+                onclick="goDashboard()"
+            >
+                ← Back to Dashboard
+            </button>
+        </div>
+
+
+        <footer class="page-footer">
+            FemCare • PCOS Reference Analysis
+        </footer>
+
+    </div>
+
+</div>
+
+<script src="../js/pcos.js"></script>
+
+</body>
+
+</html>

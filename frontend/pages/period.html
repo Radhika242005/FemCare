@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - Period Tracking
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple: #7542a2;
+            --purple-dark: #4b2b58;
+            --pink: #d94aa0;
+            --text: #302737;
+            --muted: #756d79;
+            --border: #e8ddea;
+            --soft: #faf6fc;
+            --white: #ffffff;
+            --green: #287a45;
+            --green-bg: #eaf7ee;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fbfafc;
+            color: var(--text);
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 25px 15px 45px;
+        }
+
+        .container {
+            width: min(850px, calc(100% - 10px));
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(75, 43, 88, 0.06);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--purple);
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            background: var(--soft);
+            border-radius: 9px;
+            font-size: 20px;
+        }
+
+        .header-text {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* INTRO */
+
+        .intro {
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(75, 43, 88, 0.06);
+        }
+
+        .intro h1 {
+            margin: 0 0 8px;
+            color: var(--purple-dark);
+            font-family: Georgia, serif;
+            font-size: 29px;
+        }
+
+        .intro h1 span {
+            color: var(--pink);
+        }
+
+        .intro p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* FORM CARD */
+
+        .card {
+            padding: 25px;
+            margin-bottom: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(75, 43, 88, 0.06);
+        }
+
+        .section-title {
+            margin: 22px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            color: var(--purple-dark);
+            font-size: 17px;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8cedb;
+            border-radius: 8px;
+            background: white;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border: 2px solid var(--purple);
+        }
+
+        textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(
+                90deg,
+                var(--purple),
+                var(--pink)
+            );
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #d8cedb;
+            border-radius: 9px;
+            background: white;
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        #message {
+            min-height: 20px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* RESULT */
+
+        .result-card {
+            display: none;
+            padding: 25px;
+            margin-bottom: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(75, 43, 88, 0.06);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .result-header h2 {
+            margin: 0 0 7px;
+            color: var(--purple-dark);
+            font-size: 21px;
+        }
+
+        .result-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .cycle-highlight {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: var(--soft);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+        }
+
+        .cycle-number {
+            width: 90px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 6px solid #dbc8e6;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .cycle-number strong {
+            color: var(--purple);
+            font-size: 25px;
+        }
+
+        .cycle-number span {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .cycle-info h3 {
+            margin: 0 0 7px;
+            color: var(--purple-dark);
+            font-size: 18px;
+        }
+
+        .cycle-info p {
+            margin: 3px 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 11px;
+        }
+
+        .result-item {
+            padding: 14px;
+            text-align: center;
+            background: var(--soft);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+        }
+
+        .result-icon {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .result-label {
+            margin-bottom: 5px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .result-value {
+            color: var(--purple-dark);
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .notice {
+            margin-top: 18px;
+            padding: 13px;
+            border: 1px solid #eadfbc;
+            border-radius: 8px;
+            background: #fffaf0;
+            color: #655a42;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 700px) {
+
+            .header-text {
+                display: none;
+            }
+
+            .result-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .card,
+            .result-card {
+                padding: 18px;
+            }
+
+            .cycle-highlight {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+        <div class="header-text">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+        <h1>
+            Period <span>Tracking</span>
+        </h1>
+
+        <p>
+            Record your current menstrual cycle information
+            to maintain your FemCare health history.
+        </p>
+
+    </section>
+
+
+    <!-- FORM -->
+
+    <section class="card">
+
+        <form id="periodForm">
+
+            <h3 class="section-title">
+                📅 Cycle Information
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="startDate">
+                    Period Start Date
+                </label>
+
+                <input
+                    type="date"
+                    id="startDate"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="cycleLength">
+                    Cycle Length (Days)
+                </label>
+
+                <input
+                    type="number"
+                    id="cycleLength"
+                    min="1"
+                    max="100"
+                    placeholder="Example: 28"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="flowLevel">
+                    Flow Level
+                </label>
+
+                <select id="flowLevel">
+
+                    <option value="">
+                        Select flow level
+                    </option>
+
+                    <option value="Light">
+                        Light
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Heavy">
+                        Heavy
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <h3 class="section-title">
+                🩸 Period Symptoms
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="painLevel">
+                    Pain Level (0-10)
+                </label>
+
+                <input
+                    type="number"
+                    id="painLevel"
+                    min="0"
+                    max="10"
+                    placeholder="0 = no pain, 10 = severe"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="pmsSymptoms">
+                    PMS Symptoms
+                </label>
+
+                <textarea
+                    id="pmsSymptoms"
+                    placeholder="Example: cramps, bloating, headache"
+                ></textarea>
+
+            </div>
+
+
+            <h3 class="section-title">
+                🧘 Wellness Information
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="moodScore">
+                    Mood Score (0-10)
+                </label>
+
+                <input
+                    type="number"
+                    id="moodScore"
+                    min="0"
+                    max="10"
+                    placeholder="0-10"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="stressScore">
+                    Stress Score (0-10)
+                </label>
+
+                <input
+                    type="number"
+                    id="stressScore"
+                    min="0"
+                    max="10"
+                    placeholder="0-10"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="sleepHours">
+                    Sleep Hours
+                </label>
+
+                <input
+                    type="number"
+                    id="sleepHours"
+                    min="0"
+                    max="24"
+                    step="0.1"
+                    placeholder="Example: 7.5"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="energyLevel">
+                    Energy Level (0-10)
+                </label>
+
+                <input
+                    type="number"
+                    id="energyLevel"
+                    min="0"
+                    max="10"
+                    placeholder="0-10"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="concentrationScore">
+                    Concentration Score (0-10)
+                </label>
+
+                <input
+                    type="number"
+                    id="concentrationScore"
+                    min="0"
+                    max="10"
+                    placeholder="0-10"
+                >
+
+            </div>
+
+
+            <h3 class="section-title">
+                📚 Daily Impact
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="workHoursLost">
+                    Work/Study Hours Lost
+                </label>
+
+                <input
+                    type="number"
+                    id="workHoursLost"
+                    min="0"
+                    step="0.1"
+                    placeholder="Example: 2"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="preparedBeforePeriod">
+                    Prepared Before Period?
+                </label>
+
+                <select id="preparedBeforePeriod">
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="1">
+                        Yes
+                    </option>
+
+                    <option value="0">
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="message"></div>
+
+
+            <button
+                type="submit"
+                class="button"
+                id="saveButton"
+            >
+                Save Period Data
+            </button>
+
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="goDashboard()"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section
+        id="resultCard"
+        class="result-card"
+    >
+
+        <div class="result-header">
+
+            <h2>
+                ✓ Period Data Saved
+            </h2>
+
+            <p>
+                Your latest cycle information has been
+                successfully recorded in FemCare.
+            </p>
+
+        </div>
+
+
+        <div class="cycle-highlight">
+
+            <div class="cycle-number">
+
+                <strong
+                    id="cycleNumber"
+                >
+                    -
+                </strong>
+
+                <span>
+                    CYCLE
+                </span>
+
+            </div>
+
+
+            <div class="cycle-info">
+
+                <h3>
+                    Latest Period
+                </h3>
+
+                <p>
+                    📅 Start Date:
+                    <strong id="resultStartDate">
+                        -
+                    </strong>
+                </p>
+
+                <p>
+                    🩸 Flow:
+                    <strong id="resultFlow">
+                        -
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-grid">
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    📅
+                </div>
+
+                <div class="result-label">
+                    Cycle Length
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultCycleLength"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    🩸
+                </div>
+
+                <div class="result-label">
+                    Pain
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultPain"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    😊
+                </div>
+
+                <div class="result-label">
+                    Mood
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultMood"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    🧘
+                </div>
+
+                <div class="result-label">
+                    Stress
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultStress"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    😴
+                </div>
+
+                <div class="result-label">
+                    Sleep
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultSleep"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    ⚡
+                </div>
+
+                <div class="result-label">
+                    Energy
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultEnergy"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    🧠
+                </div>
+
+                <div class="result-label">
+                    Concentration
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultConcentration"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    📚
+                </div>
+
+                <div class="result-label">
+                    Work/Study Lost
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultWorkHours"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-icon">
+                    ✓
+                </div>
+
+                <div class="result-label">
+                    Prepared
+                </div>
+
+                <div
+                    class="result-value"
+                    id="resultPrepared"
+                >
+                    -
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            Your period information is stored as part of
+            your FemCare health history. The information
+            is intended for wellness tracking and is not
+            a medical diagnosis.
+
+        </div>
+
+
+        <button
+            type="button"
+            class="back-button"
+            onclick="goDashboard()"
+        >
+            ← Back to Dashboard
+        </button>
+
+    </section>
+
+
+</div>
+
+</div>
+
+
+<script src="../js/period.js"></script>
+
+</body>
+
+</html>

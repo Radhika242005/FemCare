@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - Food & Nutrition
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --purple: #7542a2;
+            --purple-dark: #4b2b58;
+            --pink: #d94aa0;
+
+            --text: #302737;
+            --muted: #756d79;
+
+            --border: #eadcf0;
+            --soft: #faf6fc;
+
+            --green: #287a45;
+            --green-bg: #e7f6ec;
+
+            --orange: #a96720;
+            --orange-bg: #fff4e6;
+
+            --red: #b33a3a;
+            --red-bg: #fdeaea;
+
+            --page: #fbfafc;
+            --white: #ffffff;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        .page {
+
+            min-height: 100vh;
+
+            padding:
+                25px 15px 45px;
+        }
+
+
+        .container {
+
+            width:
+                min(
+                    900px,
+                    calc(100% - 20px)
+                );
+
+            margin:
+                auto;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                18px 22px;
+
+            margin-bottom:
+                20px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.06
+                );
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            color:
+                var(--purple);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                24px;
+
+            font-weight:
+                700;
+        }
+
+
+        .brand-icon {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                9px;
+
+            background:
+                var(--soft);
+
+            font-size:
+                20px;
+        }
+
+
+        .header-text {
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+        }
+
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .intro {
+
+            padding:
+                30px 20px;
+
+            margin-bottom:
+                20px;
+
+            text-align:
+                center;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.06
+                );
+        }
+
+
+        .intro h1 {
+
+            margin:
+                0 0 8px;
+
+            color:
+                var(--purple-dark);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                31px;
+        }
+
+
+        .intro h1 span {
+
+            color:
+                var(--pink);
+        }
+
+
+        .intro p {
+
+            max-width:
+                650px;
+
+            margin:
+                auto;
+
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =====================================================
+           FORM CARD
+        ===================================================== */
+
+        .card {
+
+            padding:
+                25px;
+
+            margin-bottom:
+                20px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.06
+                );
+        }
+
+
+        .section-title {
+
+            margin:
+                25px 0 15px;
+
+            padding-bottom:
+                8px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            color:
+                var(--purple-dark);
+
+            font-size:
+                17px;
+        }
+
+
+        .section-title:first-child {
+
+            margin-top:
+                0;
+        }
+
+
+        .form-group {
+
+            margin-bottom:
+                17px;
+        }
+
+
+        label {
+
+            display:
+                block;
+
+            margin-bottom:
+                7px;
+
+            color:
+                var(--text);
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+        }
+
+
+        input,
+        select {
+
+            width:
+                100%;
+
+            padding:
+                12px 13px;
+
+            border:
+                1px solid
+                #d8cedb;
+
+            border-radius:
+                8px;
+
+            background:
+                white;
+
+            color:
+                var(--text);
+
+            font-size:
+                14px;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline:
+                none;
+
+            border:
+                2px solid
+                var(--purple);
+        }
+
+
+        .button {
+
+            width:
+                100%;
+
+            padding:
+                13px;
+
+            margin-top:
+                8px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color:
+                white;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+        }
+
+
+        .button:hover {
+
+            opacity:
+                0.94;
+        }
+
+
+        .back-button {
+
+            width:
+                100%;
+
+            padding:
+                12px;
+
+            margin-top:
+                10px;
+
+            border:
+                1px solid
+                #d8cedb;
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                var(--text);
+
+            font-size:
+                13px;
+
+            cursor:
+                pointer;
+        }
+
+
+        #message {
+
+            min-height:
+                20px;
+
+            margin:
+                15px 0;
+
+            text-align:
+                center;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           RESULT
+        ===================================================== */
+
+        .result-card {
+
+            display:
+                none;
+
+            padding:
+                25px;
+
+            margin-bottom:
+                20px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                14px;
+
+            box-shadow:
+                0 6px 22px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.07
+                );
+        }
+
+
+        .result-header {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                25px;
+        }
+
+
+        .result-header h2 {
+
+            margin:
+                0 0 7px;
+
+            color:
+                var(--purple-dark);
+
+            font-size:
+                22px;
+        }
+
+
+        .result-header p {
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                12px;
+        }
+
+
+        /* =====================================================
+           SCORE
+        ===================================================== */
+
+        .score-section {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                25px;
+
+            padding:
+                22px;
+
+            margin-bottom:
+                22px;
+
+            background:
+                var(--soft);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+        }
+
+
+        .score-circle {
+
+            width:
+                120px;
+
+            height:
+                120px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                8px solid
+                #d9c2e6;
+
+            border-radius:
+                50%;
+
+            background:
+                white;
+        }
+
+
+        .score-number {
+
+            color:
+                var(--purple);
+
+            font-size:
+                29px;
+
+            font-weight:
+                700;
+        }
+
+
+        .score-label {
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+        }
+
+
+        .score-info {
+
+            max-width:
+                450px;
+        }
+
+
+        .score-info h3 {
+
+            margin:
+                0 0 7px;
+
+            color:
+                var(--purple-dark);
+
+            font-size:
+                19px;
+        }
+
+
+        .score-info p {
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           INDICATORS
+        ===================================================== */
+
+        .result-section-title {
+
+            margin:
+                25px 0 14px;
+
+            color:
+                var(--purple-dark);
+
+            font-size:
+                17px;
+        }
+
+
+        .indicator-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                12px;
+        }
+
+
+        .indicator {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                10px;
+
+            background:
+                #fff;
+        }
+
+
+        .indicator-name {
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+        }
+
+
+        .indicator-status {
+
+            padding:
+                5px 9px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+        }
+
+
+        .status-good {
+
+            background:
+                var(--green-bg);
+
+            color:
+                var(--green);
+        }
+
+
+        .status-moderate {
+
+            background:
+                var(--orange-bg);
+
+            color:
+                var(--orange);
+        }
+
+
+        .status-improvement {
+
+            background:
+                var(--red-bg);
+
+            color:
+                var(--red);
+        }
+
+
+        /* =====================================================
+           IMPROVEMENTS
+        ===================================================== */
+
+        .improvement-box {
+
+            padding:
+                18px;
+
+            background:
+                #fff8fb;
+
+            border:
+                1px solid
+                #f0d8e8;
+
+            border-radius:
+                11px;
+        }
+
+
+        .improvement-item {
+
+            padding:
+                9px 0;
+
+            border-bottom:
+                1px solid
+                #f2e2eb;
+
+            color:
+                #71395e;
+
+            font-size:
+                13px;
+        }
+
+
+        .improvement-item:last-child {
+
+            border-bottom:
+                none;
+        }
+
+
+        .no-improvements {
+
+            color:
+                var(--green);
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           RECOMMENDATIONS
+        ===================================================== */
+
+        .recommendation-list {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                12px;
+        }
+
+
+        .recommendation-item {
+
+            padding:
+                16px;
+
+            background:
+                var(--soft);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                11px;
+
+            color:
+                var(--text);
+
+            font-size:
+                13px;
+
+            line-height:
+                1.6;
+        }
+
+
+        .recommendation-item::before {
+
+            content:
+                "🌿 ";
+
+        }
+
+
+        /* =====================================================
+           NOTICE
+        ===================================================== */
+
+        .notice {
+
+            margin-top:
+                22px;
+
+            padding:
+                14px 16px;
+
+            border:
+                1px solid
+                #eadfbc;
+
+            border-radius:
+                10px;
+
+            background:
+                #fffaf0;
+
+            color:
+                #655a42;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .container {
+
+                width:
+                    calc(100% - 8px);
+            }
+
+
+            .header-text {
+
+                display:
+                    none;
+            }
+
+
+            .card,
+            .result-card {
+
+                padding:
+                    18px;
+            }
+
+
+            .score-section {
+
+                flex-direction:
+                    column;
+
+                text-align:
+                    center;
+            }
+
+
+            .score-info {
+
+                max-width:
+                    none;
+            }
+
+
+            .indicator-grid,
+            .recommendation-list {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+
+        <div class="header-text">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="intro">
+
+        <h1>
+            Food &
+            <span>Nutrition</span>
+        </h1>
+
+        <p>
+            Enter your daily food and nutrition
+            information for a personalized wellness
+            reference analysis.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         FORM
+    ====================================================== -->
+
+    <section class="card">
+
+        <form id="foodForm">
+
+
+            <!-- DAILY INFORMATION -->
+
+            <h3 class="section-title">
+                📅 Daily Information
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="logDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="logDate"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="mealsPerDay">
+                    Meals Per Day
+                </label>
+
+                <input
+                    type="number"
+                    id="mealsPerDay"
+                    min="0"
+                    max="10"
+                    placeholder="Example: 3"
+                    required
+                >
+
+            </div>
+
+
+            <!-- FOOD INTAKE -->
+
+            <h3 class="section-title">
+                🥗 Food Intake
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="fruitsServings">
+                    Fruit Servings
+                </label>
+
+                <input
+                    type="number"
+                    id="fruitsServings"
+                    min="0"
+                    max="20"
+                    step="0.5"
+                    placeholder="Example: 2"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="vegetablesServings">
+                    Vegetable Servings
+                </label>
+
+                <input
+                    type="number"
+                    id="vegetablesServings"
+                    min="0"
+                    max="20"
+                    step="0.5"
+                    placeholder="Example: 3"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="proteinServings">
+                    Protein Servings
+                </label>
+
+                <input
+                    type="number"
+                    id="proteinServings"
+                    min="0"
+                    max="20"
+                    step="0.5"
+                    placeholder="Example: 2"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="waterIntake">
+                    Water Intake (Liters)
+                </label>
+
+                <input
+                    type="number"
+                    id="waterIntake"
+                    min="0"
+                    max="20"
+                    step="0.1"
+                    placeholder="Example: 2.5"
+                    required
+                >
+
+            </div>
+
+
+            <!-- FOOD HABITS -->
+
+            <h3 class="section-title">
+                🍔 Food Habits
+            </h3>
+
+
+            <div class="form-group">
+
+                <label for="fastFood">
+                    Fast Food
+                </label>
+
+                <select
+                    id="fastFood"
+                    required
+                >
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="sugaryDrinks">
+                    Sugary Drinks
+                </label>
+
+                <select
+                    id="sugaryDrinks"
+                    required
+                >
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="breakfast">
+                    Breakfast
+                </label>
+
+                <select
+                    id="breakfast"
+                    required
+                >
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="dietaryPreference">
+                    Dietary Preference
+                </label>
+
+                <select
+                    id="dietaryPreference"
+                >
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="Vegetarian">
+                        Vegetarian
+                    </option>
+
+                    <option value="Non-Vegetarian">
+                        Non-Vegetarian
+                    </option>
+
+                    <option value="Vegan">
+                        Vegan
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"></div>
+
+
+            <!-- ANALYZE -->
+
+            <button
+                type="submit"
+                class="button"
+                id="analyzeButton"
+            >
+                Analyze Nutrition
+            </button>
+
+
+            <!-- DASHBOARD -->
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="goDashboard()"
+            >
+                ← Back to Dashboard
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- =====================================================
+         RESULT
+    ====================================================== -->
+
+    <section
+        id="resultCard"
+        class="result-card"
+    >
+
+
+        <div class="result-header">
+
+            <h2>
+                🥗 Nutrition Analysis Result
+            </h2>
+
+            <p>
+                Your food information has been analyzed
+                using the FemCare wellness reference system.
+            </p>
+
+        </div>
+
+
+        <!-- SCORE -->
+
+        <div class="score-section">
+
+
+            <div class="score-circle">
+
+                <div
+                    id="score"
+                    class="score-number"
+                >
+                    0
+                </div>
+
+                <div class="score-label">
+                    / 100
+                </div>
+
+            </div>
+
+
+            <div class="score-info">
+
+                <h3
+                    id="nutritionLevel"
+                >
+                    Nutrition Level
+                </h3>
+
+                <p
+                    id="resultText"
+                >
+                    Your result will appear here.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- INDICATORS -->
+
+        <h3 class="result-section-title">
+            📊 Nutrition Indicators
+        </h3>
+
+
+        <div
+            id="indicatorGrid"
+            class="indicator-grid"
+        ></div>
+
+
+        <!-- IMPROVEMENTS -->
+
+        <h3 class="result-section-title">
+            ⚠️ Areas to Improve
+        </h3>
+
+
+        <div
+            id="improvementBox"
+            class="improvement-box"
+        ></div>
+
+
+        <!-- RECOMMENDATIONS -->
+
+        <h3 class="result-section-title">
+            🌿 Personalized Recommendations
+        </h3>
+
+
+        <div
+            id="recommendationList"
+            class="recommendation-list"
+        ></div>
+
+
+        <!-- NOTICE -->
+
+        <div
+            id="medicalNotice"
+            class="notice"
+        >
+            This is a wellness reference analysis
+            and is not a medical diagnosis.
+        </div>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div
+        style="
+            text-align:center;
+            color:#99919d;
+            font-size:10px;
+            padding-top:15px;
+        "
+    >
+
+        FemCare • Food & Nutrition
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ============================================================
+// ELEMENTS
+// ============================================================
+
+const form =
+    document.getElementById(
+        "foodForm"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const resultCard =
+    document.getElementById(
+        "resultCard"
+    );
+
+
+const scoreElement =
+    document.getElementById(
+        "score"
+    );
+
+
+const nutritionLevel =
+    document.getElementById(
+        "nutritionLevel"
+    );
+
+
+const resultText =
+    document.getElementById(
+        "resultText"
+    );
+
+
+const indicatorGrid =
+    document.getElementById(
+        "indicatorGrid"
+    );
+
+
+const improvementBox =
+    document.getElementById(
+        "improvementBox"
+    );
+
+
+const recommendationList =
+    document.getElementById(
+        "recommendationList"
+    );
+
+
+const medicalNotice =
+    document.getElementById(
+        "medicalNotice"
+    );
+
+
+const analyzeButton =
+    document.getElementById(
+        "analyzeButton"
+    );
+
+
+// ============================================================
+// CHECK LOGIN
+// ============================================================
+
+const storedUser =
+    localStorage.getItem(
+        "user"
+    );
+
+
+if (!storedUser) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+let user;
+
+
+try {
+
+    user =
+        JSON.parse(
+            storedUser
+        );
+
+} catch (error) {
+
+    console.error(
+        "User data error:",
+        error
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+const userId =
+    user.id ||
+    user.user_id ||
+    user.userId;
+
+
+if (!userId) {
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// ============================================================
+// TODAY'S DATE
+// ============================================================
+
+document.getElementById(
+    "logDate"
+).value =
+    new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+// ============================================================
+// INDICATOR DISPLAY
+// ============================================================
+
+function createIndicator(
+    name,
+    status
+) {
+
+    let statusClass =
+        "status-improvement";
+
+
+    if (
+        status === "Good"
+    ) {
+
+        statusClass =
+            "status-good";
+
+    } else if (
+        status === "Moderate"
+    ) {
+
+        statusClass =
+            "status-moderate";
+
+    }
+
+
+    return `
+
+        <div class="indicator">
+
+            <span class="indicator-name">
+                ${name}
+            </span>
+
+            <span
+                class="
+                    indicator-status
+                    ${statusClass}
+                "
+            >
+                ${status}
+            </span>
+
+        </div>
+
+    `;
+}
+
+
+// ============================================================
+// DISPLAY RESULT
+// ============================================================
+
+function displayResult(
+    result
+) {
+
+    const score =
+        Number(
+            result.nutrition_score || 0
+        );
+
+
+    scoreElement.textContent =
+        score;
+
+
+    nutritionLevel.textContent =
+        result.nutrition_level ||
+        "Nutrition Result";
+
+
+    resultText.textContent =
+        result.result ||
+        "No reference result available.";
+
+
+    // ========================================================
+    // INDICATORS
+    // ========================================================
+
+    const indicators =
+        result.indicators || {};
+
+
+    indicatorGrid.innerHTML = `
+
+        ${createIndicator(
+            "🍽️ Meals",
+            indicators.meals ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "🍎 Fruits",
+            indicators.fruits ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "🥦 Vegetables",
+            indicators.vegetables ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "🥚 Protein",
+            indicators.protein ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "💧 Water",
+            indicators.water ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "🍔 Fast Food",
+            indicators.fast_food ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "🥤 Sugary Drinks",
+            indicators.sugary_drinks ||
+            "Not available"
+        )}
+
+        ${createIndicator(
+            "🍳 Breakfast",
+            indicators.breakfast ||
+            "Not available"
+        )}
+
+    `;
+
+
+    // ========================================================
+    // IMPROVEMENTS
+    // ========================================================
+
+    const improvements =
+        Array.isArray(
+            result.improvements
+        )
+            ? result.improvements
+            : [];
+
+
+    if (
+        improvements.length === 0
+    ) {
+
+        improvementBox.innerHTML = `
+
+            <div class="no-improvements">
+
+                ✓ No major improvement areas
+                were identified.
+
+                <br><br>
+
+                Continue maintaining
+                your current balanced habits.
+
+            </div>
+
+        `;
+
+    } else {
+
+        improvementBox.innerHTML =
+            improvements
+                .map(
+                    item => `
+
+                        <div class="improvement-item">
+                            ⚠ ${item}
+                        </div>
+
+                    `
+                )
+                .join("");
+
+    }
+
+
+    // ========================================================
+    // RECOMMENDATIONS
+    // ========================================================
+
+    const recommendations =
+        Array.isArray(
+            result.recommendations
+        )
+            ? result.recommendations
+            : [];
+
+
+    if (
+        recommendations.length === 0
+    ) {
+
+        recommendationList.innerHTML = `
+
+            <div class="recommendation-item">
+
+                Continue maintaining
+                a balanced and consistent
+                nutrition routine.
+
+            </div>
+
+        `;
+
+    } else {
+
+        recommendationList.innerHTML =
+            recommendations
+                .map(
+                    item => `
+
+                        <div class="recommendation-item">
+                            ${item}
+                        </div>
+
+                    `
+                )
+                .join("");
+
+    }
+
+
+    // ========================================================
+    // NOTICE
+    // ========================================================
+
+    medicalNotice.textContent =
+        result.medical_notice ||
+        "This is a wellness reference analysis and is not a medical diagnosis.";
+
+
+    // ========================================================
+    // SHOW RESULT
+    // ========================================================
+
+    resultCard.style.display =
+        "block";
+
+
+    // Scroll to result
+
+    resultCard.scrollIntoView({
+        behavior:
+            "smooth",
+        block:
+            "start"
+    });
+
+}
+
+
+// ============================================================
+// FORM SUBMIT
+// ============================================================
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        // ----------------------------------------------------
+        // COLLECT DATA
+        // ----------------------------------------------------
+
+        const data = {
+
+            user_id:
+                userId,
+
+            log_date:
+                document.getElementById(
+                    "logDate"
+                ).value,
+
+            meals_per_day:
+                document.getElementById(
+                    "mealsPerDay"
+                ).value,
+
+            fruits_servings:
+                document.getElementById(
+                    "fruitsServings"
+                ).value,
+
+            vegetables_servings:
+                document.getElementById(
+                    "vegetablesServings"
+                ).value,
+
+            protein_servings:
+                document.getElementById(
+                    "proteinServings"
+                ).value,
+
+            water_intake_liters:
+                document.getElementById(
+                    "waterIntake"
+                ).value,
+
+            fast_food:
+                document.getElementById(
+                    "fastFood"
+                ).value,
+
+            sugary_drinks:
+                document.getElementById(
+                    "sugaryDrinks"
+                ).value,
+
+            breakfast:
+                document.getElementById(
+                    "breakfast"
+                ).value,
+
+            dietary_preference:
+                document.getElementById(
+                    "dietaryPreference"
+                ).value
+
+        };
+
+
+        console.log(
+            "Food data:",
+            data
+        );
+
+
+        // ----------------------------------------------------
+        // UI
+        // ----------------------------------------------------
+
+        message.textContent =
+            "Analyzing your nutrition information...";
+
+        message.style.color =
+            "#666";
+
+
+        resultCard.style.display =
+            "none";
+
+
+        analyzeButton.disabled =
+            true;
+
+
+        analyzeButton.textContent =
+            "Analyzing...";
+
+
+        try {
+
+
+            // ------------------------------------------------
+            // API
+            // ------------------------------------------------
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/api/food/analyze",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                data
+                            )
+
+                    }
+                );
+
+
+            // ------------------------------------------------
+            // JSON
+            // ------------------------------------------------
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "Food response:",
+                result
+            );
+
+
+            // ------------------------------------------------
+            // ERROR
+            // ------------------------------------------------
+
+            if (
+                !response.ok
+            ) {
+
+                message.textContent =
+                    result.message ||
+                    "Unable to analyze food data.";
+
+                message.style.color =
+                    "#b33a3a";
+
+                return;
+
+            }
+
+
+            if (
+                !result.success
+            ) {
+
+                message.textContent =
+                    result.message ||
+                    "Nutrition analysis failed.";
+
+                message.style.color =
+                    "#b33a3a";
+
+                return;
+
+            }
+
+
+            // ------------------------------------------------
+            // SUCCESS
+            // ------------------------------------------------
+
+            message.textContent =
+                "✓ Nutrition analysis completed successfully.";
+
+            message.style.color =
+                "#287a45";
+
+
+            displayResult(
+                result
+            );
+
+
+        } catch (error) {
+
+
+            console.error(
+                "Food analysis error:",
+                error
+            );
+
+
+            message.textContent =
+                "Unable to connect to the FemCare server.";
+
+            message.style.color =
+                "#b33a3a";
+
+
+        } finally {
+
+            analyzeButton.disabled =
+                false;
+
+            analyzeButton.textContent =
+                "Analyze Nutrition";
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FemCare - My Recommendations
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple: #7542a2;
+            --purple-dark: #4b2b58;
+            --pink: #d94aa0;
+            --text: #302737;
+            --muted: #756d79;
+            --border: #eadcf0;
+            --soft: #faf6fc;
+            --page: #fbfafc;
+            --white: #ffffff;
+            --green: #287a45;
+            --green-bg: #e6f5eb;
+            --yellow-bg: #fffaf0;
+            --yellow-border: #eadfbc;
+        }
+
+        body {
+            margin: 0;
+            background: var(--page);
+            color: var(--text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 25px 0 45px;
+        }
+
+        .container {
+            width: min(
+                1150px,
+                calc(100% - 40px)
+            );
+
+            margin: auto;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            min-height: 65px;
+
+            padding: 0 22px;
+
+            margin-bottom: 20px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(75, 43, 88, 0.06);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--purple);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 9px;
+
+            background: var(--soft);
+
+            font-size: 20px;
+        }
+
+        .header-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            padding: 35px 20px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(75, 43, 88, 0.06);
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+
+            color: var(--purple-dark);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 34px;
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            margin: auto;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+            min-height: 22px;
+
+            margin: 12px 0;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+            width: 100%;
+
+            padding: 24px;
+
+            margin-bottom: 20px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 6px 20px
+                rgba(75, 43, 88, 0.06);
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+
+            color: var(--purple-dark);
+
+            font-size: 20px;
+        }
+
+        .section-description {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           PROGRESS
+        ===================================================== */
+
+        .progress-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+        .progress-title {
+            color: var(--purple-dark);
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+        .progress-percent {
+            color: var(--purple);
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .progress-track {
+            width: 100%;
+
+            height: 12px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: #eee7f1;
+        }
+
+        .progress-bar {
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            transition:
+                width 0.4s ease;
+        }
+
+        .progress-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .progress-stat {
+            padding: 15px;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            background: var(--soft);
+
+            border: 1px solid var(--border);
+        }
+
+        .progress-stat strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--purple);
+
+            font-size: 22px;
+        }
+
+        .progress-stat span {
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .completed-list {
+            margin-top: 18px;
+        }
+
+        .completed-title {
+            margin-bottom: 10px;
+
+            color: var(--purple-dark);
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .completed-item {
+            display: inline-block;
+
+            margin:
+                4px 5px 4px 0;
+
+            padding:
+                7px 12px;
+
+            border-radius: 20px;
+
+            background:
+                var(--green-bg);
+
+            color:
+                var(--green);
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           HEALTH
+        ===================================================== */
+
+        .health-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap: 14px;
+
+            margin-top: 18px;
+        }
+
+        .health-item {
+            min-height: 105px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 15px;
+
+            text-align: center;
+
+            background:
+                var(--soft);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 12px;
+        }
+
+        .health-label {
+            margin-bottom: 8px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .health-value {
+            color: var(--purple);
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+        .health-date {
+            grid-column: 1 / -1;
+
+            min-height: auto;
+
+            background:
+                #f4eafa;
+
+            color:
+                var(--purple);
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           PCOS REFERENCE
+        ===================================================== */
+
+        .pcos-reference-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap: 14px;
+
+            margin-top: 20px;
+        }
+
+        .pcos-reference-item {
+            padding: 20px;
+
+            text-align: center;
+
+            background:
+                var(--soft);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 13px;
+        }
+
+        .pcos-reference-number {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--purple);
+
+            font-size: 27px;
+
+            font-weight: 700;
+        }
+
+        .pcos-reference-label {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .medical-notice {
+            margin-top: 18px;
+
+            padding: 14px 16px;
+
+            border:
+                1px solid
+                var(--yellow-border);
+
+            border-radius: 10px;
+
+            background:
+                var(--yellow-bg);
+
+            color: #655a42;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           PROBLEMS
+        ===================================================== */
+
+        .problem-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(180px, 1fr)
+                );
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .problem {
+            padding: 14px 16px;
+
+            background:
+                #fff7fb;
+
+            border:
+                1px solid
+                #f0d8e8;
+
+            border-radius: 11px;
+
+            color:
+                #71395e;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           RECOMMENDATIONS
+        ===================================================== */
+
+        .recommendation-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 24px;
+
+            margin-top: 20px;
+        }
+
+        .recommendation {
+            width: 100%;
+
+            min-width: 0;
+
+            overflow: hidden;
+
+            padding: 21px;
+
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.08
+                );
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .recommendation:hover {
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 13px 32px
+                rgba(
+                    75,
+                    43,
+                    88,
+                    0.13
+                );
+        }
+
+        .recommendation h3 {
+            margin: 0 0 10px;
+
+            color:
+                var(--purple-dark);
+
+            font-size: 20px;
+
+            line-height: 1.3;
+        }
+
+        .type {
+            display: inline-block;
+
+            padding:
+                6px 11px;
+
+            margin-bottom: 12px;
+
+            border-radius: 20px;
+
+            background:
+                #f0e3f7;
+
+            color:
+                #714486;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .problem-name {
+            margin-bottom: 10px;
+
+            color:
+                #9a5c8e;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .description {
+            min-height: 55px;
+
+            margin:
+                0 0 16px;
+
+            color:
+                #6f6872;
+
+            font-size: 13px;
+
+            line-height: 1.65;
+        }
+
+        /* =====================================================
+           VIDEO
+        ===================================================== */
+
+        .video-container {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio:
+                16 / 9;
+
+            overflow: hidden;
+
+            margin-top: 12px;
+
+            border-radius: 13px;
+
+            background:
+                #eee;
+        }
+
+        .video-container iframe {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100% !important;
+
+            height: 100% !important;
+
+            border: 0;
+
+            border-radius: 13px;
+        }
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .complete-button {
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 12px 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+        .complete-button:hover {
+            transform:
+                translateY(-1px);
+
+            opacity: 0.94;
+        }
+
+        .complete-button.completed {
+            background:
+                var(--green-bg);
+
+            color:
+                var(--green);
+
+            border:
+                1px solid
+                #c7e8d1;
+
+            cursor: default;
+        }
+
+        .complete-button:disabled {
+            opacity: 0.75;
+
+            cursor: default;
+        }
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
+
+        .empty-message {
+            padding: 35px;
+
+            text-align: center;
+
+            border:
+                1px dashed
+                #dbc9e2;
+
+            border-radius: 14px;
+
+            background:
+                #fcf9fd;
+
+            color:
+                var(--muted);
+        }
+
+        .empty-message h3 {
+            margin-top: 0;
+
+            color:
+                var(--purple-dark);
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .navigation {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .navigation button {
+            min-width: 190px;
+
+            padding: 13px 20px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .navigation button:hover {
+            opacity: 0.92;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .page-footer {
+            padding-top: 20px;
+
+            margin-top: 25px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            text-align: center;
+
+            color:
+                #99919d;
+
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (
+            max-width: 900px
+        ) {
+
+            .recommendation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pcos-reference-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .health-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .container {
+                width:
+                    calc(100% - 22px);
+            }
+
+            .page {
+                padding-top: 10px;
+            }
+
+            .page-header {
+                padding: 0 13px;
+            }
+
+            .header-label {
+                display: none;
+            }
+
+            .hero {
+                padding: 25px 15px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .card {
+                padding: 17px;
+            }
+
+            .progress-stats {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .pcos-reference-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .health-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .navigation button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="page-header">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                🌸
+            </div>
+
+            <span>
+                FemCare
+            </span>
+
+        </div>
+
+        <div class="header-label">
+            Women's Health Monitoring System
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+        <h1>
+            My <span>Recommendations</span>
+        </h1>
+
+        <p>
+            Personalized wellness recommendations based on
+            your recorded health information, period history,
+            and PCOS reference analysis.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         MESSAGE
+    ====================================================== -->
+
+    <div
+        id="message"
+        class="message"
+    >
+        Loading recommendations...
+    </div>
+
+
+    <!-- =====================================================
+         PROGRESS
+    ====================================================== -->
+
+    <section
+        id="progressCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <div class="progress-top">
+
+            <div class="progress-title">
+                🌿 Wellness Progress
+            </div>
+
+            <div
+                id="progressPercent"
+                class="progress-percent"
+            >
+                0% Complete
+            </div>
+
+        </div>
+
+
+        <div class="progress-track">
+
+            <div
+                id="progressBar"
+                class="progress-bar"
+            ></div>
+
+        </div>
+
+
+        <div class="progress-stats">
+
+            <div class="progress-stat">
+
+                <strong
+                    id="completedCount"
+                >
+                    0
+                </strong>
+
+                <span>
+                    Completed
+                </span>
+
+            </div>
+
+
+            <div class="progress-stat">
+
+                <strong
+                    id="remainingCount"
+                >
+                    0
+                </strong>
+
+                <span>
+                    Remaining
+                </span>
+
+            </div>
+
+
+            <div class="progress-stat">
+
+                <strong
+                    id="totalCount"
+                >
+                    0
+                </strong>
+
+                <span>
+                    Total Recommendations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="completedList"
+            class="completed-list"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HEALTH STATUS
+    ====================================================== -->
+
+    <section
+        id="healthCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            ❤️ Latest Health Status
+        </h2>
+
+        <p class="section-description">
+            Your most recently recorded health information.
+        </p>
+
+
+        <div
+            id="healthContainer"
+            class="health-grid"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PCOS REFERENCE ANALYSIS
+    ====================================================== -->
+
+    <section
+        id="pcosReferenceCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            📊 PCOS Reference Analysis
+        </h2>
+
+        <p class="section-description">
+            Reference-based information from your PCOS
+            analysis and recorded health information.
+        </p>
+
+
+        <div
+            id="pcosReferenceContainer"
+            class="pcos-reference-grid"
+        ></div>
+
+
+        <div
+            id="medicalNotice"
+            class="medical-notice"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROBLEMS
+    ====================================================== -->
+
+    <section
+        id="problemCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            ⚠️ Areas to Focus On
+        </h2>
+
+        <p class="section-description">
+            These areas were identified from your
+            recorded information.
+        </p>
+
+
+        <div
+            id="problemContainer"
+            class="problem-list"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECOMMENDATIONS
+    ====================================================== -->
+
+    <section
+        id="recommendationCard"
+        class="card"
+        style="display:none;"
+    >
+
+        <h2>
+            🌿 Personalized Recommendations
+        </h2>
+
+        <p class="section-description">
+            Follow these wellness practices based on
+            your current recorded information.
+        </p>
+
+
+        <div
+            id="recommendationContainer"
+            class="recommendation-grid"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <div class="navigation">
+
+        <button
+            type="button"
+            onclick="goHealthTrends()"
+        >
+            📈 Health Trends
+        </button>
+
+
+        <button
+            type="button"
+            onclick="goDashboard()"
+        >
+            ← Back to Dashboard
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="page-footer">
+
+        FemCare • Personalized Wellness Recommendations
+
+    </footer>
+
+</div>
+
+</div>
+
+
+<script src="../js/recommendations.js"></script>
+
+</body>
+
+</html>
