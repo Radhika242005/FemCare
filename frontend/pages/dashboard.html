@@ -185,9 +185,45 @@
             font-size: 13px;
         }
 
-        .view-button {
-            margin-top: 15px;
-        }
+   .view-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 430px;
+    max-width: 100%;
+
+    height: 60px;
+
+    margin: 20px auto 0;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #8245ad,
+        #d83f9f
+    );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    transition: all 0.2s ease;
+}
+
+.view-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 15px rgba(150, 60, 170, 0.25);
+}
 
         .analysis-grid {
             display: grid;
