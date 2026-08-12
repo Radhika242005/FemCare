@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        FemCare - Health Trends
-    </title>
+    <title>FemCare - Health Trends</title>
 
     <style>
 
@@ -36,428 +34,339 @@
 
         body {
             margin: 0;
-
             background: var(--page);
-
             color: var(--text);
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
+            font-family: Arial, Helvetica, sans-serif;
             font-size: 14px;
         }
 
         .page {
             min-height: 100vh;
-
-            padding:
-                22px 0 45px;
+            padding: 22px 0 45px;
         }
 
         .container {
-            width:
-                min(
-                    1150px,
-                    calc(100% - 44px)
-                );
-
+            width: min(1150px, calc(100% - 44px));
             margin: auto;
         }
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
+        /* HEADER */
 
         .page-header {
             min-height: 64px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
-            padding:
-                0 20px;
-
+            padding: 0 20px;
             margin-bottom: 20px;
-
-            background:
-                var(--white);
-
-            border:
-                1px solid
-                var(--border);
-
+            background: var(--white);
+            border: 1px solid var(--border);
             border-radius: 8px;
-
-            box-shadow:
-                0 4px 16px
-                rgba(
-                    53,
-                    35,
-                    64,
-                    0.05
-                );
+            box-shadow: 0 4px 16px rgba(53, 35, 64, 0.05);
         }
 
         .brand {
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
-            color:
-                var(--purple);
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            color: var(--purple);
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 26px;
-
             font-weight: 700;
         }
 
         .brand-mark {
             width: 38px;
-
             height: 38px;
-
             display: grid;
-
             place-items: center;
-
-            background:
-                var(--soft);
-
+            background: var(--soft);
             border-radius: 7px;
-
             font-size: 18px;
         }
 
         .header-label {
-            color:
-                var(--muted);
-
+            color: var(--muted);
             font-size: 11px;
         }
 
-        /* =====================================================
-           HERO
-        ===================================================== */
+        /* HERO */
 
         .hero {
-            padding:
-                30px 20px;
-
+            padding: 30px 20px;
             margin-bottom: 20px;
-
             text-align: center;
-
-            background:
-                var(--white);
-
-            border:
-                1px solid
-                var(--border);
-
+            background: var(--white);
+            border: 1px solid var(--border);
             border-radius: 8px;
         }
 
         .hero h1 {
-            margin:
-                0 0 8px;
-
-            color:
-                var(--purple-dark);
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            margin: 0 0 8px;
+            color: var(--purple-dark);
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 32px;
         }
 
         .hero h1 span {
-            color:
-                var(--pink);
+            color: var(--pink);
         }
 
         .hero p {
             max-width: 700px;
-
-            margin:
-                0 auto;
-
-            color:
-                var(--muted);
-
+            margin: 0 auto;
+            color: var(--muted);
             font-size: 12px;
-
             line-height: 1.6;
         }
 
-        /* =====================================================
-           MESSAGE
-        ===================================================== */
+        /* MESSAGE */
 
         #message {
             min-height: 22px;
-
-            margin:
-                10px 0 16px;
-
+            margin: 10px 0 16px;
             text-align: center;
-
-            color:
-                var(--muted);
-
+            color: var(--muted);
             font-size: 12px;
-
             font-weight: 600;
         }
 
-        /* =====================================================
-           CARD
-        ===================================================== */
+        /* CARD */
 
         .card {
-            padding:
-                22px;
-
-            margin-bottom:
-                18px;
-
-            background:
-                var(--white);
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                8px;
-
-            box-shadow:
-                0 4px 16px
-                rgba(
-                    53,
-                    35,
-                    64,
-                    0.05
-                );
+            padding: 22px;
+            margin-bottom: 18px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(53, 35, 64, 0.05);
         }
 
         .card h2 {
-            margin:
-                0 0 18px;
-
-            color:
-                var(--text);
-
+            margin: 0 0 18px;
+            color: var(--text);
             font-size: 17px;
         }
 
-        /* =====================================================
-           HEALTH OVERVIEW
-        ===================================================== */
+        /* HEALTH LOG */
+
+        .health-log-card {
+            padding: 24px;
+            margin-bottom: 18px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(53, 35, 64, 0.05);
+        }
+
+        .health-log-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .health-log-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                var(--purple),
+                var(--pink)
+            );
+            color: white;
+            font-size: 23px;
+        }
+
+        .health-log-header h2 {
+            margin: 0 0 5px;
+            color: var(--purple-dark);
+            font-size: 19px;
+        }
+
+        .health-log-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .health-form-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .health-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .health-field label {
+            margin-bottom: 7px;
+            color: var(--purple-dark);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .health-field input {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #d9c9df;
+            border-radius: 8px;
+            background: white;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .health-field input:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow:
+                0 0 0 3px rgba(117, 66, 162, 0.10);
+        }
+
+        .save-health-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--purple),
+                    var(--pink)
+                );
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .save-health-button:hover {
+            opacity: 0.92;
+        }
+
+        #logMessage {
+            min-height: 20px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* HEALTH OVERVIEW */
 
         .trend-grid {
             display: grid;
-
             grid-template-columns:
-                repeat(
-                    5,
-                    minmax(0, 1fr)
-                );
-
+                repeat(5, minmax(0, 1fr));
             gap: 10px;
         }
 
         .trend-item {
             min-height: 120px;
-
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
             justify-content: center;
-
             padding: 14px;
-
             text-align: center;
-
-            background:
-                #ffffff;
-
-            border:
-                1px solid
-                var(--border);
-
+            background: #ffffff;
+            border: 1px solid var(--border);
             border-radius: 7px;
         }
 
         .trend-icon {
             margin-bottom: 8px;
-
             font-size: 25px;
         }
 
         .trend-label {
             margin-bottom: 7px;
-
-            color:
-                var(--muted);
-
+            color: var(--muted);
             font-size: 11px;
         }
 
         .trend-value {
-            color:
-                var(--purple);
-
+            color: var(--purple);
             font-size: 20px;
-
             font-weight: 700;
         }
 
-        /* =====================================================
-           TREND ANALYSIS
-        ===================================================== */
+        /* TREND ANALYSIS */
 
         .trend-analysis-grid {
             display: grid;
-
             grid-template-columns:
-                repeat(
-                    2,
-                    minmax(0, 1fr)
-                );
-
+                repeat(2, minmax(0, 1fr));
             gap: 14px;
         }
 
         .analysis-item {
-            padding:
-                18px;
-
-            background:
-                var(--soft);
-
-            border-radius:
-                7px;
-
-            border:
-                1px solid
-                var(--border);
+            padding: 18px;
+            background: var(--soft);
+            border-radius: 7px;
+            border: 1px solid var(--border);
         }
 
         .analysis-item h3 {
-            margin:
-                0 0 10px;
-
-            color:
-                var(--purple-dark);
-
+            margin: 0 0 10px;
+            color: var(--purple-dark);
             font-size: 14px;
         }
 
         .analysis-value {
-            margin-bottom:
-                7px;
-
-            color:
-                var(--purple);
-
+            margin-bottom: 7px;
+            color: var(--purple);
             font-size: 17px;
-
             font-weight: 700;
         }
 
         .analysis-item p {
             margin: 0;
-
-            color:
-                var(--muted);
-
+            color: var(--muted);
             font-size: 11px;
-
             line-height: 1.6;
         }
 
-        /* =====================================================
-           HISTORICAL CHARTS
-        ===================================================== */
+        /* CHARTS */
 
         .chart-grid {
             display: grid;
-
             grid-template-columns:
-                repeat(
-                    2,
-                    minmax(0, 1fr)
-                );
-
+                repeat(2, minmax(0, 1fr));
             gap: 18px;
         }
 
         .chart-card {
-            padding:
-                18px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                8px;
-
-            background:
-                #ffffff;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #ffffff;
         }
 
         .chart-title {
-            margin:
-                0 0 15px;
-
-            color:
-                var(--purple-dark);
-
+            margin: 0 0 15px;
+            color: var(--purple-dark);
             font-size: 14px;
-
             font-weight: 700;
         }
 
-        /* =====================================================
-           BAR CHART
-        ===================================================== */
-
         .chart {
             min-height: 270px;
-
             display: flex;
-
             align-items: flex-end;
-
             gap: 10px;
-
-            padding:
-                20px 10px 5px;
-
+            padding: 20px 10px 5px;
             overflow-x: auto;
-
-            border-bottom:
-                1px solid
-                var(--border);
-
+            border-bottom: 1px solid var(--border);
             background:
                 linear-gradient(
                     to top,
@@ -468,204 +377,116 @@
 
         .chart-bar {
             min-width: 42px;
-
             height: 230px;
-
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
             justify-content: flex-end;
-
             gap: 6px;
         }
 
         .bar-value {
-            color:
-                var(--purple-dark);
-
+            color: var(--purple-dark);
             font-size: 9px;
-
             font-weight: 700;
-
-            white-space:
-                nowrap;
+            white-space: nowrap;
         }
 
         .bar {
             width: 28px;
-
             min-height: 5px;
-
             background:
                 linear-gradient(
                     to top,
                     var(--purple),
                     var(--pink)
                 );
-
-            border-radius:
-                5px 5px 0 0;
-
-            transition:
-                opacity .15s ease;
+            border-radius: 5px 5px 0 0;
+            transition: opacity .15s ease;
         }
 
         .bar:hover {
-            opacity:
-                .75;
+            opacity: .75;
         }
 
         .bar-date {
-            color:
-                var(--muted);
-
+            color: var(--muted);
             font-size: 9px;
-
-            white-space:
-                nowrap;
+            white-space: nowrap;
         }
 
         .no-chart-data {
             width: 100%;
-
             display: grid;
-
             place-items: center;
-
-            color:
-                var(--muted);
-
+            color: var(--muted);
             font-size: 11px;
         }
 
-        /* =====================================================
-           NOTICE
-        ===================================================== */
+        /* NOTICE */
 
         .notice {
-            padding:
-                13px 15px;
-
-            background:
-                #fffaf0;
-
-            border:
-                1px solid
-                #eadfbc;
-
-            border-radius:
-                6px;
-
-            color:
-                #655a42;
-
+            padding: 13px 15px;
+            background: #fffaf0;
+            border: 1px solid #eadfbc;
+            border-radius: 6px;
+            color: #655a42;
             font-size: 11px;
-
             line-height: 1.6;
         }
 
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
+        /* BUTTONS */
 
         .navigation {
             display: flex;
-
-            justify-content:
-                center;
-
+            justify-content: center;
             gap: 12px;
-
-            margin-top:
-                20px;
+            margin-top: 20px;
         }
 
         .button {
-            min-width:
-                190px;
-
-            height:
-                43px;
-
-            padding:
-                0 20px;
-
-            border-radius:
-                7px;
-
-            font-size:
-                11px;
-
-            font-weight:
-                700;
-
-            cursor:
-                pointer;
+            min-width: 190px;
+            height: 43px;
+            padding: 0 20px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         .primary {
-            border:
-                none;
-
+            border: none;
             background:
                 linear-gradient(
                     90deg,
                     var(--purple),
                     var(--pink)
                 );
-
-            color:
-                white;
+            color: white;
         }
 
         .secondary {
-            border:
-                1px solid
-                var(--border);
-
-            background:
-                white;
-
-            color:
-                var(--purple);
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--purple);
         }
 
         .button:hover {
-            opacity:
-                .92;
+            opacity: .92;
         }
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
+        /* FOOTER */
 
         .footer {
-            padding-top:
-                17px;
-
-            margin-top:
-                22px;
-
-            border-top:
-                1px solid
-                var(--border);
-
-            text-align:
-                center;
-
-            color:
-                #99919d;
-
-            font-size:
-                10px;
+            padding-top: 17px;
+            margin-top: 22px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: #99919d;
+            font-size: 10px;
         }
 
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
+        /* RESPONSIVE */
 
         @media (max-width: 1000px) {
 
@@ -676,38 +497,36 @@
                         minmax(0, 1fr)
                     );
             }
-
         }
 
         @media (max-width: 700px) {
 
             .container {
-                width:
-                    calc(100% - 22px);
+                width: calc(100% - 22px);
             }
 
             .header-label {
-                display:
-                    none;
+                display: none;
             }
 
             .trend-grid,
             .trend-analysis-grid,
-            .chart-grid {
-                grid-template-columns:
-                    1fr;
+            .chart-grid,
+            .health-form-grid {
+                grid-template-columns: 1fr;
             }
 
             .navigation {
-                flex-direction:
-                    column;
+                flex-direction: column;
             }
 
             .button {
-                width:
-                    100%;
+                width: 100%;
             }
 
+            .health-log-card {
+                padding: 18px;
+            }
         }
 
     </style>
@@ -717,15 +536,12 @@
 
 <body>
 
-
 <div class="page">
 
 <div class="container">
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+    <!-- HEADER -->
 
     <header class="page-header">
 
@@ -748,9 +564,7 @@
     </header>
 
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -767,13 +581,162 @@
     </section>
 
 
-    <!-- =====================================================
-         MESSAGE
-    ====================================================== -->
+    <!-- MESSAGE -->
 
     <div id="message">
         Loading your health information...
     </div>
+
+
+    <!-- =====================================================
+         RECORD HEALTH LOG
+    ====================================================== -->
+
+    <section class="health-log-card">
+
+        <div class="health-log-header">
+
+            <div class="health-log-icon">
+                📝
+            </div>
+
+            <div>
+
+                <h2>
+                    Record Today's Health
+                </h2>
+
+                <p>
+                    Enter your daily wellness information
+                    to generate personalized trends and graphs.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="healthLogForm">
+
+            <div class="health-form-grid">
+
+
+                <!-- DATE -->
+
+                <div class="health-field">
+
+                    <label for="logDate">
+                        📅 Log Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="logDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SLEEP -->
+
+                <div class="health-field">
+
+                    <label for="sleepHours">
+                        😴 Sleep Hours
+                    </label>
+
+                    <input
+                        type="number"
+                        id="sleepHours"
+                        min="0"
+                        max="24"
+                        step="0.1"
+                        placeholder="Example: 7.5"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- WATER -->
+
+                <div class="health-field">
+
+                    <label for="waterIntake">
+                        💧 Water Intake (Litres)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="waterIntake"
+                        min="0"
+                        max="20"
+                        step="0.1"
+                        placeholder="Example: 2.5"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STRESS -->
+
+                <div class="health-field">
+
+                    <label for="stressScore">
+                        🧘 Stress Score (0-10)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="stressScore"
+                        min="0"
+                        max="10"
+                        step="1"
+                        placeholder="Example: 5"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EXERCISE -->
+
+                <div class="health-field">
+
+                    <label for="exerciseMinutes">
+                        🏃 Exercise (Minutes)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="exerciseMinutes"
+                        min="0"
+                        max="1000"
+                        placeholder="Example: 30"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div id="logMessage"></div>
+
+
+            <button
+                type="submit"
+                class="save-health-button"
+            >
+                💾 Save Health Log
+            </button>
+
+        </form>
+
+    </section>
 
 
     <!-- =====================================================
@@ -802,17 +765,28 @@
          TREND ANALYSIS
     ====================================================== -->
 
-    <section
-        class="card"
-    >
+    <section class="card">
 
         <h2>
             📈 Health Trends
         </h2>
 
-        <div
-            id="trendAnalysis"
-        ></div>
+        <div id="trendAnalysis">
+
+            <div class="analysis-item">
+
+                <h3>
+                    📊 Health Trends
+                </h3>
+
+                <p>
+                    Record your health information to
+                    generate meaningful trend analysis.
+                </p>
+
+            </div>
+
+        </div>
 
     </section>
 
@@ -839,7 +813,7 @@
 
 
     <!-- =====================================================
-         SYMPTOMS
+         HEALTH INDICATORS
     ====================================================== -->
 
     <section
@@ -860,7 +834,7 @@
 
 
     <!-- =====================================================
-         HISTORICAL CHARTS
+         HEALTH HISTORY
     ====================================================== -->
 
     <section
@@ -977,9 +951,7 @@
     </section>
 
 
-    <!-- =====================================================
-         NAVIGATION
-    ====================================================== -->
+    <!-- NAVIGATION -->
 
     <div class="navigation">
 
@@ -1001,9 +973,7 @@
     </div>
 
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
+    <!-- FOOTER -->
 
     <footer class="footer">
 
@@ -1016,11 +986,6 @@
 
 </div>
 
-
-<!-- IMPORTANT:
-     Use your ORIGINAL trends.js,
-     not the simplified one I gave earlier.
--->
 
 <script src="../js/trends.js"></script>
 

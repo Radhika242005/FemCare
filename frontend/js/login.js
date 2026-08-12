@@ -101,7 +101,7 @@ loginForm.addEventListener(
 
             localStorage.setItem(
                 "user",
-                JSON.stringify(user)
+                JSON.stringify(data.user)
             );
 
             showMessage(

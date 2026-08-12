@@ -35,15 +35,13 @@ def register():
             }), 400
 
 
-        name = data.get(
-            "name",
-            ""
+        name = str(
+            data.get("name", "")
         ).strip()
 
 
-        email = data.get(
-            "email",
-            ""
+        email = str(
+            data.get("email", "")
         ).strip().lower()
 
 
@@ -52,6 +50,10 @@ def register():
             ""
         )
 
+
+        # ====================================================
+        # VALIDATION
+        # ====================================================
 
         if not name:
 
@@ -86,12 +88,15 @@ def register():
             }), 400
 
 
+        # ====================================================
+        # DATABASE
+        # ====================================================
+
         connection = get_db_connection()
 
-
-        cursor =connection.cursor(
-                dictionary=True
-            )
+        cursor = connection.cursor(
+            dictionary=True
+        )
 
 
         # ====================================================
@@ -100,7 +105,10 @@ def register():
 
         cursor.execute(
             """
-            SELECT id
+            SELECT
+                id,
+                name,
+                email
             FROM users
             WHERE email = %s
             """,
@@ -108,7 +116,7 @@ def register():
         )
 
 
-        existing_user =cursor.fetchone()
+        existing_user = cursor.fetchone()
 
 
         if existing_user:
@@ -125,9 +133,9 @@ def register():
         # ====================================================
 
         password_hash = bcrypt.hashpw(
-                password.encode("utf-8"),
-                bcrypt.gensalt()
-            ).decode("utf-8")
+            password.encode("utf-8"),
+            bcrypt.gensalt()
+        ).decode("utf-8")
 
 
         # ====================================================
@@ -157,15 +165,35 @@ def register():
         )
 
 
+        new_user_id = cursor.lastrowid
+
+
         connection.commit()
 
+
+        # ====================================================
+        # IMPORTANT
+        # RETURN CREATED USER
+        # ====================================================
 
         return jsonify({
 
             "success": True,
 
             "message":
-                "Registration successful!"
+                "Registration successful!",
+
+            "user": {
+
+                "id":
+                    new_user_id,
+
+                "name":
+                    name,
+
+                "email":
+                    email
+            }
 
         }), 201
 
@@ -229,9 +257,8 @@ def login():
             }), 400
 
 
-        email = data.get(
-            "email",
-            ""
+        email = str(
+            data.get("email", "")
         ).strip().lower()
 
 
@@ -240,6 +267,10 @@ def login():
             ""
         )
 
+
+        # ====================================================
+        # VALIDATION
+        # ====================================================
 
         if not email or not password:
 
@@ -250,12 +281,15 @@ def login():
             }), 400
 
 
+        # ====================================================
+        # DATABASE
+        # ====================================================
+
         connection = get_db_connection()
 
-
-        cursor =connection.cursor(
-                dictionary=True
-            )
+        cursor = connection.cursor(
+            dictionary=True
+        )
 
 
         # ====================================================
@@ -289,10 +323,10 @@ def login():
 
 
         # ====================================================
-        # CHECK PASSWORD
+        # PASSWORD CHECK
         # ====================================================
 
-        password_hash =user["password_hash"]
+        password_hash = user["password_hash"]
 
 
         if isinstance(
@@ -301,14 +335,14 @@ def login():
         ):
 
             password_hash = password_hash.encode(
-                    "utf-8"
-                )
-
-
-        password_valid =bcrypt.checkpw(
-                password.encode("utf-8"),
-                password_hash
+                "utf-8"
             )
+
+
+        password_valid = bcrypt.checkpw(
+            password.encode("utf-8"),
+            password_hash
+        )
 
 
         if not password_valid:
@@ -321,8 +355,21 @@ def login():
 
 
         # ====================================================
-        # SUCCESS
+        # LOGIN SUCCESS
         # ====================================================
+
+        logged_user = {
+
+            "id":
+                int(user["id"]),
+
+            "name":
+                user["name"],
+
+            "email":
+                user["email"]
+        }
+
 
         return jsonify({
 
@@ -331,18 +378,8 @@ def login():
             "message":
                 "Login successful!",
 
-            "user": {
-
-                "id":
-                    user["id"],
-
-                "name":
-                    user["name"],
-
-                "email":
-                    user["email"]
-
-            }
+            "user":
+                logged_user
 
         }), 200
 

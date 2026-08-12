@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-
 from database import get_db_connection
 
 
@@ -10,7 +9,7 @@ health_logs_bp = Blueprint(
 
 
 # ============================================================
-# ADD HEALTH LOG
+# ADD / UPDATE HEALTH LOG
 # ============================================================
 
 @health_logs_bp.route(
@@ -35,17 +34,30 @@ def add_health_log():
 
         user_id = data.get("user_id")
         log_date = data.get("log_date")
-        sleep_hours = data.get("sleep_hours")
+
+        sleep_hours = data.get(
+            "sleep_hours"
+        )
+
         water_intake_liters = data.get(
             "water_intake_liters"
         )
-        stress_score = data.get("stress_score")
+
+        stress_score = data.get(
+            "stress_score"
+        )
+
         exercise_minutes = data.get(
             "exercise_minutes"
         )
 
 
+        # ====================================================
+        # VALIDATION
+        # ====================================================
+
         if not user_id:
+
             return jsonify({
                 "success": False,
                 "message": "User ID is required."
@@ -53,6 +65,7 @@ def add_health_log():
 
 
         if not log_date:
+
             return jsonify({
                 "success": False,
                 "message": "Log date is required."
@@ -66,14 +79,15 @@ def add_health_log():
         )
 
 
-        # ----------------------------------------------------
-        # CHECK WHETHER LOG ALREADY EXISTS
-        # ----------------------------------------------------
+        # ====================================================
+        # CHECK EXISTING LOG
+        # ====================================================
 
         cursor.execute(
             """
             SELECT id
             FROM health_logs
+
             WHERE user_id = %s
             AND log_date = %s
             """,
@@ -86,9 +100,9 @@ def add_health_log():
         existing = cursor.fetchone()
 
 
-        # ----------------------------------------------------
+        # ====================================================
         # UPDATE EXISTING LOG
-        # ----------------------------------------------------
+        # ====================================================
 
         if existing:
 
@@ -117,6 +131,7 @@ def add_health_log():
 
             connection.commit()
 
+
             return jsonify({
 
                 "success": True,
@@ -130,13 +145,14 @@ def add_health_log():
             }), 200
 
 
-        # ----------------------------------------------------
+        # ====================================================
         # INSERT NEW LOG
-        # ----------------------------------------------------
+        # ====================================================
 
         cursor.execute(
             """
-            INSERT INTO health_logs (
+            INSERT INTO health_logs
+            (
                 user_id,
                 log_date,
                 sleep_hours,
@@ -145,7 +161,8 @@ def add_health_log():
                 exercise_minutes
             )
 
-            VALUES (
+            VALUES
+            (
                 %s,
                 %s,
                 %s,
@@ -216,7 +233,7 @@ def add_health_log():
 
 
 # ============================================================
-# GET HEALTH LOGS
+# GET HEALTH LOGS FOR USER
 # ============================================================
 
 @health_logs_bp.route(
@@ -253,7 +270,9 @@ def get_health_logs(user_id):
 
             WHERE user_id = %s
 
-            ORDER BY log_date ASC
+            ORDER BY
+                log_date ASC,
+                id ASC
             """,
             (user_id,)
         )
@@ -265,6 +284,9 @@ def get_health_logs(user_id):
         return jsonify({
 
             "success": True,
+
+            "user_id":
+                user_id,
 
             "count":
                 len(logs),
